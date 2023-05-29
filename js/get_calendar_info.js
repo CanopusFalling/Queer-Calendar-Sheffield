@@ -3,7 +3,7 @@ const GOOGLE_CALENDAR_ID = 'queercalendarsheffield@gmail.com';
 const GOOGLE_CALENDAR_API_KEY = 'AIzaSyCG_DrTXfD1Zrt2rCXsgc5-W0reHuPG49E';
 
 function writeEventsToDOM(events) {
-    var eventsContainer = document.getElementById('calendar-card-container');
+    var eventsContainer = document.getElementById('event-card-container');
     var modalsContainer = document.getElementById('event-modal-container');
 
 
@@ -59,7 +59,7 @@ function writeEventsToDOM(events) {
                 </div>
             </div>`
         }catch(error){
-            console.log("Event Failed: ${error}")
+            console.log("Event Failed: " + error)
         }
     });
 
