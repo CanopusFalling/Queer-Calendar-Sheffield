@@ -1,14 +1,21 @@
 const GOOGLE_CALENDAR_API_KEY = "AIzaSyCG_DrTXfD1Zrt2rCXsgc5-W0reHuPG49E"
 
-// Love not having ENUMS in JS. /s :(
-const SourceType = {
+/** @constant EventSourceType ENUM to identify Event Source Types. */
+const EventSourceType = {
     google_calendar: 'google_calendar'
 }
 
-const EVENT_CARD_CONTAINER_ID = "event-card-container";
-const EVENT_MODAL_CONTAINER_ID = "event-modal-container";
-
+/**
+ * @class EventSource
+ * @classdesc Class to represent a source of events.
+ */
 class EventSource {
+    /**
+     * @constructor
+     * @param {String} name
+     * @param {EventSourceType} type 
+     * @param {String} google_calendar_ID
+     */
     constructor(name, type, google_calendar_ID) {
         this.name = name
         this.type = type
@@ -16,19 +23,26 @@ class EventSource {
     }
 }
 
-const QCS_CALENDAR_ID = "queercalendarsheffield@gmail.com";
-const SOURCES = [new EventSource("Queer Calendar Sheffield Google Calendar", SourceType.google_calendar, "queercalendarsheffield@gmail.com")];
-
-// Removed source, not enough info on the PQA calendar currently. Looking to add it back in if it's updated.
-// new EventSource("Peak Queer Adventures Google Calendar", SourceType.google_calendar, "peakqueeradventures@gmail.com")
-
+/**
+ * @class CalendarEvent
+ * @classdesc Class to represent an event on the calendar.
+ */
 class CalendarEvent {
-    constructor(data, format) {
-        if (format == SourceType.google_calendar) {
+    /**
+     * @constructor
+     * @param {Object} data - Raw data about this event from the event source.
+     * @param {EventSourceType} source - Which source the data is from.
+     */
+    constructor(data, source) {
+        if (source == EventSourceType.google_calendar) {
             this.#google_constructior(data)
         }
     }
 
+    /**
+     * A function to handle the construction of google calendar objects.
+     * @param {Object} data
+     */
     #google_constructior(data) {
         this.id = data.id
         this.title = data.summary
@@ -40,6 +54,10 @@ class CalendarEvent {
         this.last_updated = data.updated
     }
 
+    /**
+     * A function to handle ingesting time from google events.
+     * @param {Object} data 
+     */
     #google_ingest_time(data) {
         if (data.start != undefined) {
             if (data.start.dateTime != undefined) { this.start = new Date(data.start.dateTime) }
@@ -53,6 +71,11 @@ class CalendarEvent {
         }
     }
 
+    /**
+     * Formats a date into a string
+     * @param {Object} date 
+     * @returns {String} in the following format "DD [MonthName] YYYY at HH:MM [am/pm]"
+     */
     formatDate(date) {
         return date.toLocaleString(undefined, {
             day: 'numeric',
@@ -64,6 +87,11 @@ class CalendarEvent {
         });
     }
 
+    /**
+     * Formats a date into a string with just the time.
+     * @param {Object} date 
+     * @returns {String} in the following format "HH:MM [am/pm]"
+     */
     formatTime(date) {
         return date.toLocaleString(undefined, {
             hour: 'numeric',
@@ -72,6 +100,10 @@ class CalendarEvent {
         });
     }
 
+    /**
+     * Function to get the time as a String for the event.
+     * @returns {String} Time in human readable format.
+     */
     getTimeString() {
         if (this.end == undefined) {
             return this.formatDate(this.start)
@@ -84,10 +116,18 @@ class CalendarEvent {
         }
     }
 
+    /**
+     * Function to return the event as an easily human readable string.
+     * @returns {String} Event title, location and time.
+     */
     toString() {
         return `${this.title} | ${this.location} | ${this.getTimeString()}`
     }
 
+    /**
+     * Output the event as a Card Element.
+     * @returns {String} HTML event card element.
+     */
     toEventCard() {
         return `
         <div class="col">
@@ -110,6 +150,10 @@ class CalendarEvent {
         </div>`
     }
 
+    /**
+     * Output the event as a Modal Element.
+     * @returns {String} HTML Modal Element
+     */
     toModal() {
         return `
         <div class="modal fade" id="eventModal-${this.id}" tabindex="-1" aria-labelledby="eventModalLabel-${this.id}"
@@ -131,11 +175,21 @@ class CalendarEvent {
     }
 }
 
+/**
+ * @class Calendar
+ * @classdesc A class to store, organise and output all of the CalendarEvents.
+ */
 class Calendar {
     constructor() {
         this.events = []
     }
 
+    /**
+     * Checks if an event is already in the calendar.
+     * The check might have to compare from different sources with competing info.
+     * @param {CalendarEvent} new_event 
+     * @returns {Boolean}
+     */
     hasEvent(new_event) {
         this.events.forEach(event => {
             if (event.name == new_event.name && event.start == new_event.start) {
@@ -145,6 +199,10 @@ class Calendar {
         return false
     }
 
+    /**
+     * Inputs a list of events into the calendar.
+     * @param {Object} events 
+     */
     inputEvents(events) {
         events.forEach(event => {
             if (!this.hasEvent(event)) {
@@ -153,12 +211,18 @@ class Calendar {
         });
     }
 
+    /**
+     * Sorts all the events in the calendar by start date.
+     */
     sortEvents() {
         this.events.sort(function(a, b) {
             return a.start - b.start;
         });
     }
 
+    /**
+     * Outputs all the calendar events into the DOM.
+     */
     outputInfo() {
         this.sortEvents();
 
@@ -177,6 +241,17 @@ class Calendar {
     }
 }
 
+// Script Settings
+// Sets default values for the settings of this script if they've not already been set
+
+const EVENT_CARD_CONTAINER_ID = "event-card-container";
+const EVENT_MODAL_CONTAINER_ID = "event-modal-container";
+
+const SOURCES = [new EventSource("Queer Calendar Sheffield Google Calendar", EventSourceType.google_calendar, "queercalendarsheffield@gmail.com")];
+
+// Removed source, not enough info on the PQA calendar currently. Looking to add it back in if it's updated.
+// new EventSource("Peak Queer Adventures Google Calendar", SourceType.google_calendar, "peakqueeradventures@gmail.com")
+
 var loaded_sources = 0;
 
 var page_calendar = new Calendar();
@@ -184,7 +259,7 @@ var page_calendar = new Calendar();
 function handleGoogleCalendarData(data) {
     let events = []
     data.items.forEach(event => {
-        events.push(new CalendarEvent(event, SourceType.google_calendar))
+        events.push(new CalendarEvent(event, EventSourceType.google_calendar))
     });
 
     page_calendar.inputEvents(events)
