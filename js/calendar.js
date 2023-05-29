@@ -123,7 +123,7 @@ class CalendarEvent {
                     <div class="modal-body">
                         <p><span class="fw-bold">Location:</span> ${this.location}</p>
                         <p><span class="fw-bold">Time:</span> ${this.getTimeString()}</p>
-                        <p class="text-truncate">${this.description}</p>
+                        <p>${this.description}</p>
                     </div>
                 </div>
             </div>
