@@ -21,7 +21,7 @@ const SOURCES = [
     new EventSource("Queer Calendar Sheffield Google Calendar", SourceType.google_calendar, "queercalendarsheffield@gmail.com"),
     new EventSource("Peak Queer Adventures Google Calendar", SourceType.google_calendar, "peakqueeradventures@gmail.com")];
 
-class Event {
+class CalendarEvent {
     constructor(data, format) {
         if (format == SourceType.google_calendar) {
             this.#google_constructior(data)
@@ -176,7 +176,7 @@ var page_calendar = new Calendar();
 function handleGoogleCalendarData(data) {
     let events = []
     data.items.forEach(event => {
-        events.push(new Event(event, SourceType.google_calendar))
+        events.push(new CalendarEvent(event, SourceType.google_calendar))
     });
 
     page_calendar.inputEvents(events)
