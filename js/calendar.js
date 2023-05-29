@@ -5,6 +5,9 @@ const SourceType = {
     google_calendar: 'google_calendar'
 }
 
+const EVENT_CARD_CONTAINER_ID = "event-card-container";
+const EVENT_MODAL_CONTAINER_ID = "event-modal-container";
+
 class EventSource {
     constructor(name, type, google_calendar_ID) {
         this.name = name
@@ -13,7 +16,7 @@ class EventSource {
     }
 }
 
-const QCS_CALENDAR_ID = "queercalendarsheffield@gmail.com"; 
+const QCS_CALENDAR_ID = "queercalendarsheffield@gmail.com";
 const SOURCES = [
     new EventSource("Queer Calendar Sheffield Google Calendar", SourceType.google_calendar, "queercalendarsheffield@gmail.com"),
     new EventSource("Peak Queer Adventures Google Calendar", SourceType.google_calendar, "peakqueeradventures@gmail.com")];
@@ -26,6 +29,7 @@ class Event {
     }
 
     #google_constructior(data) {
+        this.id = data.id
         this.title = data.summary
         this.description = data.description
         this.location = data.location
@@ -82,6 +86,49 @@ class Event {
     toString() {
         return `${this.title} | ${this.location} | ${this.getTimeString()}`
     }
+
+    toEventCard() {
+        return `
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">${this.title}</h4>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        <span class="fw-bold">Location:</span> ${this.location}
+                    </p>
+                    <p class="card-text">
+                        <span class="fw-bold">Time:</span> ${this.getTimeString()}
+                    </p>
+                    <p class="card-text text-truncate">${this.description}</p>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#eventModal-${this.id}">More Information</button>
+                </div>
+            </div>
+        </div>`
+    }
+
+    toModal() {
+        return `
+        <div class="modal fade" id="eventModal-${this.id}" tabindex="-1" aria-labelledby="eventModalLabel-${this.id}"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="eventModalLabel-${this.id}">${this.title}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p><span class="fw-bold">Location:</span> ${this.location}</p>
+                        <p><span class="fw-bold">Start Time:</span> ${this.start.dateTime}</p>
+                        <p><span class="fw-bold">End Time:</span> ${this.end.dateTime}</p>
+                        <p>${this.description}</p>
+                    </div>
+                </div>
+            </div>
+        </div>`
+    }
 }
 
 class Calendar {
@@ -89,26 +136,36 @@ class Calendar {
         this.events = []
     }
 
-    hasEvent(new_event){
+    hasEvent(new_event) {
         this.events.forEach(event => {
-            if(event.name == new_event.name && event.start == new_event.start){
+            if (event.name == new_event.name && event.start == new_event.start) {
                 return true
             }
         })
         return false
     }
 
-    inputEvents(events){
+    inputEvents(events) {
         events.forEach(event => {
-            if(!this.hasEvent(event)){
+            if (!this.hasEvent(event)) {
                 this.events.push(event)
             }
         });
     }
 
-    outputInfo(){
-        //Placeholder, will output all the events to the DOM.
-        document.body.innerHTML = this.events
+    outputInfo() {
+        let event_container = document.getElementById(EVENT_CARD_CONTAINER_ID)
+        let modal_container = document.getElementById(EVENT_MODAL_CONTAINER_ID)
+
+        let event_cards = ""
+        let modal_cards = ""
+        this.events.forEach(event => {
+            event_cards += event.toEventCard()
+            modal_cards += event.toModal()
+        })
+
+        event_container.innerHTML = event_cards
+        modal_container.innerHTML = modal_cards
     }
 }
 
@@ -125,7 +182,7 @@ function handleGoogleCalendarData(data) {
     page_calendar.inputEvents(events)
 
     loaded_sources += 1;
-    if(loaded_sources == SOURCES.length){
+    if (loaded_sources == SOURCES.length) {
         page_calendar.outputInfo()
     }
 }
@@ -142,9 +199,9 @@ function fetchCalendarData(calendar, callback, timeMin, timeMax) {
     document.body.appendChild(script);
 }
 
-function loadSources(timeMin, timeMax){
+function loadSources(timeMin, timeMax) {
     SOURCES.forEach(source => {
-        fetchCalendarData(source, "handleGoogleCalendarData", timeMin, timeMax); 
+        fetchCalendarData(source, "handleGoogleCalendarData", timeMin, timeMax);
     });
 }
 
