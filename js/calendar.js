@@ -17,9 +17,10 @@ class EventSource {
 }
 
 const QCS_CALENDAR_ID = "queercalendarsheffield@gmail.com";
-const SOURCES = [
-    new EventSource("Queer Calendar Sheffield Google Calendar", SourceType.google_calendar, "queercalendarsheffield@gmail.com"),
-    new EventSource("Peak Queer Adventures Google Calendar", SourceType.google_calendar, "peakqueeradventures@gmail.com")];
+const SOURCES = [new EventSource("Queer Calendar Sheffield Google Calendar", SourceType.google_calendar, "queercalendarsheffield@gmail.com")];
+
+// Removed source, not enough info on the PQA calendar currently. Looking to add it back in if it's updated.
+// new EventSource("Peak Queer Adventures Google Calendar", SourceType.google_calendar, "peakqueeradventures@gmail.com")
 
 class CalendarEvent {
     constructor(data, format) {
@@ -121,9 +122,8 @@ class CalendarEvent {
                     </div>
                     <div class="modal-body">
                         <p><span class="fw-bold">Location:</span> ${this.location}</p>
-                        <p><span class="fw-bold">Start Time:</span> ${this.start.dateTime}</p>
-                        <p><span class="fw-bold">End Time:</span> ${this.end.dateTime}</p>
-                        <p>${this.description}</p>
+                        <p><span class="fw-bold">Time:</span> ${this.getTimeString()}</p>
+                        <p class="text-truncate">${this.description}</p>
                     </div>
                 </div>
             </div>
@@ -153,7 +153,15 @@ class Calendar {
         });
     }
 
+    sortEvents() {
+        this.events.sort(function(a, b) {
+            return a.start - b.start;
+        });
+    }
+
     outputInfo() {
+        this.sortEvents();
+
         let event_container = document.getElementById(EVENT_CARD_CONTAINER_ID)
         let modal_container = document.getElementById(EVENT_MODAL_CONTAINER_ID)
 
