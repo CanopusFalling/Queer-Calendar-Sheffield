@@ -1,25 +1,62 @@
 const GOOGLE_CALENDAR_API_KEY = "AIzaSyCG_DrTXfD1Zrt2rCXsgc5-W0reHuPG49E"
 
-/** @constant EventSourceType ENUM to identify Event Source Types. */
-const EventSourceType = {
-    google_calendar: 'google_calendar'
-}
+/**
+ * @enum {string}
+ * @description ENUM to identify calendar source types.
+ */
+const CalendarSourceType = {
+    GOOGLE_CALENDAR: 'google_calendar'
+};
 
 /**
- * @class EventSource
- * @classdesc Class to represent a source of events.
+ * @class CalendarSource
+ * @classdesc Represents an online calendar that can be used to pull events from.
+ * @constructor
+ * @param {string} name - The name of the calendar source.
+ * @param {CalendarSourceType} type - The type of the calendar source.
+ * @param {string} googleCalendarId - The ID of the Google Calendar associated with this calendar source.
  */
-class EventSource {
+class CalendarSource {
+    constructor(name, type, googleCalendarId) {
+        this.name = name;
+        this.type = type;
+        this.googleCalendarId = googleCalendarId;
+    }
+
+    addEventsToCalendar(timeMin, timeMax) {
+        if (this.type == CalendarSourceType.GOOGLE_CALENDAR){this.#fetchGoogleCalendarData(timeMin, timeMax)}
+    }
+
     /**
-     * @constructor
-     * @param {String} name
-     * @param {EventSourceType} type 
-     * @param {String} google_calendar_ID
+     * Function to request information from the google calendar event's API, reference for the API here:
+     * https://developers.google.com/calendar/api/v3/reference/events/list
+     * @param {*} timeMin
+     * @param {*} timeMax 
+     * @param {*} showDeleted 
      */
-    constructor(name, type, google_calendar_ID) {
-        this.name = name
-        this.type = type
-        this.google_calendar_ID = google_calendar_ID
+    #fetchGoogleCalendarData(timeMin, timeMax, showDeleted){
+        let parameters = {
+            key: GOOGLE_CALENDAR_API_KEY,
+            timeMin: timeMin || new Date().toISOString(),
+            timeMax: timeMax || undefined
+        };
+        
+        let queryString = new URLSearchParams(
+            Object.entries(parameters)
+              .filter(([key, value]) => value !== undefined)
+          ).toString();
+        let requestURL = `https://www.googleapis.com/calendar/v3/calendars/${this.googleCalendarId}/events?${queryString}`
+
+        console.log(requestURL)
+
+        fetch(requestURL)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
 }
 
@@ -31,10 +68,10 @@ class CalendarEvent {
     /**
      * @constructor
      * @param {Object} data - Raw data about this event from the event source.
-     * @param {EventSourceType} source - Which source the data is from.
+     * @param {CalendarSourceType} source - Which source the data is from.
      */
     constructor(data, source) {
-        if (source == EventSourceType.google_calendar) {
+        if (source == CalendarSourceType.GOOGLE_CALENDAR) {
             this.#google_constructior(data)
         }
     }
@@ -247,19 +284,21 @@ class Calendar {
 const EVENT_CARD_CONTAINER_ID = "event-card-container";
 const EVENT_MODAL_CONTAINER_ID = "event-modal-container";
 
-const SOURCES = [new EventSource("Queer Calendar Sheffield Google Calendar", EventSourceType.google_calendar, "queercalendarsheffield@gmail.com")];
+const SOURCES = [new CalendarSource("Queer Calendar Sheffield Google Calendar", CalendarSourceType.GOOGLE_CALENDAR, "queercalendarsheffield@gmail.com")];
 
 // Removed source, not enough info on the PQA calendar currently. Looking to add it back in if it's updated.
-// new EventSource("Peak Queer Adventures Google Calendar", SourceType.google_calendar, "peakqueeradventures@gmail.com")
+// new CalendarSource("Peak Queer Adventures Google Calendar", SourceType.GOOGLE_CALENDAR, "peakqueeradventures@gmail.com")
 
 var loaded_sources = 0;
 
+// Instantiate a global calendar for the page that will be used to store info.
 var page_calendar = new Calendar();
 
 function handleGoogleCalendarData(data) {
     let events = []
+    console.log(data)
     data.items.forEach(event => {
-        events.push(new CalendarEvent(event, EventSourceType.google_calendar))
+        events.push(new CalendarEvent(event, CalendarSourceType.GOOGLE_CALENDAR))
     });
 
     page_calendar.inputEvents(events)
@@ -271,11 +310,12 @@ function handleGoogleCalendarData(data) {
 }
 
 function fetchCalendarData(calendar, callback, timeMin, timeMax) {
+    console.log(calendar)
     // Set Default Values for Dates as they're optional parameters.
     if (timeMin == undefined) { timeMin = "&timeMin=" + (new Date()).toISOString() } else { timeMin = "&timeMin=" + timeMin }
     if (timeMax == undefined) { timeMax = "" } else { timeMax = "&timeMax=" + timeMax }
 
-    var requestUrl = `https://www.googleapis.com/calendar/v3/calendars/${calendar.google_calendar_ID}/events?callback=${callback}&key=${GOOGLE_CALENDAR_API_KEY}&showDeleted=False&singleEvents=True&orderBy=starttime${timeMin}${timeMax}`;
+    var requestUrl = `https://www.googleapis.com/calendar/v3/calendars/${calendar.googleCalendarId}/events?callback=${callback}&key=${GOOGLE_CALENDAR_API_KEY}&showDeleted=False&singleEvents=True&orderBy=starttime${timeMin}${timeMax}`;
 
     var script = document.createElement('script');
     script.src = requestUrl;
@@ -284,7 +324,8 @@ function fetchCalendarData(calendar, callback, timeMin, timeMax) {
 
 function loadSources(timeMin, timeMax) {
     SOURCES.forEach(source => {
-        fetchCalendarData(source, "handleGoogleCalendarData", timeMin, timeMax);
+        //fetchCalendarData(source, "CalendarSource.handleGoogleCalendarData", timeMin, timeMax);
+        source.addEventsToCalendar(timeMin, timeMax);
     });
 }
 
