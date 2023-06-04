@@ -23,8 +23,10 @@ class CalendarSource {
         this.googleCalendarId = googleCalendarId;
     }
 
-    addEventsToCalendar(timeMin, timeMax) {
-        if (this.type == CalendarSourceType.GOOGLE_CALENDAR){this.#fetchGoogleCalendarData(timeMin, timeMax)}
+    fetchEvents(timeMin, timeMax) {
+        if (this.type == CalendarSourceType.GOOGLE_CALENDAR) {
+            return this.#fetchGoogleCalendarData(timeMin, timeMax)
+        }
     }
 
     /**
@@ -34,29 +36,33 @@ class CalendarSource {
      * @param {*} timeMax 
      * @param {*} showDeleted 
      */
-    #fetchGoogleCalendarData(timeMin, timeMax, showDeleted){
+    #fetchGoogleCalendarData(timeMin, timeMax, showDeleted) {
         let parameters = {
             key: GOOGLE_CALENDAR_API_KEY,
-            timeMin: timeMin || new Date().toISOString(),
+            timeMin: timeMin || new Date().toISOString(), //Sets timeMin to current date if one isn't specified.
             timeMax: timeMax || undefined
         };
-        
+
         let queryString = new URLSearchParams(
             Object.entries(parameters)
-              .filter(([key, value]) => value !== undefined)
-          ).toString();
+                .filter(([key, value]) => value !== undefined)
+        ).toString();
         let requestURL = `https://www.googleapis.com/calendar/v3/calendars/${this.googleCalendarId}/events?${queryString}`
 
-        console.log(requestURL)
+        let events = []
 
         fetch(requestURL)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
+                data.items.forEach(event => {
+                    events.push(new CalendarEvent(event, CalendarSourceType.GOOGLE_CALENDAR))
+                });
             })
             .catch(error => {
                 console.log(error)
             })
+
+        return events
     }
 }
 
@@ -217,8 +223,12 @@ class CalendarEvent {
  * @classdesc A class to store, organise and output all of the CalendarEvents.
  */
 class Calendar {
-    constructor() {
+    constructor(sources) {
         this.events = []
+
+        sources.forEach(source => {
+            events.push(source.fetchEvents())
+        });
     }
 
     /**
@@ -252,7 +262,7 @@ class Calendar {
      * Sorts all the events in the calendar by start date.
      */
     sortEvents() {
-        this.events.sort(function(a, b) {
+        this.events.sort(function (a, b) {
             return a.start - b.start;
         });
     }
@@ -292,47 +302,8 @@ const SOURCES = [new CalendarSource("Queer Calendar Sheffield Google Calendar", 
 var loaded_sources = 0;
 
 // Instantiate a global calendar for the page that will be used to store info.
-var page_calendar = new Calendar();
-
-function handleGoogleCalendarData(data) {
-    let events = []
-    console.log(data)
-    data.items.forEach(event => {
-        events.push(new CalendarEvent(event, CalendarSourceType.GOOGLE_CALENDAR))
-    });
-
-    page_calendar.inputEvents(events)
-
-    loaded_sources += 1;
-    if (loaded_sources == SOURCES.length) {
-        page_calendar.outputInfo()
-    }
-}
-
-function fetchCalendarData(calendar, callback, timeMin, timeMax) {
-    console.log(calendar)
-    // Set Default Values for Dates as they're optional parameters.
-    if (timeMin == undefined) { timeMin = "&timeMin=" + (new Date()).toISOString() } else { timeMin = "&timeMin=" + timeMin }
-    if (timeMax == undefined) { timeMax = "" } else { timeMax = "&timeMax=" + timeMax }
-
-    var requestUrl = `https://www.googleapis.com/calendar/v3/calendars/${calendar.googleCalendarId}/events?callback=${callback}&key=${GOOGLE_CALENDAR_API_KEY}&showDeleted=False&singleEvents=True&orderBy=starttime${timeMin}${timeMax}`;
-
-    var script = document.createElement('script');
-    script.src = requestUrl;
-    document.body.appendChild(script);
-}
-
-function loadSources(timeMin, timeMax) {
-    SOURCES.forEach(source => {
-        //fetchCalendarData(source, "CalendarSource.handleGoogleCalendarData", timeMin, timeMax);
-        source.addEventsToCalendar(timeMin, timeMax);
-    });
-}
+var page_calendar = new Calendar(SOURCES);
 
 document.addEventListener("DOMContentLoaded", function () {
-    var currentUrl = window.location.href;
-    var url = new URL(currentUrl);
-    var searchParams = url.searchParams;
-
-    loadSources(searchParams.timeMin, searchParams.timeMax)
+    page_calendar.outputInfo()
 })
