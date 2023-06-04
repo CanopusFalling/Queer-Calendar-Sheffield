@@ -39,8 +39,8 @@ class CalendarSource {
     #fetchGoogleCalendarData(timeMin, timeMax, showDeleted) {
         let parameters = {
             key: GOOGLE_CALENDAR_API_KEY,
-            timeMin: timeMin || new Date().toISOString(), //Sets timeMin to current date if one isn't specified.
-            timeMax: timeMax,
+            timeMin: timeMin.toISOString() || new Date().toISOString(), //Sets timeMin to current date if one isn't specified.
+            timeMax: timeMax.toISOString(),
             showDeleted: showDeleted
         };
 
@@ -52,16 +52,16 @@ class CalendarSource {
 
         let events = []
 
-        fetch(requestURL)
+        return fetch(requestURL)
             .then(response => response.json())
             .then(data => {
-                data.items.forEach(event => {
-                    events.push(new CalendarEvent(event, CalendarSourceType.GOOGLE_CALENDAR))
-                });
+                let events = data.items.map(event => new CalendarEvent(event, CalendarSourceType.GOOGLE_CALENDAR));
+                return events;
             })
             .catch(error => {
-                console.log(error)
-            })
+                console.log(error);
+                return [];
+            });
 
         return events
     }
@@ -224,18 +224,25 @@ class CalendarEvent {
  * @classdesc A class to store, organise and output all of the CalendarEvents.
  */
 class Calendar {
-    constructor(sources) {
-        let events = []
+    constructor(calendarSources) {
+        this.calendarSources = calendarSources;
 
-        console.log(sources)
+        this.minDate = new Date();
+        this.maxDate = new Date();
 
-        sources.forEach(source => {
-            console.log(source.fetchEvents())
-            events.push(...source.fetchEvents())
-            console.log(events)
+        this.events = new Array();
+    }
+
+    fetchAllEvents(timeMin, timeMax) {
+        timeMin = timeMin || new Date()
+        timeMax = timeMax || new Date(Date.now() + (365 * 24 * 60 * 60 * 1000)) //Sets date to a year from now if one isn't provided.
+
+        let fetchPromises = this.calendarSources.map(async (source) => {
+            let events = await source.fetchEvents(timeMin, timeMax);
+            this.events.push(...events);
         });
 
-        this.events = events
+        return Promise.all(fetchPromises);
     }
 
     /**
@@ -268,12 +275,14 @@ class Calendar {
     outputInfo() {
         this.sortEvents();
 
+        console.log(this.events.length)
+
         let event_container = document.getElementById(EVENT_CARD_CONTAINER_ID)
         let modal_container = document.getElementById(EVENT_MODAL_CONTAINER_ID)
 
         let event_cards = ""
         let modal_cards = ""
-        console.log(this.events)
+
         this.events.forEach(event => {
             console.log(event)
             event_cards += event.toEventCard()
@@ -302,5 +311,8 @@ var loaded_sources = 0;
 var page_calendar = new Calendar(SOURCES);
 
 document.addEventListener("DOMContentLoaded", function () {
-    page_calendar.outputInfo()
+    page_calendar.fetchAllEvents()
+    .then(() => {
+        page_calendar.outputInfo()
+    })
 })
