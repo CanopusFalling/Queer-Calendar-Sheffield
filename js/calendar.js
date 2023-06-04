@@ -40,7 +40,8 @@ class CalendarSource {
         let parameters = {
             key: GOOGLE_CALENDAR_API_KEY,
             timeMin: timeMin || new Date().toISOString(), //Sets timeMin to current date if one isn't specified.
-            timeMax: timeMax || undefined
+            timeMax: timeMax,
+            showDeleted: showDeleted
         };
 
         let queryString = new URLSearchParams(
@@ -224,11 +225,17 @@ class CalendarEvent {
  */
 class Calendar {
     constructor(sources) {
-        this.events = []
+        let events = []
+
+        console.log(sources)
 
         sources.forEach(source => {
-            events.push(source.fetchEvents())
+            console.log(source.fetchEvents())
+            events.push(...source.fetchEvents())
+            console.log(events)
         });
+
+        this.events = events
     }
 
     /**
@@ -244,18 +251,6 @@ class Calendar {
             }
         })
         return false
-    }
-
-    /**
-     * Inputs a list of events into the calendar.
-     * @param {Object} events 
-     */
-    inputEvents(events) {
-        events.forEach(event => {
-            if (!this.hasEvent(event)) {
-                this.events.push(event)
-            }
-        });
     }
 
     /**
@@ -278,7 +273,9 @@ class Calendar {
 
         let event_cards = ""
         let modal_cards = ""
+        console.log(this.events)
         this.events.forEach(event => {
+            console.log(event)
             event_cards += event.toEventCard()
             modal_cards += event.toModal()
         })
