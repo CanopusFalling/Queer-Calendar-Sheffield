@@ -55,7 +55,8 @@ class CalendarSource {
         return fetch(requestURL)
             .then(response => response.json())
             .then(data => {
-                let events = data.items.map(event => new CalendarEvent(event, CalendarSourceType.GOOGLE_CALENDAR));
+                console.log(data)
+                let events = data.items.map(event => new CalendarEvent(event, this));
                 return events;
             })
             .catch(error => {
@@ -75,10 +76,12 @@ class CalendarEvent {
     /**
      * @constructor
      * @param {Object} data - Raw data about this event from the event source.
-     * @param {CalendarSourceType} source - Which source the data is from.
+     * @param {CalendarSource} source - Source for the event.
      */
     constructor(data, source) {
-        if (source == CalendarSourceType.GOOGLE_CALENDAR) {
+        this.source = source
+
+        if (source.type == CalendarSourceType.GOOGLE_CALENDAR) {
             this.#google_constructior(data)
         }
     }
@@ -88,13 +91,23 @@ class CalendarEvent {
      * @param {Object} data
      */
     #google_constructior(data) {
-        this.id = data.id
-        this.title = data.summary
-        this.description = data.description
+        console.log(data)
+
+        // Basic Event Information.
+        this.title = data.summary;
+        this.creator = this.creator;
+        this.description = data.description;
         this.location = data.location
+        
+        // Calendar ID Information.
+        this.iCalUID = data.iCalUID;
+        this.googleID = data.id
+
+        this.dateCreated = data.created;
+
         this.#google_ingest_time(data)
         this.calendar_link = data.htmlLink
-        this.iCal_UID = data.iCalUID
+
         this.last_updated = data.updated
     }
 
