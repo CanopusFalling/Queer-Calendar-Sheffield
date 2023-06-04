@@ -275,8 +275,6 @@ class Calendar {
     outputInfo() {
         this.sortEvents();
 
-        console.log(this.events.length)
-
         let event_container = document.getElementById(EVENT_CARD_CONTAINER_ID)
         let modal_container = document.getElementById(EVENT_MODAL_CONTAINER_ID)
 
@@ -284,7 +282,6 @@ class Calendar {
         let modal_cards = ""
 
         this.events.forEach(event => {
-            console.log(event)
             event_cards += event.toEventCard()
             modal_cards += event.toModal()
         })
