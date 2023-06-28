@@ -7,58 +7,42 @@ function HomePage() {
   <!DOCTYPE html>
 
   <head>  
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
       <script type='text/javascript' src='js/calendar.js'></script>
   </head>
   
-  <div>
-      <header>
-          <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-              <div class="container">
-                  <a class="navbar-brand" href="#">Queer Calendar Sheffield</a>
-                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                      <span class="navbar-toggler-icon"></span>
-                  </button>
-                  <div class="collapse navbar-collapse" id="navbarNav">
-                      <!-- <ul class="navbar-nav ml-auto">
-                          <li class="nav-item">
-                              <a class="nav-link" href="#">Home</a>
-                          </li>
-                          <li class="nav-item">
-                              <a class="nav-link" href="#">Events</a>
-                          </li>
-                          <li class="nav-item">
-                              <a class="nav-link" href="#">About</a>
-                          </li>
-                          <li class="nav-item">
-                              <a class="nav-link" href="#">Contact</a>
-                          </li>
-                      </ul> -->
-                  </div>
-              </div>
-          </nav>
-      </header>
-  
-      <main>
-          <section id="calendar-events" class="container my-5">
-              <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="event-card-container">
-              </div>
-          </section>
-      </main>
-  
-  
-  
-      <footer class="bg-light text-center py-3">
-          <div class="container">
-              <p><a href="https://github.com/CanopusFalling/Queer-Calendar-Sheffield">view project on github</a></p>
-          </div>
-      </footer>
-  
-      <!-- Modals -->
-      <div id="event-modal-container">
+  <header>
+    <nav class="bg-gray-900">
+      <div class="container mx-auto px-4">
+        <div class="flex items-center justify-between h-16">
+          <a class="text-white text-lg font-bold" href="#">Queer Calendar Sheffield</a>
+          <button class="text-white inline-flex p-2 rounded-md hover:bg-gray-800 focus:outline-none focus:bg-gray-800"
+            aria-label="Toggle navigation">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
       </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="calendar-events" class="container my-5">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="event-card-container">
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-gray-100 py-3">
+    <div class="container mx-auto px-4">
+      <p><a href="https://github.com/CanopusFalling/Queer-Calendar-Sheffield">View project on GitHub</a></p>
+    </div>
+  </footer>
+
+  <!-- Modals -->
+  <div id="event-modal-container">
+  </div>
   </div>
   `;
 

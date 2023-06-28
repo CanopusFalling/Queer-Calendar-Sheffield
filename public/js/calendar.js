@@ -189,23 +189,24 @@ class CalendarEvent {
     toEventCard() {
         return `
         <div class="col">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">${this.title}</h4>
-                </div>
-                <div class="card-body">
-                    <p class="card-text">
-                        <span class="fw-bold">Location:</span> ${this.location}
-                    </p>
-                    <p class="card-text">
-                        <span class="fw-bold">Time:</span> ${this.getTimeString()}
-                    </p>
-                    <p class="card-text text-truncate">${this.description}</p>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#eventModal-${this.id}">More Information</button>
-                </div>
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div class="px-4 py-3 bg-gray-200">
+                <h4 class="text-xl font-semibold">${this.title}</h4>
             </div>
-        </div>`
+            <div class="px-4 py-3">
+                <p class="mb-2">
+                <span class="font-semibold">Location:</span> ${this.location}
+                </p>
+                <p class="mb-2">
+                <span class="font-semibold">Time:</span> ${this.getTimeString()}
+                </p>
+                <p class="mb-2 truncate">${this.description}</p>
+                <button type="button" class="px-4 py-2 mt-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md"
+                data-toggle="modal" data-target="#eventModal-${this.id}">More Information</button>
+            </div>
+            </div>
+        </div>
+        `
     }
 
     /**
@@ -214,22 +215,22 @@ class CalendarEvent {
      */
     toModal() {
         return `
-        <div class="modal fade" id="eventModal-${this.id}" tabindex="-1" aria-labelledby="eventModalLabel-${this.id}"
-            aria-hidden="true">
+        <div class="fixed inset-0 flex items-center justify-center z-50" id="eventModal-${this.id}" aria-labelledby="eventModalLabel-${this.id}" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="eventModalLabel-${this.id}">${this.title}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p><span class="fw-bold">Location:</span> ${this.location}</p>
-                        <p><span class="fw-bold">Time:</span> ${this.getTimeString()}</p>
-                        <p>${this.description}</p>
-                    </div>
+                <div class="modal-header">
+                    <h5 class="modal-title">${this.title}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><span class="font-semibold">Location:</span> ${this.location}</p>
+                    <p><span class="font-semibold">Time:</span> ${this.getTimeString()}</p>
+                    <p>${this.description}</p>
+                </div>
                 </div>
             </div>
-        </div>`
+        </div>
+        `
     }
 }
 
