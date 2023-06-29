@@ -1,6 +1,8 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { NextApiRequest, NextApiResponse } from 'next';
 
+export const runtime = 'edge';
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const googleApiUrl = 'https://www.googleapis.com/calendar/v3/calendars/queercalendarsheffield@gmail.com/events';
