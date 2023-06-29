@@ -1,6 +1,13 @@
 import React from 'react';
 
 export const runtime = 'edge';
+const googleApiKey = process.env.GOOGLE_API_KEY;
+
+function TestPage(){
+    return (<p>Hello</p>);
+}
+
+export default TestPage;
 
 function HomePage() {
     const htmlContent = `
@@ -65,4 +72,4 @@ function HomePage() {
     return <div dangerouslySetInnerHTML={{ __html: htmlContent }} />;
 }
 
-export default HomePage;
+//export default HomePage;
