@@ -62,31 +62,58 @@ async function getEvents() {
 }
 
 export default async function HomePage() {
-    const events = await getEvents();
+  const events = await getEvents();
 
-    const sanitizeOptions = {
-        allowedTags: ['b', 'i', 'em', 'strong', 'a', 'p'],
-        allowedAttributes: {
-            a: ['href']
-        }
-    };
+  const sanitizeOptions = {
+    allowedTags: ['b', 'i', 'em', 'strong', 'a', 'p'],
+    allowedAttributes: {
+      a: ['href']
+    }
+  };
 
-    const eventCards = events.items.map((event: Event) => {
-        const { id, summary, description, start, end } = event;
+  const formatEventTime = (startDateTime: string, endDateTime: string) => {
+    const startDate = new Date(startDateTime);
+    const endDate = new Date(endDateTime);
 
-        return (
-            <div key={id} className="event-card">
-                <h3>{summary}</h3>
-                <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(description, sanitizeOptions) }} />
-                <p>Start: {start.dateTime || start.date}</p>
-                <p>End: {end.dateTime || end.date}</p>
-            </div>
-        );
-    });
+    if (startDate.toDateString() === endDate.toDateString()) {
+      const startTime = startDate.toLocaleString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: false
+      });
+      const endTime = endDate.toLocaleString('en-US', {
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: false
+      });
+
+      return `${startTime} - ${endTime}`;
+    } else {
+      // Different days, display both date and time
+      return `${startDateTime} - ${endDateTime}`;
+    }
+  };
+
+  const eventCards = events.items.map((event: Event) => {
+    const { id, summary, description, start, end } = event;
 
     return (
-        <div className="event-list">
-            {eventCards}
-        </div>
+      <div key={id} className="event-card bg-white shadow-md p-4 rounded-lg">
+        <h3 className="text-lg font-semibold">{summary}</h3>
+        <div
+          className="description"
+          dangerouslySetInnerHTML={{ __html: sanitizeHtml(description, sanitizeOptions) }}
+        />
+        <p className="mt-2">
+          <b>Time: </b>
+          {formatEventTime(start.dateTime || start.date as string, end.dateTime || end.date as string)}
+        </p>
+      </div>
     );
+  });
+
+  return <div className="event-list">{eventCards}</div>;
 }
