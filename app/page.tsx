@@ -40,7 +40,7 @@ async function getEvents() {
         showDeleted: 'False',
         singleEvents: 'True',
         orderBy: 'startTime',
-        maxResults: 50,
+        maxResults: '50',
     };
 
     const queryString = new URLSearchParams(parameters).toString();
