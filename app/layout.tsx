@@ -1,3 +1,5 @@
+import './globals.css'
+
 export const metadata = {
   title: 'Queer Calendar Sheffield',
   description: 'Find out what queer events are on in Sheffield!',
