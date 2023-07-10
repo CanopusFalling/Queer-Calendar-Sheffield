@@ -1,31 +1,33 @@
-import axios, { AxiosRequestConfig } from 'axios';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export const runtime = 'edge';
 
+const googleApiKey = process.env.GOOGLE_API_KEY;
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  try {
-    const googleApiUrl = 'https://www.googleapis.com/calendar/v3/calendars/queercalendarsheffield@gmail.com/events';
-
-    const googleApiKey = process.env.GOOGLE_API_KEY; // Access the environment variable
-
-    if (!googleApiKey) {
-      throw new Error('Google API key not found');
-    }
-
-    const config: AxiosRequestConfig = {
-      method: req.method as AxiosRequestConfig['method'],
-      url: googleApiUrl,
-      params: {
-        ...req.query,
-        key: googleApiKey,
-      },
-    };
-
-    const response = await axios(config);
-
-    res.status(response.status).json(response.data);
-  } catch (error) {
-    res.status(500).json({ error: 'An error occurred' });
+  if (!googleApiKey) {
+    throw new Error('Google API key is not defined.');
   }
+
+  const parameters = {
+    key: googleApiKey,
+    timeMin: new Date().toISOString(),
+    showDeleted: "False",
+    singleEvents: "True"
+  };
+
+  const queryString = new URLSearchParams(parameters).toString();
+
+  const response = await fetch(`https://www.googleapis.com/calendar/v3/calendars/queercalendarsheffield@gmail.com/events?${queryString}`);
+  const eventData = await response.json();
+
+  return new Response(
+    JSON.stringify(eventData),
+    {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+  );
 }

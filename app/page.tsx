@@ -1,13 +1,37 @@
 import React from 'react';
 
 export const runtime = 'edge';
-const googleApiKey = process.env.GOOGLE_API_KEY;
 
-function TestPage(){
-    return (<p>Hello</p>);
+async function getEvents() {
+    const googleApiKey = process.env.GOOGLE_API_KEY;
+
+    if (!googleApiKey) {
+        throw new Error('Google API key is not defined.');
+    }
+
+    const parameters = {
+        key: googleApiKey,
+        timeMin: new Date().toISOString(),
+        showDeleted: "False",
+        singleEvents: "True"
+    };
+
+    const queryString = new URLSearchParams(parameters).toString();
+
+    const res = await fetch(`https://www.googleapis.com/calendar/v3/calendars/queercalendarsheffield@gmail.com/events?${queryString}`);
+
+    if (!res.ok) {
+        throw new Error('Failed to fetch data')
+    }
+
+    return res.json()
 }
 
-export default TestPage;
+export default async function TestPage() {
+    const events = await getEvents();
+
+    return JSON.stringify(events);
+}
 
 function HomePage() {
     const htmlContent = `
