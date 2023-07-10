@@ -65,7 +65,7 @@ export default async function HomePage() {
   const events = await getEvents();
 
   const sanitizeOptions = {
-    allowedTags: ['b', 'i', 'em', 'strong', 'a'],
+    allowedTags: ['b', 'i', 'em', 'strong', 'a', 'p'],
     allowedAttributes: {
       a: ['href']
     }
@@ -114,7 +114,7 @@ export default async function HomePage() {
           <b>Time: </b>
           {formatEventTime(start.dateTime || start.date as string, end.dateTime || end.date as string)}
         </p>
-        <p
+        <div
           className="mb-4 text-base text-neutral-600 dark:text-neutral-200"
           dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
         />
