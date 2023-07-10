@@ -105,7 +105,7 @@ export default async function HomePage() {
 
       <div
         key={id}
-        className="block rounded-lg bg-white p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+        className="block rounded-lg bg-white mb-2 p-6 shadow dark:shadow-white/10 dark:bg-neutral-700">
         <h5
           className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
           {summary}
@@ -122,5 +122,5 @@ export default async function HomePage() {
     );
   });
 
-  return <div className="event-list">{eventCards}</div>;
+  return <div className="p-6 dark:bg-neutral-800">{eventCards}</div>;
 }
