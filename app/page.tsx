@@ -1,52 +1,119 @@
 import React from 'react';
+import { Cache } from 'memory-cache';
+import sanitizeHtml from 'sanitize-html';
 
 export const runtime = 'edge';
 
-function HomePage() {
-    const htmlContent = `
-  <!DOCTYPE html>
+const cache = new Cache();
+const CACHE_DURATION = 60 * 1000; // milliseconds
 
-  <head>  
-      <script type='text/javascript' src='js/calendar.js'></script>
-  </head>
-  
-  <header>
-    <nav class="bg-gray-900">
-      <div class="container mx-auto px-4">
-        <div class="flex items-center justify-between h-16">
-          <a class="text-white text-lg font-bold" href="#">Queer Calendar Sheffield</a>
-          <button class="text-white inline-flex p-2 rounded-md hover:bg-gray-800 focus:outline-none focus:bg-gray-800"
-            aria-label="Toggle navigation">
-            <svg class="h-6 w-6" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-          </button>
-        </div>
-      </div>
-    </nav>
-  </header>
-
-  <main>
-    <section id="calendar-events" class="container my-5">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="event-card-container">
-      </div>
-    </section>
-  </main>
-
-  <footer class="bg-gray-100 py-3">
-    <div class="container mx-auto px-4">
-      <p><a href="https://github.com/CanopusFalling/Queer-Calendar-Sheffield">View project on GitHub</a></p>
-    </div>
-  </footer>
-
-  <!-- Modals -->
-  <div id="event-modal-container">
-  </div>
-  </div>
-  `;
-
-    return <div dangerouslySetInnerHTML={{ __html: htmlContent }} />;
+interface Event {
+    id: string;
+    summary: string;
+    description: string;
+    start: {
+        dateTime?: string;
+        date?: string;
+    };
+    end: {
+        dateTime?: string;
+        date?: string;
+    };
 }
 
-export default HomePage;
+async function getEvents() {
+    const googleApiKey = process.env.GOOGLE_API_KEY;
+
+    if (!googleApiKey) {
+        throw new Error('Google API key is not defined.');
+    }
+
+    // Check if the data is already cached
+    const cachedData = cache.get('events');
+    if (cachedData) {
+        return cachedData;
+    }
+
+    const parameters = {
+        key: googleApiKey,
+        timeMin: new Date().toISOString(),
+        showDeleted: 'False',
+        singleEvents: 'True',
+        orderBy: 'startTime',
+        maxResults: '50',
+    };
+
+    const queryString = new URLSearchParams(parameters).toString();
+
+    const res = await fetch(
+        `https://www.googleapis.com/calendar/v3/calendars/queercalendarsheffield@gmail.com/events?${queryString}`
+    );
+
+    if (!res.ok) {
+        throw new Error('Failed to fetch data');
+    }
+
+    const eventData = await res.json();
+
+    // Cache the fetched data
+    cache.put('events', eventData, CACHE_DURATION);
+
+    return eventData;
+}
+
+export default async function HomePage() {
+  const events = await getEvents();
+
+  const sanitizeOptions = {
+    allowedTags: ['b', 'i', 'em', 'strong', 'a', 'p'],
+    allowedAttributes: {
+      a: ['href']
+    }
+  };
+
+  const formatEventTime = (startDateTime: string, endDateTime: string) => {
+    const startDate = new Date(startDateTime);
+    const endDate = new Date(endDateTime);
+
+    if (startDate.toDateString() === endDate.toDateString()) {
+      const startTime = startDate.toLocaleString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: false
+      });
+      const endTime = endDate.toLocaleString('en-US', {
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: false
+      });
+
+      return `${startTime} - ${endTime}`;
+    } else {
+      // Different days, display both date and time
+      return `${startDateTime} - ${endDateTime}`;
+    }
+  };
+
+  const eventCards = events.items.map((event: Event) => {
+    const { id, summary, description, start, end } = event;
+
+    return (
+      <div key={id} className="event-card bg-white shadow-md p-4 rounded-lg">
+        <h3 className="text-lg font-semibold">{summary}</h3>
+        <div
+          className="description"
+          dangerouslySetInnerHTML={{ __html: sanitizeHtml(description, sanitizeOptions) }}
+        />
+        <p className="mt-2">
+          <b>Time: </b>
+          {formatEventTime(start.dateTime || start.date as string, end.dateTime || end.date as string)}
+        </p>
+      </div>
+    );
+  });
+
+  return <div className="event-list">{eventCards}</div>;
+}
