@@ -13,7 +13,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     key: googleApiKey,
     timeMin: new Date().toISOString(),
     showDeleted: "False",
-    singleEvents: "True"
+    singleEvents: "True",
+    orderBy: "startTime",
   };
 
   const queryString = new URLSearchParams(parameters).toString();

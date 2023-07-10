@@ -1,7 +1,11 @@
 import React from 'react';
+import { Cache } from 'memory-cache';
 import sanitizeHtml from 'sanitize-html';
 
 export const runtime = 'edge';
+
+const cache = new Cache();
+const CACHE_DURATION = 60 * 1000; // milliseconds
 
 interface Event {
     id: string;
@@ -24,23 +28,37 @@ async function getEvents() {
         throw new Error('Google API key is not defined.');
     }
 
+    // Check if the data is already cached
+    const cachedData = cache.get('events');
+    if (cachedData) {
+        return cachedData;
+    }
+
     const parameters = {
         key: googleApiKey,
         timeMin: new Date().toISOString(),
-        showDeleted: "False",
-        singleEvents: "True",
-        orderBy: "startTime",
+        showDeleted: 'False',
+        singleEvents: 'True',
+        orderBy: 'startTime',
+        maxResults: 50,
     };
 
     const queryString = new URLSearchParams(parameters).toString();
 
-    const res = await fetch(`https://www.googleapis.com/calendar/v3/calendars/queercalendarsheffield@gmail.com/events?${queryString}`);
+    const res = await fetch(
+        `https://www.googleapis.com/calendar/v3/calendars/queercalendarsheffield@gmail.com/events?${queryString}`
+    );
 
     if (!res.ok) {
-        throw new Error('Failed to fetch data')
+        throw new Error('Failed to fetch data');
     }
 
-    return res.json()
+    const eventData = await res.json();
+
+    // Cache the fetched data
+    cache.put('events', eventData, CACHE_DURATION);
+
+    return eventData;
 }
 
 export default async function HomePage() {
