@@ -1,68 +1,126 @@
 import React from 'react';
+import { Cache } from 'memory-cache';
+import sanitizeHtml from 'sanitize-html';
 
 export const runtime = 'edge';
 
-function HomePage() {
-    const htmlContent = `
-  <!DOCTYPE html>
+const cache = new Cache();
+const CACHE_DURATION = 60 * 1000; // milliseconds
 
-  <head>  
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-      <script type='text/javascript' src='js/calendar.js'></script>
-  </head>
-  
-  <div>
-      <header>
-          <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-              <div class="container">
-                  <a class="navbar-brand" href="#">Queer Calendar Sheffield</a>
-                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                      <span class="navbar-toggler-icon"></span>
-                  </button>
-                  <div class="collapse navbar-collapse" id="navbarNav">
-                      <!-- <ul class="navbar-nav ml-auto">
-                          <li class="nav-item">
-                              <a class="nav-link" href="#">Home</a>
-                          </li>
-                          <li class="nav-item">
-                              <a class="nav-link" href="#">Events</a>
-                          </li>
-                          <li class="nav-item">
-                              <a class="nav-link" href="#">About</a>
-                          </li>
-                          <li class="nav-item">
-                              <a class="nav-link" href="#">Contact</a>
-                          </li>
-                      </ul> -->
-                  </div>
-              </div>
-          </nav>
-      </header>
-  
-      <main>
-          <section id="calendar-events" class="container my-5">
-              <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="event-card-container">
-              </div>
-          </section>
-      </main>
-  
-  
-  
-      <footer class="bg-light text-center py-3">
-          <div class="container">
-              <p><a href="https://github.com/CanopusFalling/Queer-Calendar-Sheffield">view project on github</a></p>
-          </div>
-      </footer>
-  
-      <!-- Modals -->
-      <div id="event-modal-container">
-      </div>
-  </div>
-  `;
-
-    return <div dangerouslySetInnerHTML={{ __html: htmlContent }} />;
+interface Event {
+  id: string;
+  summary: string;
+  description: string;
+  start: {
+    dateTime?: string;
+    date?: string;
+  };
+  end: {
+    dateTime?: string;
+    date?: string;
+  };
 }
 
-export default HomePage;
+async function getEvents() {
+  const googleApiKey = process.env.GOOGLE_API_KEY;
+
+  if (!googleApiKey) {
+    throw new Error('Google API key is not defined.');
+  }
+
+  // Check if the data is already cached
+  const cachedData = cache.get('events');
+  if (cachedData) {
+    return cachedData;
+  }
+
+  const parameters = {
+    key: googleApiKey,
+    timeMin: new Date().toISOString(),
+    showDeleted: 'False',
+    singleEvents: 'True',
+    orderBy: 'startTime',
+    maxResults: '50',
+  };
+
+  const queryString = new URLSearchParams(parameters).toString();
+
+  const res = await fetch(
+    `https://www.googleapis.com/calendar/v3/calendars/queercalendarsheffield@gmail.com/events?${queryString}`
+  );
+
+  if (!res.ok) {
+    throw new Error('Failed to fetch data');
+  }
+
+  const eventData = await res.json();
+
+  // Cache the fetched data
+  cache.put('events', eventData, CACHE_DURATION);
+
+  return eventData;
+}
+
+export default async function HomePage() {
+  const events = await getEvents();
+
+  const sanitizeOptions = {
+    allowedTags: ['b', 'i', 'em', 'strong', 'a', 'p'],
+    allowedAttributes: {
+      a: ['href']
+    }
+  };
+
+  const formatEventTime = (startDateTime: string, endDateTime: string) => {
+    const startDate = new Date(startDateTime);
+    const endDate = new Date(endDateTime);
+
+    if (startDate.toDateString() === endDate.toDateString()) {
+      const startTime = startDate.toLocaleString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: false
+      });
+      const endTime = endDate.toLocaleString('en-US', {
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: false
+      });
+
+      return `${startTime} - ${endTime}`;
+    } else {
+      // Different days, display both date and time
+      return `${startDateTime} - ${endDateTime}`;
+    }
+  };
+
+  const eventCards = events.items.map((event: Event) => {
+    const { id, summary, description, start, end } = event;
+    const sanitizedDescription = sanitizeHtml(description, sanitizeOptions);
+
+    return (
+
+      <div
+        key={id}
+        className="block rounded-lg bg-white mb-2 p-6 shadow dark:shadow-white/10 dark:bg-neutral-700">
+        <h5
+          className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+          {summary}
+        </h5>
+        <p className="mb-2 leading-tight text-neutral-800 dark:text-neutral-50">
+          <b>Time: </b>
+          {formatEventTime(start.dateTime || start.date as string, end.dateTime || end.date as string)}
+        </p>
+        <div
+          className="mb-4 text-base text-neutral-600 dark:text-neutral-200"
+          dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
+        />
+      </div>
+    );
+  });
+
+  return <div className="p-6 dark:bg-neutral-800">{eventCards}</div>;
+}
