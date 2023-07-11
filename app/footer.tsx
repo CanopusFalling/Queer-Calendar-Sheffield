@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="bg-neutral-100 text-center dark:bg-neutral-600 lg:text-left">
       <div className="container p-6 text-neutral-800 dark:text-neutral-200">
         <div className="mb-6 md:mb-0">
-          <p>
+          <p className="text-center">
             This website is built entirely by volenteers to advertise local queer events in Sheffield.
           </p>
         </div>
