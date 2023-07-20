@@ -73,32 +73,6 @@ export default async function HomePage() {
     }
   };
 
-  const formatEventTime = (startDateTime: string, endDateTime: string) => {
-    const startDate = new Date(startDateTime);
-    const endDate = new Date(endDateTime);
-
-    if (startDate.toDateString() === endDate.toDateString()) {
-      const startTime = startDate.toLocaleString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        hour12: false
-      });
-      const endTime = endDate.toLocaleString('en-US', {
-        hour: 'numeric',
-        minute: 'numeric',
-        hour12: false
-      });
-
-      return `${startTime} - ${endTime}`;
-    } else {
-      // Different days, display both date and time
-      return `${startDateTime} - ${endDateTime}`;
-    }
-  };
-
   const eventCards = events.items.map((event: Event) => {
     const { id, summary, description, start, end } = event;
     const sanitizedDescription = sanitizeHtml(description, sanitizeOptions);
