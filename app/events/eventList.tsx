@@ -2,6 +2,8 @@ import React from 'react';
 import { Cache } from 'memory-cache';
 import sanitizeHtml from 'sanitize-html';
 
+import DateTimeWithDST from './dateHandling';
+
 export const runtime = 'edge';
 
 // Create Cache to cache the events results.
@@ -127,7 +129,10 @@ export default async function EventList({ requestArguments }: EventListProps) {
                 </h5>
                 <p className="mb-2 leading-tight text-neutral-800 dark:text-neutral-50">
                     <b>Time: </b>
-                    {formatEventTime(start.dateTime || start.date as string, end.dateTime || end.date as string)}
+                    <DateTimeWithDST
+                        start={new Date(start.dateTime || start.date as string)}
+                        end={new Date(end.dateTime || end.date as string)}
+                        isFullDayEvent={start.dateTime == undefined && end.dateTime == undefined} />
                 </p>
                 <div
                     className="mb-4 text-base text-neutral-600 dark:text-neutral-200"
