@@ -6,9 +6,10 @@ import moment from 'moment-timezone';
 interface DateTimeWithDSTProps {
   start: Date;
   end: Date;
+  isFullDayEvent: Boolean;
 }
 
-const DateTimeWithDST: React.FC<DateTimeWithDSTProps> = ({ start, end }) => {
+const DateTimeWithDST: React.FC<DateTimeWithDSTProps> = ({ start, end, isFullDayEvent }) => {
   const [formattedDateTime, setFormattedDateTime] = useState<string>('');
 
   useEffect(() => {
@@ -23,14 +24,25 @@ const DateTimeWithDST: React.FC<DateTimeWithDSTProps> = ({ start, end }) => {
     const isSameDay = startDate.isSame(endDate, 'day');
 
     // Format the start and end date and time for display, accounting for DST
-    let formattedStart = startDate.tz(timezone).format('DD MMMM YYYY HH:mm');
+    let formattedStart = startDate.tz(timezone).format('Do MMMM YYYY HH:mm');
     let formattedEnd = endDate.tz(timezone).format('HH:mm');
 
-    if (!isSameDay) {
-      formattedEnd = endDate.tz(timezone).format('DD MMMM YYYY HH:mm');
+    if (isFullDayEvent) {
+      formattedStart = startDate.tz(timezone).format('Do MMMM YYYY');
+      formattedEnd = endDate.tz(timezone).format('Do MMMM YYYY');
     }
 
-    setFormattedDateTime(`${formattedStart} - ${formattedEnd}`);
+    if (!isSameDay) {
+      if (!isFullDayEvent) {
+        formattedEnd = endDate.tz(timezone).format('Do MMMM YYYY HH:mm');
+      }
+    }
+
+    if (isSameDay && isFullDayEvent) {
+      setFormattedDateTime(formattedStart);
+    } else {
+      setFormattedDateTime(`${formattedStart} - ${formattedEnd}`);
+    }
   }, [start, end]);
 
   return formattedDateTime;

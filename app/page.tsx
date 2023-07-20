@@ -103,6 +103,8 @@ export default async function HomePage() {
     const { id, summary, description, start, end } = event;
     const sanitizedDescription = sanitizeHtml(description, sanitizeOptions);
 
+    let isFullDayEvent = start.dateTime == undefined && end.dateTime == undefined
+
     const startDate = new Date(start.dateTime || start.date as string)
     const endDate = new Date(end.dateTime || end.date as string)
 
@@ -117,7 +119,7 @@ export default async function HomePage() {
         </h5>
         <p className="mb-2 leading-tight text-neutral-800 dark:text-neutral-50">
           <b>Time: </b>
-          <DateTimeWithDST start={startDate} end={endDate} />
+          <DateTimeWithDST start={startDate} end={endDate} isFullDayEvent={isFullDayEvent} />
         </p>
         <div
           className="mb-4 text-base text-neutral-600 dark:text-neutral-200"
