@@ -1,6 +1,8 @@
 import React from 'react';
 import { Cache } from 'memory-cache';
 import sanitizeHtml from 'sanitize-html';
+import DateTimeWithDST from './dateHandling';
+import { start } from 'repl';
 
 export const runtime = 'edge';
 
@@ -101,6 +103,9 @@ export default async function HomePage() {
     const { id, summary, description, start, end } = event;
     const sanitizedDescription = sanitizeHtml(description, sanitizeOptions);
 
+    const startDate = new Date(start.dateTime || start.date as string)
+    const endDate = new Date(end.dateTime || end.date as string)
+
     return (
 
       <div
@@ -112,7 +117,7 @@ export default async function HomePage() {
         </h5>
         <p className="mb-2 leading-tight text-neutral-800 dark:text-neutral-50">
           <b>Time: </b>
-          {formatEventTime(start.dateTime || start.date as string, end.dateTime || end.date as string)}
+          <DateTimeWithDST start={startDate} end={endDate} />
         </p>
         <div
           className="mb-4 text-base text-neutral-600 dark:text-neutral-200"
