@@ -2,6 +2,15 @@
 
 You can view this project deployed over on cloudflare pages [here](https://queer-calendar-sheffield.pages.dev/).
 
+This is a project to take data collated and organised by Rowan Garwood about Queeer events in Sheffield and present them in an accessible format. You can view the original google calendar this project pulls data from [here](https://calendar.google.com/calendar/embed?src=queercalendarsheffield%40gmail.com&ctz=Europe%2FLondon).
+
+## How to Contribute
+
+- Fill in [this form](https://forms.gle/KE4iZaxnhtfw4RCF7) if you want to add an event to the calendar!
+- Submit issues if you want to see a feature or find a bug [here](https://github.com/CanopusFalling/Queer-Calendar-Sheffield/issues)!
+- [Fork this repo](https://github.com/CanopusFalling/Queer-Calendar-Sheffield/fork) and submit a [pull request](https://github.com/CanopusFalling/Queer-Calendar-Sheffield/compare) if you want to contribute to the website.
+- If you would like to get involved with updating the calendar to add events or working on the website email us: [queercalendarsheffield@gmail.com](mailto:queercalendarsheffield@gmail.com)
+
 ## Development Setup
 
 ### Requirements
