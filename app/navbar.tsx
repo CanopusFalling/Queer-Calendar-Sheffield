@@ -40,7 +40,6 @@ function NavLink({ label, href, isActive }: NavLinkProps) {
 function HamburgerSvg() {
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill="currentColor"
       className="h-7 w-7">
@@ -74,7 +73,7 @@ export default function Navbar() {
     <nav className="relative flex w-full flex-nowrap items-center justify-between bg-[#FBFBFB] py-2 text-neutral-500 shadow-lg hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-600 lg:flex-wrap lg:justify-start lg:py-4">
       <div className="flex w-full flex-wrap items-center justify-between px-3">
         <Logo />
-        {/*<HamburgerButton />
+        <HamburgerButton />
         <div
           className="!visible mt-2 hidden flex-grow basis-[100%] items-center lg:mt-0 lg:!flex lg:basis-auto"
           id="navbarSupportedContent3"
@@ -91,7 +90,7 @@ export default function Navbar() {
               />
             ))}
           </div>
-            </div>*/}
+        </div>
       </div>
     </nav>
   );

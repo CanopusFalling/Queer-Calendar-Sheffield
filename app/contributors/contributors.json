@@ -4,7 +4,12 @@
         "role": "Calendar Organiser & Maintainer"
     },
     {
+        "avatarUrl": "https://canopusfalling.co.uk/assets/images/profile_photo.jpg",
         "name": "Sammy",
-        "role": "Website Developer & Maintainer"
+        "pronouns": "They/Them",
+        "role": "Website Developer & Maintainer",
+        "email": "kent_sam@outlook.com",
+        "github": "CanopusFalling",
+        "website": "canopusfalling.co.uk"
     }
 ]
