@@ -15,3 +15,7 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
+
+body{
+  @apply text-neutral-800 dark:text-neutral-50;
+}
