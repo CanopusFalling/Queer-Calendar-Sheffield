@@ -96,7 +96,7 @@ export default async function HomePage() {
           <DateTimeWithDST start={startDate} end={endDate} isFullDayEvent={isFullDayEvent} />
         </p>
         <div
-          className="mb-4 text-base text-neutral-600 dark:text-neutral-200"
+          className="mb-4 text-base overflow-x-hidden cursor-pointer text-neutral-600 dark:text-neutral-200" 
           dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
         />
       </div>
