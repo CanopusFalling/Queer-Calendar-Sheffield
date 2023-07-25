@@ -1,5 +1,7 @@
 import React from 'react';
 
+export const runtime = 'edge';
+
 interface NavLinkProps {
   label: string;
   href: string;

@@ -1,5 +1,7 @@
 import React from 'react';
 
+export const runtime = 'edge';
+
 export default function Footer() {
   return (
     <footer className="bg-neutral-100 text-center dark:bg-neutral-600 lg:text-left">

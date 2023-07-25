@@ -4,6 +4,8 @@ import React from "react";
 import { Event } from "./Event";
 import moment from "moment-timezone";
 
+export const runtime = 'edge';
+
 interface GoogleCalendarButtonProps {
     event: Event;
 }
