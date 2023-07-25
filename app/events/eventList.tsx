@@ -24,6 +24,7 @@ interface Event {
     id: string;
     summary: string;
     description: string;
+    location: string;
     start: {
         dateTime?: string;
         date?: string;
@@ -89,11 +90,12 @@ export default async function EventList({ requestArguments }: EventListProps) {
     };
 
     const eventCards = events.items.map((event: Event) => {
-        const { id, summary, description, start, end } = event;
+        const { id, summary, location, description, start, end } = event;
         const sanitizedDescription = sanitizeHtml(description, sanitizeOptions);
 
-        return (
+        const urlEncodedLocation = encodeURIComponent(location)
 
+        return (
             <div
                 key={id}
                 className="block rounded-lg bg-white mb-2 p-6 shadow dark:shadow-white/10 dark:bg-neutral-700">
@@ -108,6 +110,13 @@ export default async function EventList({ requestArguments }: EventListProps) {
                         end={new Date(end.dateTime || end.date as string)}
                         isFullDayEvent={start.dateTime == undefined && end.dateTime == undefined} />
                 </p>
+                {location && (
+                    <a href={`https://www.google.com/maps/dir/?api=1&destination=${urlEncodedLocation}`}>
+                        <p className="mb-2 leading-tight text-neutral-800 dark:text-neutral-50">
+                            <b>Location: </b> {location}
+                        </p>
+                    </a>
+                )}
                 <div
                     className="mb-4 text-base text-neutral-600 dark:text-neutral-200"
                     dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
