@@ -78,14 +78,10 @@ export default async function EventList({ requestArguments }: EventListProps) {
     };
 
     const eventCards = events.items.map((event: Event) => {
-        const { id, summary, location, description, htmlLink, start, end } = event;
+        const { id, summary, location, description, start, end } = event;
         const sanitizedDescription = sanitizeHtml(description, sanitizeOptions);
 
         const urlEncodedLocation = encodeURIComponent(location)
-
-        const openInGoogleCalendar = () => {
-            window.open(htmlLink, '_blank');
-        }
 
         return (
             <div
