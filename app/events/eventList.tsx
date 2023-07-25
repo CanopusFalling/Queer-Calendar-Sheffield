@@ -3,6 +3,9 @@ import { Cache } from 'memory-cache';
 import sanitizeHtml from 'sanitize-html';
 
 import DateTimeWithDST from './dateHandling';
+import GoogleCalendarButton from './googleCalendarButton';
+
+import { Event } from './Event';
 
 export const runtime = 'edge';
 
@@ -18,21 +21,6 @@ interface GoogleCalendarApiArguments {
 
 interface EventListProps {
     requestArguments: GoogleCalendarApiArguments
-}
-
-interface Event {
-    id: string;
-    summary: string;
-    description: string;
-    location: string;
-    start: {
-        dateTime?: string;
-        date?: string;
-    };
-    end: {
-        dateTime?: string;
-        date?: string;
-    };
 }
 
 async function getEvents({ timeMin, timeMax, maxResults }: GoogleCalendarApiArguments) {
@@ -90,10 +78,14 @@ export default async function EventList({ requestArguments }: EventListProps) {
     };
 
     const eventCards = events.items.map((event: Event) => {
-        const { id, summary, location, description, start, end } = event;
+        const { id, summary, location, description, htmlLink, start, end } = event;
         const sanitizedDescription = sanitizeHtml(description, sanitizeOptions);
 
         const urlEncodedLocation = encodeURIComponent(location)
+
+        const openInGoogleCalendar = () => {
+            window.open(htmlLink, '_blank');
+        }
 
         return (
             <div
@@ -121,6 +113,7 @@ export default async function EventList({ requestArguments }: EventListProps) {
                     className="mb-4 text-base text-neutral-600 dark:text-neutral-200"
                     dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
                 />
+                <GoogleCalendarButton event={event}/>
             </div>
         );
     });
