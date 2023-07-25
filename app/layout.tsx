@@ -1,5 +1,7 @@
 import './globals.css';
 
+export const runtime = 'edge';
+
 import Header from './header';
 import Footer from './footer';
 

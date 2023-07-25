@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react';
 import moment from 'moment-timezone';
 
+export const runtime = 'edge';
+
 interface DateTimeWithDSTProps {
   start: Date;
   end: Date;
