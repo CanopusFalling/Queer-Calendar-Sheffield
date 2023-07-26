@@ -1,10 +1,12 @@
 [
     {
+        "avatarUrl": "img/contributors/rowan_garwood_profile.webp",
         "name": "Rowan Garwood",
-        "role": "Calendar Organiser & Maintainer"
+        "role": "Calendar Organiser & Maintainer",
+        "pronouns": "They/Them"
     },
     {
-        "avatarUrl": "https://canopusfalling.co.uk/assets/images/profile_photo.jpg",
+        "avatarUrl": "img/contributors/sammy_profile.webp",
         "name": "Sammy",
         "pronouns": "They/Them",
         "role": "Website Developer & Maintainer",
