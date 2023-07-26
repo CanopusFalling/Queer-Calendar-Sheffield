@@ -16,7 +16,8 @@ const Contributors: React.FC = () => {
                             src={contributor.avatarUrl}
                             className="mx-auto mb-4 rounded-full shadow-lg dark:shadow-black/20"
                             alt={contributor.name}
-                            style={{ maxWidth: '100px' }}
+                            width = '100px'
+                            height = '100px'
                         />
                     ) : (
                         <CgProfile className="mx-auto mb-4 w-20 h-20" />
@@ -28,17 +29,17 @@ const Contributors: React.FC = () => {
 
                     <div className="icon-container flex justify-center items-center">
                         {contributor.email && (
-                            <a className="m-2" href={`mailto:${contributor.email}`}>
+                            <a className="m-2" href={`mailto:${contributor.email}`} aria-label={`Email ${contributor.name}`}>
                                 <AiOutlineMail className="w-6 h-6" />
                             </a>
                         )}
                         {contributor.github && (
-                            <a className="m-2" href={`https://github.com/${contributor.github}`}>
+                            <a className="m-2" href={`https://github.com/${contributor.github}`} aria-label={`Visit ${contributor.name}'s Github`}>
                                 <DiGithubBadge className="w-7 h-7" />
                             </a>
                         )}
                         {contributor.website && (
-                            <a className="m-2" href={contributor.website}>
+                            <a className="m-2" href={contributor.website} aria-label={`Visit ${contributor.name}'s Website`}>
                                 <GoGlobe className="w-6 h-6" />
                             </a>
                         )}
