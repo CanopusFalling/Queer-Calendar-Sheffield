@@ -106,7 +106,7 @@ export default async function EventList({ requestArguments }: EventListProps) {
                     </a>
                 )}
                 <div
-                    className="mb-4 text-base text-neutral-600 dark:text-neutral-200"
+                    className="mb-4 text-base text-neutral-600 overflow-x-hidden dark:text-neutral-200"
                     dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
                 />
                 <GoogleCalendarButton event={event}/>
