@@ -24,7 +24,7 @@ function AdaptiveLinks({ isNavOpen }: AdaptiveLinksProps) {
             data-te-collapse-item
         >
             <div
-                className="mt-4 list-style-none mr-auto flex flex-col pl-0 lg:mt-0 lg:ml-4 lg: lg:flex-row"
+                className="flex-grow mt-4 list-style-none flex flex-col pl-0 lg:mt-0 lg:ml-4 lg:flex-row"
             >
                 {navLinks.map((link, index) => (
                     <NavLink
