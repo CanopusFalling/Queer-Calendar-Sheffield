@@ -1,9 +1,7 @@
 import './globals.css';
 
-export const runtime = 'edge';
-
-import Header from './header';
-import Footer from './footer';
+import Header from './components/header';
+import Footer from './components/footer';
 
 export const metadata = {
   title: 'Queer Calendar Sheffield',
@@ -19,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className='block bg-white dark:shadow-white/10 dark:bg-neutral-700'>
         <Header />
         {children}
         <Footer />

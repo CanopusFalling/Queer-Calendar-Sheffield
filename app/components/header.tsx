@@ -1,8 +1,6 @@
 import React from 'react';
 
-export const runtime = 'edge';
-
-import Navbar from './navbar';
+import Navbar from './navbar/navbar';
 
 export default function Header() {
   return (
