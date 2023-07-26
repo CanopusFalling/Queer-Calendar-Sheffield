@@ -8,7 +8,11 @@ export interface NavLinkProps {
 }
 
 function NavLink({ label, href }: NavLinkProps) {
-    const isActive = window.location.pathname === href;
+    function removeAnchors (path: string){
+        return path.split('#')[0];
+    }
+
+    const isActive = removeAnchors(window.location.pathname) === removeAnchors(href);
 
     return (
         <div className="mb-4 pl-2 lg:mb-0 lg:pl-0 lg:pr-1">
