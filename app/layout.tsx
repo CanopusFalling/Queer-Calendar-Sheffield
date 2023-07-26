@@ -1,7 +1,7 @@
 import './globals.css';
 
-import Header from './header';
-import Footer from './footer';
+import Header from './components/header';
+import Footer from './components/footer';
 
 export const metadata = {
   title: 'Queer Calendar Sheffield',
