@@ -1,34 +1,46 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Queer Calendar Sheffield
 
-## Getting Started
+You can view this project deployed over on cloudflare pages [here](https://queer-calendar-sheffield.pages.dev/).
 
-First, run the development server:
+This is a project to take data collated and organised by Rowan Garwood about Queeer events in Sheffield and present them in an accessible format. You can view the original google calendar this project pulls data from [here](https://calendar.google.com/calendar/embed?src=queercalendarsheffield%40gmail.com&ctz=Europe%2FLondon).
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+## How to Contribute
+
+- Fill in [this form](https://forms.gle/KE4iZaxnhtfw4RCF7) if you want to add an event to the calendar!
+- Submit issues if you want to see a feature or find a bug [here](https://github.com/CanopusFalling/Queer-Calendar-Sheffield/issues)!
+- [Fork this repo](https://github.com/CanopusFalling/Queer-Calendar-Sheffield/fork) and submit a [pull request](https://github.com/CanopusFalling/Queer-Calendar-Sheffield/compare) if you want to contribute to the website.
+- If you would like to get involved with updating the calendar to add events or working on the website email us: [queercalendarsheffield@gmail.com](mailto:queercalendarsheffield@gmail.com)
+
+## Development Setup
+
+### Requirements
+
+- Node Package Manager v9.8.1
+- NodeJS v18.15.0
+
+*Version numbers are based on what has been tested, newer versions will likely work.*
+
+[Install instructions for node and npm.](https://docs.npmjs.com/cli/v9/configuring-npm/install)
+
+### Local Evnironment Setup
+
+- Create a copy of `.env.local.sample` and name it `.env.local`.
+- Replace `[Google-Calendar-API-Key]` with your google API key. The API key must have the calendar API enabled. [Instructions to obtain a Google API key.](https://support.google.com/googleapi/answer/6158862)
+
+### Installing Node Modules
+
+Run the following to install all node modules.
+
+```
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Running the Project
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Run the following command to launch the project.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```
+npm run dev
+```
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+You should then be able to view the local website on [http://localhost:3000](http://localhost:3000).
