@@ -4,6 +4,7 @@ import sanitizeHtml from 'sanitize-html';
 
 import DateTimeWithDST from './dateHandling';
 import GoogleCalendarButton from './googleCalendarButton';
+import ShareButton from "./shareButton";
 
 import { Event } from './Event';
 
@@ -110,6 +111,7 @@ export default async function EventList({ requestArguments }: EventListProps) {
                     dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
                 />
                 <GoogleCalendarButton event={event}/>
+                <ShareButton event={event}/>
             </div>
         );
     });
