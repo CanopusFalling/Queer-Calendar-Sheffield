@@ -11,7 +11,7 @@ interface GoogleCalendarButtonProps {
 }
 
 const GoogleCalendarButton: React.FC<GoogleCalendarButtonProps> = ({ event }) => {
-    const { summary, description, location, start, end } = event;
+    const { summary, description, location, startTime: start, endTime: end } = event;
 
     const convertToUTC = (dateStr: string) => {
       const utcDate = moment.tz(dateStr, moment.tz.guess()).utc();

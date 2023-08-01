@@ -79,7 +79,7 @@ export default async function EventList({ requestArguments }: EventListProps) {
     };
 
     const eventCards = events.items.map((event: Event) => {
-        const { id, summary, location, description, start, end } = event;
+        const { id, summary, location, description, startTime: start, endTime: end } = event;
         const sanitizedDescription = sanitizeHtml(description || "", sanitizeOptions);
 
         const urlEncodedLocation = encodeURIComponent(location)
@@ -95,9 +95,9 @@ export default async function EventList({ requestArguments }: EventListProps) {
                 <p className="mb-2 leading-tight text-neutral-800 dark:text-neutral-50">
                     <b>Time: </b>
                     <DateTimeWithDST
-                        start={new Date(start.dateTime || start.date as string)}
-                        end={new Date(end.dateTime || end.date as string)}
-                        isFullDayEvent={start.dateTime == undefined && end.dateTime == undefined} />
+                        start={event.startTime}
+                        end={event.endTime}
+                        isFullDayEvent={event.allDay} />
                 </p>
                 {location && (
                     <a href={`https://www.google.com/maps/dir/?api=1&destination=${urlEncodedLocation}`}>

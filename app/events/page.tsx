@@ -104,9 +104,9 @@ export default async function EventPage(req: any, res: any) {
             <p className="mb-2 leading-tight text-neutral-800 dark:text-neutral-50">
                 <b>Time: </b>
                 <DateTimeWithDST
-                    start={new Date(event.start.dateTime || event.start.date as string)}
-                    end={new Date(event.end.dateTime || event.end.date as string)}
-                    isFullDayEvent={event.start.dateTime == undefined && event.end.dateTime == undefined} />
+                    start={new Date(event.startTime.dateTime || event.startTime.date as string)}
+                    end={new Date(event.endTime.dateTime || event.endTime.date as string)}
+                    isFullDayEvent={event.startTime.dateTime == undefined && event.endTime.dateTime == undefined} />
             </p>
             {event.location && (
                 <a href={`https://www.google.com/maps/dir/?api=1&destination=${urlEncodedLocation}`}>
