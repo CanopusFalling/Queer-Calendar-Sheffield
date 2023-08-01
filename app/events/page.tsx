@@ -89,7 +89,7 @@ export default async function EventPage(req: any, res: any) {
         }
     };
 
-    const sanitizedDescription = sanitizeHtml(event.description, sanitizeOptions);
+    const sanitizedDescription = sanitizeHtml(event.description || "", sanitizeOptions);
 
     const urlEncodedLocation = encodeURIComponent(event.location);
 

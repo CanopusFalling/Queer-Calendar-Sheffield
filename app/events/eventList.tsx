@@ -80,7 +80,7 @@ export default async function EventList({ requestArguments }: EventListProps) {
 
     const eventCards = events.items.map((event: Event) => {
         const { id, summary, location, description, start, end } = event;
-        const sanitizedDescription = sanitizeHtml(description, sanitizeOptions);
+        const sanitizedDescription = sanitizeHtml(description || "", sanitizeOptions);
 
         const urlEncodedLocation = encodeURIComponent(location)
 
