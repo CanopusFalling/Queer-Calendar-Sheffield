@@ -1,5 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
+import { Metadata, ResolvingMetadata } from 'next'
 import { redirect } from 'next/navigation'
 
 import { Cache } from 'memory-cache';
@@ -17,50 +18,69 @@ export const runtime = 'edge';
 const cache = new Cache();
 const CACHE_DURATION = 60 * 1000; // milliseconds
 
+type Props = {
+    params: {}
+    searchParams: { eventId: string }
+}
+
+const getEvent = async (eventId: string) => {
+    const googleApiKey = process.env.GOOGLE_API_KEY;
+
+    if (!googleApiKey) {
+        throw new Error('Google API key is not defined.');
+    }
+
+    // Check if the data is already cached
+    // const cachedData = cache.get('event');
+    // if (cachedData) {
+    //     return cachedData;
+    // }
+
+    const parameters = {
+        key: googleApiKey,
+    };
+
+    const queryString = new URLSearchParams(parameters).toString();
+
+    const response = await fetch(
+        `https://www.googleapis.com/calendar/v3/calendars/queercalendarsheffield@gmail.com/events/${eventId}?${queryString}`
+    );
+
+    if (!response.ok) {
+        //console.log(res)
+        throw new Error('Failed to fetch data');
+    }
+
+    const eventData = await response.json();
+
+    // Cache the fetched data
+    // cache.put('event', eventData, CACHE_DURATION);
+
+    return eventData as Event;
+}
+
+export async function generateMetadata(
+    { params, searchParams }: Props,
+    parent: ResolvingMetadata
+): Promise<Metadata> {
+    const { eventId } = searchParams;
+
+    const event = await getEvent(eventId);
+
+    return {
+        title: event.summary,
+        description: event.description,
+    }
+}
+
 export default async function EventPage(req: any, res: any) {
     const { eventId } = req.searchParams;
+
+    const event = await getEvent(eventId);
 
     if (!eventId) {
         redirect('/');
     }
-
-    const getEvent = async (eventId: string) => {
-        const googleApiKey = process.env.GOOGLE_API_KEY;
-
-        if (!googleApiKey) {
-            throw new Error('Google API key is not defined.');
-        }
-
-        // Check if the data is already cached
-        // const cachedData = cache.get('event');
-        // if (cachedData) {
-        //     return cachedData;
-        // }
-
-        const parameters = {
-            key: googleApiKey,
-        };
-
-        const queryString = new URLSearchParams(parameters).toString();
-
-        const response = await fetch(
-            `https://www.googleapis.com/calendar/v3/calendars/queercalendarsheffield@gmail.com/events/${eventId}?${queryString}`
-        );
-
-        if (!response.ok) {
-            //console.log(res)
-            throw new Error('Failed to fetch data');
-        }
-
-        const eventData = await response.json();
-
-        // Cache the fetched data
-        // cache.put('event', eventData, CACHE_DURATION);
-
-        return eventData as Event;
-    }
-
-    const event = await getEvent(eventId);
 
     const sanitizeOptions = {
         allowedTags: ['b', 'i', 'em', 'strong', 'a', 'p'],
@@ -77,13 +97,6 @@ export default async function EventPage(req: any, res: any) {
         <div
             key={eventId}
             className="block rounded-lg bg-white mb-2 p-6 shadow dark:shadow-white/10 dark:bg-neutral-700">
-            <Head>
-                {/* Set custom Open Graph meta tags for the event */}
-                <title>{event.summary}</title>
-                <meta property="og:title" content={event.summary} />
-                <meta property="og:description" content={event.description} />
-                {/* Add other custom Open Graph meta tags as needed */}
-            </Head>
             <h5
                 className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
                 {event.summary}
