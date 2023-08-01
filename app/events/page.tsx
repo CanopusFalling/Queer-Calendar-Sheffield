@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 import { redirect } from 'next/navigation'
 
 import { Cache } from 'memory-cache';
@@ -76,6 +77,13 @@ export default async function EventPage(req: any, res: any) {
         <div
             key={eventId}
             className="block rounded-lg bg-white mb-2 p-6 shadow dark:shadow-white/10 dark:bg-neutral-700">
+            <Head>
+                {/* Set custom Open Graph meta tags for the event */}
+                <title>{event.summary}</title>
+                <meta property="og:title" content={event.summary} />
+                <meta property="og:description" content={event.description} />
+                {/* Add other custom Open Graph meta tags as needed */}
+            </Head>
             <h5
                 className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
                 {event.summary}
