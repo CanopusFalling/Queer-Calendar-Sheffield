@@ -1,5 +1,4 @@
 import React from 'react';
-import { useRouter } from "next/router";
 import { redirect } from 'next/navigation'
 
 import { Cache } from 'memory-cache';
@@ -17,7 +16,7 @@ export const runtime = 'edge';
 const cache = new Cache();
 const CACHE_DURATION = 60 * 1000; // milliseconds
 
-export default async function EventPage(req, res) {
+export default async function EventPage(req: any, res: any) {
     const { eventId } = req.searchParams;
 
     if (!eventId) {
