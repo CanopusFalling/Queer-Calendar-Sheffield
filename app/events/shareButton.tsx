@@ -1,14 +1,14 @@
 'use client';
 
 import React from "react";
-import { Event } from "./Event";
+import { EventData } from "./Event";
 
 import { BsShareFill } from "react-icons/bs";
 
 export const runtime = 'edge';
 
 interface GoogleCalendarButtonProps {
-    event: Event;
+    event: EventData;
 }
 
 const GoogleCalendarButton: React.FC<GoogleCalendarButtonProps> = ({ event }) => {
