@@ -1,5 +1,4 @@
 import React from 'react';
-import sanitizeHtml from 'sanitize-html';
 
 import DateTimeWithDST from './dateHandling';
 import GoogleCalendarButton from './googleCalendarButton';
@@ -14,7 +13,7 @@ interface GoogleCalendarButtonProps {
 }
 
 const eventCard: React.FC<GoogleCalendarButtonProps> = ({ event }) => {
-    const { id, summary, location, description, startTime, endTime, allDay} = event;
+    const { id, summary, location, description, startTime, endTime, allDay } = event;
 
     const urlEncodedLocation = encodeURIComponent(location)
 
@@ -44,8 +43,10 @@ const eventCard: React.FC<GoogleCalendarButtonProps> = ({ event }) => {
                 className="mb-4 text-base text-neutral-600 break-words dark:text-neutral-200"
                 dangerouslySetInnerHTML={{ __html: event.getMarkupDescription() }}
             />
-            <GoogleCalendarButton event={event.toPlainObject()} />
-            <ShareButton event={event.toPlainObject()} />
+            <div className="flex flex-wrap gap-4">
+                <GoogleCalendarButton event={event.toPlainObject()} />
+                <ShareButton event={event.toPlainObject()} />
+            </div>
         </div>
     );
 }
