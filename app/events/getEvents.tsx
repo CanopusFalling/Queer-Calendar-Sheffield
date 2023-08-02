@@ -1,12 +1,32 @@
 import { Event } from "./Event";
 import { googleEventObject } from "./calendar_interfaces/googleEvent";
 
-export async function getEvents(timeMin?: Date, timeMax?: Date, showDeleted?: boolean, singleEvents?: boolean, orderBy?: string, maxResults?: number): Promise<Event[]>{
+interface GetEventsOptions {
+    timeMin?: Date;
+    timeMax?: Date;
+    showDeleted?: boolean;
+    singleEvents?: boolean;
+    orderBy?: string;
+    maxResults?: number;
+    eventId?: string;
+}
+
+export async function getEvents(options: GetEventsOptions = {}): Promise<Event[]> {
     const googleApiKey = process.env.GOOGLE_API_KEY;
 
     if (!googleApiKey) {
         throw new Error('Google API key is not defined.');
     }
+
+    const {
+        timeMin,
+        timeMax,
+        showDeleted,
+        singleEvents,
+        orderBy,
+        maxResults = 5,
+        eventId,
+    } = options;
 
     const parameters = {
         key: googleApiKey,
@@ -15,7 +35,8 @@ export async function getEvents(timeMin?: Date, timeMax?: Date, showDeleted?: bo
         showDeleted: showDeleted ? "True" : "False",
         singleEvents: singleEvents ? "True" : "False",
         orderBy: orderBy ? orderBy : "",
-        maxResults: (maxResults || 5).toString(),
+        maxResults: maxResults.toString(),
+        eventId: eventId ? eventId : "",
     };
 
     const queryString = new URLSearchParams(

@@ -1,4 +1,3 @@
-import { time } from 'console';
 import { googleEventObject } from './calendar_interfaces/googleEvent';
 
 import sanitizeHtml from 'sanitize-html';
@@ -79,5 +78,16 @@ export class Event {
             endTime: this.endTime,
             allDay: this.allDay,
         };
+    }
+
+    getMarkupDescription(){
+        const sanitizeOptions = {
+            allowedTags: ['b', 'i', 'em', 'strong', 'a', 'p'],
+            allowedAttributes: {
+                a: ['href']
+            }
+        };
+    
+        return sanitizeHtml(this.description || "", sanitizeOptions);
     }
 }
