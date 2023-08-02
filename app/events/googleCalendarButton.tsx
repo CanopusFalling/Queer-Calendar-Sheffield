@@ -1,17 +1,18 @@
 'use client';
 
 import React from "react";
-import { Event } from "./Event";
 import moment from "moment-timezone";
+
+import { EventData } from "./Event";
 
 export const runtime = 'edge';
 
 interface GoogleCalendarButtonProps {
-    event: Event;
+    event: EventData;
 }
 
 const GoogleCalendarButton: React.FC<GoogleCalendarButtonProps> = ({ event }) => {
-    const { summary, description, location, start, end } = event;
+    const { summary, description, location, startTime, endTime } = event;
 
     const convertToUTC = (dateStr: string) => {
       const utcDate = moment.tz(dateStr, moment.tz.guess()).utc();
@@ -19,24 +20,9 @@ const GoogleCalendarButton: React.FC<GoogleCalendarButtonProps> = ({ event }) =>
     };
   
     const openGoogleCalendarTemplate = () => {
-      let startDateTime = "";
-      let endDateTime = "";
-  
-      if (start?.dateTime && end?.dateTime) {
-        startDateTime = convertToUTC(start.dateTime);
-        endDateTime = convertToUTC(end.dateTime);
-      } else if (start?.date && end?.date) {
-        startDateTime = convertToUTC(start.date + "T00:00:00");
-        endDateTime = convertToUTC(end.date + "T00:00:00");
-      } else {
-        return;
-      }
-  
       const url = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
         summary
-      )}&dates=${startDateTime}/${endDateTime}&details=${encodeURIComponent(
-        description
-      )}&location=${encodeURIComponent(location)}`;
+      )}&dates=${startTime.toUTCString()}/${endTime.toUTCString()}&details=${encodeURIComponent(description || "")}&location=${encodeURIComponent(location)}`;
   
       window.open(url, "_blank");
     };
