@@ -1,7 +1,7 @@
 import { Event } from "./Event";
 import { googleEventObject } from "./calendar_interfaces/googleEvent";
 
-interface GetEventsOptions {
+export interface GetEventsOptions {
     timeMin?: Date;
     timeMax?: Date;
     showDeleted?: boolean;
@@ -24,7 +24,7 @@ export async function getEvents(options: GetEventsOptions = {}): Promise<Event[]
         showDeleted,
         singleEvents,
         orderBy,
-        maxResults = 5,
+        maxResults = 50,
         eventId,
     } = options;
 
