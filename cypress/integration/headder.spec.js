@@ -8,7 +8,7 @@ describe('Header', () => {
       cy.get('header').should('exist');
   
       // Optionally, you can also assert that the header contains certain text
-      cy.get('header').contains('My App');
+      cy.get('header').contains('Queer Calendar Sheffield');
     });
   });
   
