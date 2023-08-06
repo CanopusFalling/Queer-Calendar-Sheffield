@@ -11,12 +11,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "18.15.0"
+
       - name: Install dependencies
         run: npm install
 
       - name: Set up environment variables
         run: |
-          echo "GOOGLE_API_KEY=$GOOGLE_API_KEY" >> .env.production
+          echo "GOOGLE_API_KEY=$GOOGLE_API_KEY" >> .env.local
 
       - name: Run tests
         run: npm run test:cypress-headless
