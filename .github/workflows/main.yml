@@ -4,8 +4,9 @@ on:
   push:
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
+    environment: testing
 
     steps:
       - name: Checkout code
@@ -19,9 +20,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Set up environment variables
-        run: |
-          echo "GOOGLE_API_KEY=$GOOGLE_API_KEY" >> .env.local
-
       - name: Run tests
         run: npm run test:cypress-headless
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
