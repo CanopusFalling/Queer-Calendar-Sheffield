@@ -9,6 +9,8 @@ describe('Header', () => {
   
       // Optionally, you can also assert that the header contains certain text
       cy.get('header').contains('Queer Calendar Sheffield');
+
+      cy.get('header').contains('Fail please');
     });
   });
   
