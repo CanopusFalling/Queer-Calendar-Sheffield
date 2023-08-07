@@ -11,7 +11,7 @@ describe('Header', () => {
   const homepageURL = '/'
 
   pathsToTest.forEach((path) => {
-    context(`Testing headder on ${path}`, () => {
+    context(`Testing on ${path}`, () => {
       beforeEach(() => {
         cy.visit(path);
       });
