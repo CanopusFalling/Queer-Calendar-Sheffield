@@ -19,7 +19,7 @@ describe('Header', () => {
       it(`should load the title and logo`, () => {
         cy.get(headerSelector).should('exist');
         cy.get(headerSelector).contains(siteTitleText);
-  
+
         cy.get(siteLogoImageSelector)
           .should('exist')
           .should('have.attr', 'src')
