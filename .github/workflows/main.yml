@@ -19,52 +19,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # - name: Build Project
-      #   run: npm run build
+      - name: Build Project
+        run: npm run build
 
-      - name: Run tests and annotate results
+      - name: Run tests
         run: |
-          npm run test:cypress-headless
-          npx cypress run --json > cypress_results.json
+          npm run test:ci
         env:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-
-      - name: Publish test results
-        uses: actions/upload-artifact@v2
-        with:
-          name: test-results
-          path: cypress_results.json
-
-      - name: Check conclusion annotation
-        uses: actions/github-script@v4
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const results = require('./cypress_results.json');
-            const failedTests = results.runs.find(run => run.stats.failures > 0);
-            if (failedTests) {
-              const summary = failedTests.specs.map(spec => `${spec.name}: ${spec.tests.filter(test => test.state === 'failed').map(test => test.title).join(', ')}`).join('\n');
-              github.checks.create({
-                ...context.repo,
-                name: 'Test Failures',
-                head_sha: context.sha,
-                status: 'completed',
-                conclusion: 'failure',
-                output: {
-                  title: 'Test Failures',
-                  summary: summary,
-                },
-              });
-            } else {
-              github.checks.create({
-                ...context.repo,
-                name: 'Test Failures',
-                head_sha: context.sha,
-                status: 'completed',
-                conclusion: 'success',
-                output: {
-                  title: 'No Test Failures',
-                  summary: 'All tests passed!',
-                },
-              });
-            }
