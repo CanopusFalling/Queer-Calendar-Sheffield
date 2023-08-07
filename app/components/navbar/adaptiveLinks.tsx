@@ -20,7 +20,7 @@ function AdaptiveLinks({ isNavOpen }: AdaptiveLinksProps) {
         <div
             className={`${isNavOpen ? 'flex' : 'hidden'
                 } mt-2 lg:flex flex-grow basis-[100%] items-center lg:mt-0 lg:basis-auto`}
-            id="navbarSupportedContent3"
+            id="adaptiveLinks"
             data-te-collapse-item
         >
             <div
