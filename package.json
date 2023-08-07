@@ -32,7 +32,7 @@
   "devDependencies": {
     "@types/memory-cache": "^0.2.3",
     "@types/sanitize-html": "^2.9.0",
-    "cypress": "^4.2.0",
+    "cypress": "^7.7.0",
     "start-server-and-test": "^2.0.0",
     "typescript": "^5.1.6"
   }
