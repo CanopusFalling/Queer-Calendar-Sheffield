@@ -9,7 +9,7 @@
     "lint": "next lint",
     "test:cypress": "start-server-and-test dev http://localhost:3000 \"cypress open\"",
     "test:cypress-headless": "start-server-and-test dev http://localhost:3000 \"cypress run\"",
-    "test:ci": "start-server-and-test start http@//localhost:3000 \"cypress run\""
+    "test:ci": "start-server-and-test dev http@//localhost:3000 \"cypress run\""
   },
   "dependencies": {
     "@types/node": "20.3.2",
