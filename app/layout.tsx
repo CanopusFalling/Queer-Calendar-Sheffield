@@ -26,7 +26,7 @@ export default function RootLayout({
         <meta property='og:image:type' content='image/webp'/>
         <meta property='og:image:width' content='1200'/>
         <meta property='og:image:height' content='630'/>
-        <meta property='og:image:alt' content='A rainbow calendar icon with a heart shape in the centre of the icon and to the right of that the words \"queer calendar sheffield\" in white, bold text each word on a new line all on a black background.'/>
+        <meta property='og:image:alt' content='A rainbow calendar icon with a heart shape in the centre of the icon and to the right of that the words \"Queer Calendar Sheffield\" in white, bold text each word on a new line all on a black background.'/>
         <meta property='og:site_name' content='Queer Calendar Sheffield'/>
         <meta property='og:locale' content='en_GB'/>
         <meta property='og:description' content='A place to find queer and LGBTQ+ events in Sheffield.'/>
