@@ -33,6 +33,9 @@ export default function RootLayout({
         {/* Twitter specific tags */}
         <meta property='twitter:title' content='Queer Calendar Sheffield'/>
         <meta property='twitter:description' content='A place to find queer and LGBTQ+ events in Sheffield.'/>
+        <meta property='twitter:card' content='open-graph-banner.webp'/>
+        <meta property='twitter:domain' content='queercalendarsheffield.co.uk'/>
+        <meta property='twitter:url' content='https://queercalendarsheffield.co.uk/'/>
         {/* Icon meta tags */}
         <meta property='msapplication-TileColor' content='#00aba9' />
         <meta property='theme-color' content='#ffffff' />
