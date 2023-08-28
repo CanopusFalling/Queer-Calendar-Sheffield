@@ -18,6 +18,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Open Graph meta tags */}
+        <meta name="og:image" content="open-graph-banner.webp"/>
+        <meta property="og:image:type" content="image/webp"/>
+        <meta property="og:image:width" content="1200"/>
+        <meta property="og:image:height" content="630"/>
+        {/* Icon meta tags */}
         <meta name="msapplication-TileColor" content="#00aba9" />
         <meta name="theme-color" content="#ffffff" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
