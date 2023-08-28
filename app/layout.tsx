@@ -19,11 +19,15 @@ export default function RootLayout({
     <html lang="en">
       <head>
         {/* Open Graph meta tags */}
+        <meta property="og:title" content="Queer Calendar Sheffield"/>
+        <meta name="og:url" content="https://queercalendarsheffield.co.uk/"/>
+        <meta property="og:type" content="website"/>
         <meta name="og:image" content="open-graph-banner.webp"/>
         <meta property="og:image:type" content="image/webp"/>
         <meta property="og:image:width" content="1200"/>
         <meta property="og:image:height" content="630"/>
         <meta property="og:image:alt" content="A rainbow calendar icon with a heart shape in the centre of the icon and to the right of that the words 'queer calendar sheffield' in white, bold text each word on a new line all on a black background."/>
+        <meta property="og:site_name" content="Queer Calendar Sheffield"/>
         {/* Icon meta tags */}
         <meta name="msapplication-TileColor" content="#00aba9" />
         <meta name="theme-color" content="#ffffff" />
