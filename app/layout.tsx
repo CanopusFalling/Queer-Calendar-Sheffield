@@ -22,7 +22,7 @@ export default function RootLayout({
         <meta property='og:title' content='Queer Calendar Sheffield'/>
         <meta property='og:url' content='https://queercalendarsheffield.co.uk/'/>
         <meta property='og:type' content='website'/>
-        <meta property='og:image' content='open-graph-banner.webp'/>
+        <meta property='og:image' content='/open-graph-banner.webp'/>
         <meta property='og:image:type' content='image/webp'/>
         <meta property='og:image:width' content='1200'/>
         <meta property='og:image:height' content='630'/>
