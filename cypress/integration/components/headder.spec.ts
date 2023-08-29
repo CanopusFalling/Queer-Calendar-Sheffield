@@ -64,11 +64,15 @@ describe('Header', () => {
         });
 
         it(`should show and hide the navigation links when the hamburger icon is clicked`, () => {
-          cy.get(hamburgerIconSelector).click();
-          cy.get(adaptiveLinksSelector).should(`be.visible`);
+          cy.get(hamburgerIconSelector).click()
+          cy.then(() => {
+            cy.get(adaptiveLinksSelector).should(`be.visible`);
+          });
 
-          cy.get(hamburgerIconSelector).click();
-          cy.get(adaptiveLinksSelector).should(`not.be.visible`);
+          cy.get(hamburgerIconSelector).click()
+          cy.then(() => {
+            cy.get(adaptiveLinksSelector).should(`not.be.visible`);
+          });
         });
       });
     });
