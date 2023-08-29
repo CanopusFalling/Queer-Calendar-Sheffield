@@ -9,13 +9,7 @@
             "cypress",
             "node"
         ],
-        "module": "CommonJS",
-        "jsx": "react",
-        "outDir": "./dist",
-        "strict": true,
-        "esModuleInterop": true,
-        "allowImportingTsExtensions": true,
-        "noEmit": true
+        "strict": true
     },
     "include": [
         "**/*.ts"
