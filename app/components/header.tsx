@@ -4,7 +4,7 @@ import Navbar from './navbar/navbar';
 
 export default function Header() {
   return (
-    <header>
+    <header role="banner">
       <Navbar/>
     </header>
   );

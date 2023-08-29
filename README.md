@@ -22,7 +22,7 @@ This is a project to take data collated and organised by Rowan Garwood about Que
 
 [Install instructions for node and npm.](https://docs.npmjs.com/cli/v9/configuring-npm/install)
 
-### Local Evnironment Setup
+### Local Environment Setup
 
 - Create a copy of `.env.local.sample` and name it `.env.local`.
 - Replace `[Google-Calendar-API-Key]` with your google API key. The API key must have the calendar API enabled. [Instructions to obtain a Google API key.](https://support.google.com/googleapi/answer/6158862)
