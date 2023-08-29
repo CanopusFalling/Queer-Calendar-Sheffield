@@ -31,11 +31,15 @@ export default function RootLayout({
         <meta property='og:locale' content='en_GB'/>
         <meta property='og:description' content='A place to find queer and LGBTQ+ events in Sheffield.'/>
         {/* Twitter specific tags */}
+        <meta property='twitter:card' content='app'/>
         <meta property='twitter:title' content='Queer Calendar Sheffield'/>
         <meta property='twitter:description' content='A place to find queer and LGBTQ+ events in Sheffield.'/>
-        <meta property='twitter:card' content='https://queercalendarsheffield.co.uk/open-graph-banner.webp'/>
+        <meta property='twitter:image' content='https://queercalendarsheffield.co.uk/open-graph-banner.webp'/>
+        <meta property='twitter:image:alt' content='A rainbow calendar icon with a heart shape in the centre of the icon and to the right of that the words \"Queer Calendar Sheffield\" in white, bold text each word on a new line all on a black background.'/>
         <meta property='twitter:domain' content='queercalendarsheffield.co.uk'/>
         <meta property='twitter:url' content='https://queercalendarsheffield.co.uk/'/>
+        {/* <meta property='twitter:site' content=''/>
+        <meta property='twitter:creator' content=''/> */}
         {/* Icon meta tags */}
         <meta property='msapplication-TileColor' content='#00aba9' />
         <meta property='theme-color' content='#ffffff' />
