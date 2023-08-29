@@ -10,7 +10,7 @@ const Contributors: React.FC = () => {
     return (
         <div className="lg:gap-xl-12 grid gap-x-6 md:grid-cols-3 xl:grid-cols-4">
             {(contributorsData as Contributor[]).map((contributor: Contributor, index: number) => (
-                <div key={index} className="mb-12">
+                <div key={index} id={`contributor-${index}`} className="mb-12">
                     {contributor.avatarUrl ? (
                         <img
                             src={contributor.avatarUrl}
@@ -29,17 +29,17 @@ const Contributors: React.FC = () => {
 
                     <div className="icon-container flex justify-center items-center">
                         {contributor.email && (
-                            <a className="m-2" href={`mailto:${contributor.email}`} aria-label={`Email ${contributor.name}`}>
+                            <a className="mail-badge m-2" href={`mailto:${contributor.email}`} aria-label={`Email ${contributor.name}`}>
                                 <AiOutlineMail className="w-6 h-6" />
                             </a>
                         )}
                         {contributor.github && (
-                            <a className="m-2" href={`https://github.com/${contributor.github}`} aria-label={`Visit ${contributor.name}'s Github`}>
+                            <a className="github-badge m-2" href={`https://github.com/${contributor.github}`} aria-label={`Visit ${contributor.name}'s Github`}>
                                 <DiGithubBadge className="w-7 h-7" />
                             </a>
                         )}
                         {contributor.website && (
-                            <a className="m-2" href={contributor.website} aria-label={`Visit ${contributor.name}'s Website`}>
+                            <a className="website-badge m-2" href={contributor.website} aria-label={`Visit ${contributor.name}'s Website`}>
                                 <GoGlobe className="w-6 h-6" />
                             </a>
                         )}
