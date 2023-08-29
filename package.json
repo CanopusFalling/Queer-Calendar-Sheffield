@@ -27,13 +27,13 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.10.1",
     "sanitize-html": "^2.11.0",
-    "tailwindcss": "^3.3.2"
+    "tailwindcss": "^3.3.2",
+    "typescript": "^5.1.6"
   },
   "devDependencies": {
     "@types/memory-cache": "^0.2.3",
     "@types/sanitize-html": "^2.9.0",
-    "cypress": "^7.7.0",
-    "start-server-and-test": "^2.0.0",
-    "typescript": "^5.1.6"
+    "cypress": "^13.0.0",
+    "start-server-and-test": "^2.0.0"
   }
 }
