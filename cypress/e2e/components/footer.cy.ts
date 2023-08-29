@@ -10,7 +10,7 @@ describe('Footer', () => {
 
     pathsToTest.forEach((path) => {
         context(`Testing on ${path}`, () => {
-            before(() => {
+            beforeEach(() => {
                 cy.visit(path);
             });
 

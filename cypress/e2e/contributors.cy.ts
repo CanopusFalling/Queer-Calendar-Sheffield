@@ -3,7 +3,7 @@
 describe(`contributors`, () => {
     const contributorPagePath = "/contributors";
 
-    before(() => {
+    beforeEach(() => {
         cy.visit(contributorPagePath);
     });
 
