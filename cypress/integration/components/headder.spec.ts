@@ -12,7 +12,7 @@ describe('Header', () => {
 
   pathsToTest.forEach((path) => {
     context(`Testing on ${path}`, () => {
-      beforeEach(() => {
+      before(() => {
         cy.visit(path);
       });
 
