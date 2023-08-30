@@ -30,7 +30,7 @@ jobs:
         run: npm run start &
 
       - name: Run end-to-end tests
-        run: npm run ci:cypress
+        run: npm run ci:cypress:e-to-e
         env:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
 
