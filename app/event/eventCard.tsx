@@ -51,7 +51,7 @@ const eventCard: React.FC<EventCardProps> = ({ event, linkEvent }) => {
                 dangerouslySetInnerHTML={{ __html: event.getMarkupDescription() }}
             />
             <div className="flex flex-wrap gap-4">
-                {linkEvent && <OpenLinkInNewWindowButton url={eventURL} />}
+                {linkEvent && <OpenLinkInNewWindowButton url={eventURL} text="View Details" />}
                 <GoogleCalendarButton event={event.toPlainObject()} />
                 <ShareButton event={event.toPlainObject()} />
             </div>
