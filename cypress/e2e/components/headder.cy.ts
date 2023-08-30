@@ -4,7 +4,7 @@ describe('Header', () => {
   const siteLogoSelector = 'header div#siteLogo';
   const siteLogoImageSelector = `${siteLogoSelector} img.logo`;
   const adaptiveLinksSelector = 'div#adaptiveLinks';
-  const hamburgerIconSelector = 'nav button.hamburgerIcon';
+  const hamburgerIconSelector = 'nav [data-testid="hamburger-icon"]';
 
   const siteTitleText = 'Queer Calendar Sheffield';
 
