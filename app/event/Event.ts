@@ -10,6 +10,7 @@ export interface EventData {
     startTime: Date;
     endTime: Date;
     allDay: boolean;
+    lastModified: Date;
 }
 
 export class Event {
@@ -20,6 +21,7 @@ export class Event {
     startTime!: Date;
     endTime!: Date;
     allDay!: boolean;
+    lastModified: Date;
 
     constructor(googleEventObject: googleEventObject);
     constructor(
@@ -29,16 +31,18 @@ export class Event {
         location: string,
         start: Date,
         end: Date,
-        allDay: boolean
+        allDay: boolean,
+        lastModified: Date
     );
     constructor(...args: any[]) {
         if ("id" in args[0]) {
-            const { id, summary, description, location, start, end } = args[0] as googleEventObject;
+            const { id, summary, description, location, start, end, updated } = args[0] as googleEventObject;
             this.id = id;
             this.summary = summary;
             this.description = description;
             this.location = location;
             this.setTime(start, end);
+            this.lastModified = new Date(updated);
         } else {
             this.id = args[0];
             this.summary = args[1];
@@ -47,6 +51,7 @@ export class Event {
             this.startTime = args[4];
             this.endTime = args[5];
             this.allDay = args[6];
+            this.lastModified = args[7];
         }
     };
 
@@ -60,7 +65,7 @@ export class Event {
             this.startTime = new Date(start.date);
             this.endTime = new Date(end.date);
         } else if (start.dateTime !== undefined && end.dateTime !== undefined) {
-            this.allDay = true;
+            this.allDay = false;
             this.startTime = new Date(start.dateTime);
             this.endTime = new Date(end.dateTime);
         } else {
@@ -77,6 +82,7 @@ export class Event {
             startTime: this.startTime,
             endTime: this.endTime,
             allDay: this.allDay,
+            lastModified: this.lastModified,
         };
     }
 
@@ -89,5 +95,9 @@ export class Event {
         };
     
         return sanitizeHtml(this.description || "", sanitizeOptions);
+    }
+
+    getPath(){
+        return `/event?eventId=${this.id}`;
     }
 }

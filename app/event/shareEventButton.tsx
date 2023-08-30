@@ -11,10 +11,10 @@ interface GoogleCalendarButtonProps {
     event: EventData;
 }
 
-const GoogleCalendarButton: React.FC<GoogleCalendarButtonProps> = ({ event }) => {
+const ShareEventButton: React.FC<GoogleCalendarButtonProps> = ({ event }) => {
 
     const shareEvent = async () => {
-        const url = `${window.location.origin}/events?eventId=${event.id}`;
+        const url = `${window.location.origin}/event?eventId=${event.id}`;
         try {
             // Check if the Web Share API is available (mobile devices)
             if (navigator.share) {
@@ -33,12 +33,14 @@ const GoogleCalendarButton: React.FC<GoogleCalendarButtonProps> = ({ event }) =>
     };
 
     return (
-        <button className="flex rounded items-center justify-center border border-black dark:border-white text-black dark:text-white px-4 py-2"
+        <button
+            data-testid={`share-button-${event.id}`}
+            className="flex rounded items-center justify-center border border-black dark:border-white text-black dark:text-white px-4 py-2 text-xs font-medium uppercase"
             onClick={shareEvent}>
             <BsShareFill className="mr-2" />
-            share
+            Share
         </button>
     );
 }
 
-export default GoogleCalendarButton;
+export default ShareEventButton;
