@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:dev": "next build --no-lint",
     "start": "next start",
     "lint": "next lint",
     "test:cypress": "start-server-and-test dev http://localhost:3000 \"cypress open\"",

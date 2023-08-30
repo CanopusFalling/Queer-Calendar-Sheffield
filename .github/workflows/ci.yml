@@ -25,10 +25,10 @@ jobs:
         run: npm install
 
       - name: Build project
-        run: npm run build
+        run: npm run build:dev
 
       - name: Start server
-        run: npm run start &
+        run: npm run dev &
 
       - name: Run end-to-end tests
         run: npm run ci:cypress:e-to-e
