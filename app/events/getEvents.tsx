@@ -39,14 +39,16 @@ export async function getEvents(options: GetEventsOptions = {}): Promise<Event[]
         eventId: eventId ? eventId : "",
     };
 
-    const queryString = new URLSearchParams(
+    let queryString = new URLSearchParams(
         Object.entries(parameters).filter(([, value]) => value !== "")
     ).toString();
 
-    console.log(`https://www.googleapis.com/calendar/v3/calendars/queercalendarsheffield@gmail.com/events?${queryString}`);
+    queryString = `https://www.googleapis.com/calendar/v3/calendars/queercalendarsheffield@gmail.com/events?${queryString}`;
+
+    //console.log(queryString);
 
     const res = await fetch(
-        `https://www.googleapis.com/calendar/v3/calendars/queercalendarsheffield@gmail.com/events?${queryString}`
+        queryString
     );
 
     if (!res.ok) {

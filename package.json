@@ -5,8 +5,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:dev": "next build --no-lint",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:cypress": "start-server-and-test dev http://localhost:3000 \"cypress open\"",
+    "test:cypress-headless": "start-server-and-test dev http://localhost:3000 \"cypress run\"",
+    "ci:cypress:e-to-e": "cypress run --spec 'cypress/e2e/**/*'"
   },
   "dependencies": {
     "@types/node": "20.3.2",
@@ -26,10 +30,12 @@
     "react-icons": "^4.10.1",
     "sanitize-html": "^2.11.0",
     "tailwindcss": "^3.3.2",
-    "typescript": "5.1.5"
+    "typescript": "^5.1.6"
   },
   "devDependencies": {
     "@types/memory-cache": "^0.2.3",
-    "@types/sanitize-html": "^2.9.0"
+    "@types/sanitize-html": "^2.9.0",
+    "cypress": "^13.0.0",
+    "start-server-and-test": "^2.0.0"
   }
 }
