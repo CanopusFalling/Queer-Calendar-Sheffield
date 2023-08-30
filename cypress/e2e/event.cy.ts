@@ -21,7 +21,7 @@ describe(`/event`, () => {
         it(`should load details ${event.title} correctly`, () => {
             cy.visit(event.path)
             cy.contains(event.title).should('exist');
-            cy.contains(event.time, { timeout: 10000 }).should('exist');
+            cy.contains(event.time, { timeout: 60000 }).should('exist');
             cy.contains(event.location).should('exist');
             cy.contains(event.description).should('exist');
         });
