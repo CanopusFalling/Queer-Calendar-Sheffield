@@ -14,7 +14,7 @@ interface GoogleCalendarButtonProps {
 const ShareEventButton: React.FC<GoogleCalendarButtonProps> = ({ event }) => {
 
     const shareEvent = async () => {
-        const url = `${window.location.origin}/events?eventId=${event.id}`;
+        const url = `${window.location.origin}/event?eventId=${event.id}`;
         try {
             // Check if the Web Share API is available (mobile devices)
             if (navigator.share) {

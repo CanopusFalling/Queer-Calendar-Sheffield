@@ -19,7 +19,7 @@ const eventCard: React.FC<EventCardProps> = ({ event, linkEvent }) => {
 
     const urlEncodedLocation = encodeURIComponent(location)
 
-    const eventURL = `/events?eventId=${event.id}`;
+    const eventURL = `/event?eventId=${event.id}`;
 
     return (
         <div

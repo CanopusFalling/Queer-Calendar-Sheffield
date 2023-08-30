@@ -1,8 +1,8 @@
 export const runtime = 'edge';
 
-import { getEvents } from './events/getEvents';
-import EventList from './events/eventList'
-import { GetEventsOptions } from './events/getEvents'
+import { getEvents } from './event/getEvents';
+import EventList from './event/eventList'
+import { GetEventsOptions } from './event/getEvents'
 
 export default async function HomePage() {
   const currentDate = new Date();
