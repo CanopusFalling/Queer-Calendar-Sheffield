@@ -11,13 +11,15 @@ interface openLinkInNewWindowButtonProps {
 
 const OpenLinkInNewWindowButton: React.FC<openLinkInNewWindowButtonProps> = ({ url, text }) => {
     const openLink = () => {
-      window.open(url, "_blank");
+        window.open(url, "_blank");
     };
 
     return (
-        <button className="flex rounded items-center justify-center border border-black dark:border-white text-black dark:text-white px-4 py-2 text-xs font-medium uppercase"
+        <button
+            data-testid={`open-new-window-${url}`}
+            className="flex rounded items-center justify-center border border-black dark:border-white text-black dark:text-white px-4 py-2 text-xs font-medium uppercase"
             onClick={openLink}>
-            <BsBoxArrowUpRight className="mr-2"/> {text}
+            <BsBoxArrowUpRight className="mr-2" /> {text}
         </button>
     );
 }
