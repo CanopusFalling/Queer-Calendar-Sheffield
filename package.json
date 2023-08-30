@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "test:cypress": "start-server-and-test dev http://localhost:3000 \"cypress open\"",
-    "test:cypress-headless": "start-server-and-test dev http://localhost:3000 \"cypress run\""
+    "test:cypress-headless": "start-server-and-test dev http://localhost:3000 \"cypress run\"",
+    "ci:cypress:e-to-e": "cypress run --spec 'cypress/e2e/**/*'"
   },
   "dependencies": {
     "@types/node": "20.3.2",

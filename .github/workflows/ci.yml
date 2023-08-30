@@ -8,7 +8,7 @@ on:
       - development
 
 jobs:
-  test:
+  main:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,11 +23,23 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # - name: Build Project
-      #   run: npm run build
+      - name: Build project
+        run: nmp run build
 
-      - name: Run tests
-        run: |
-          npm run test:cypress-headless
+      - name: Start server
+        run: npm run start &
+
+      - name: Run end-to-end tests
+        run: npm run ci:cypress
         env:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        with:
+          wait-on: 'http://localhost:3000'
+
+      # - name: Run component tests
+      #   run: npm run ci:cypress:component
+      #   env:
+      #     GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+
+      # - name: Run Lighthouse tests
+      #   run: npm run lighthouse
