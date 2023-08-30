@@ -3,7 +3,8 @@ const parser = new xml2js.Parser();
 
 describe('/sitemap', () => {
     let sitemap;
-    let urls:string[]; // Declare a variable to store the URLs
+    let urls: string[]; // Declare a variable to store the URLs
+    let paths: string[];
 
     before(() => {
         // Fetch and parse the sitemap URLs before the tests run
@@ -14,13 +15,17 @@ describe('/sitemap', () => {
                 } else {
                     sitemap = result;
                     urls = result.urlset.url.map((urlObj: any) => urlObj.loc[0]);
+                    paths = urls.map((url: string) => {
+                        const urlObject = new URL(url);
+                        return urlObject.pathname + urlObject.search;
+                    });
                 }
             });
         });
     });
 
     it('should contain only resolvable URLs', () => {
-        const paths:string[] = urls.map((url: string) => new URL(url).pathname);
+        let count = 0;
 
         paths.forEach(path => {
             cy.request({
@@ -28,8 +33,11 @@ describe('/sitemap', () => {
                 failOnStatusCode: false
             }).then(response => {
                 expect(response.status).to.equal(200, `${path} is returning 200 status code`);
+                count++;
             });
         });
+
+        console.log(count);
     });
 
     it(`should contain only HTTPS absolute URLs`, () => {
@@ -39,9 +47,8 @@ describe('/sitemap', () => {
     });
 
     it(`should contain the static path URLs`, () => {
-        const paths: string[] = urls.map((url: string) => new URL(url).pathname);
         const staticPaths = ["/", "/contributors"];
-        
+
         staticPaths.forEach(staticPath => {
             expect(paths).to.include(staticPath);
         });

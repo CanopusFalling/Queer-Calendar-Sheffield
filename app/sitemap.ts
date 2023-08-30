@@ -15,15 +15,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
+  const maxDate = new Date();
+  maxDate.setMonth(maxDate.getMonth() + 12);
   const eventParams: GetEventsOptions = {
     singleEvents: true,
-    maxResults: undefined,
+    maxResults: 2500,
+    timeMax: maxDate
   }
   const events = await getEvents(eventParams);
 
   events.forEach(event => {
     sitemap.push({
-      url: `https://queercalendarsheffield.co.uk/${event.getPath()}`,
+      url: `https://queercalendarsheffield.co.uk${event.getPath()}`,
       lastModified: event.lastModified.toISOString(),
     });
   });
