@@ -44,3 +44,9 @@ npm run dev
 ```
 
 You should then be able to view the local website on [http://localhost:3000](http://localhost:3000).
+
+## Testing
+
+Run `npm run test:cypress` to test the project using the cypress interactive UI.
+
+`npm run test:cypress-headless` runs all tests in a terminal.
