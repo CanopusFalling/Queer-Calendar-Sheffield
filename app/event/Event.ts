@@ -60,7 +60,7 @@ export class Event {
             this.startTime = new Date(start.date);
             this.endTime = new Date(end.date);
         } else if (start.dateTime !== undefined && end.dateTime !== undefined) {
-            this.allDay = true;
+            this.allDay = false;
             this.startTime = new Date(start.dateTime);
             this.endTime = new Date(end.dateTime);
         } else {
