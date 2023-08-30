@@ -1,9 +1,9 @@
 describe('Header', () => {
   const pathsToTest = ['/', '/contributors'];
-  const headerSelector = 'header';
-  const siteLogoSelector = 'header div#siteLogo';
-  const siteLogoImageSelector = `${siteLogoSelector} img.logo`;
-  const adaptiveLinksSelector = 'div#adaptiveLinks';
+  const headerSelector = '[data-testid="site-header"]';
+  const siteLogoSelector = `${headerSelector} [data-testid="site-logo"]`;
+  const siteLogoImageSelector = `${siteLogoSelector} [data-testid="logo-image"]`;
+  const adaptiveLinksSelector = '[data-testid="adaptive-links"]';
   const hamburgerIconSelector = 'nav [data-testid="hamburger-icon"]';
 
   const siteTitleText = 'Queer Calendar Sheffield';

@@ -4,7 +4,7 @@ import Navbar from './navbar/navbar';
 
 export default function Header() {
   return (
-    <header>
+    <header data-testid="site-header">
       <Navbar/>
     </header>
   );
