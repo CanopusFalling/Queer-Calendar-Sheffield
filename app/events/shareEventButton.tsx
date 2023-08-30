@@ -11,7 +11,7 @@ interface GoogleCalendarButtonProps {
     event: EventData;
 }
 
-const GoogleCalendarButton: React.FC<GoogleCalendarButtonProps> = ({ event }) => {
+const ShareEventButton: React.FC<GoogleCalendarButtonProps> = ({ event }) => {
 
     const shareEvent = async () => {
         const url = `${window.location.origin}/events?eventId=${event.id}`;
@@ -41,4 +41,4 @@ const GoogleCalendarButton: React.FC<GoogleCalendarButtonProps> = ({ event }) =>
     );
 }
 
-export default GoogleCalendarButton;
+export default ShareEventButton;

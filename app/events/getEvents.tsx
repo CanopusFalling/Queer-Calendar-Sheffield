@@ -8,7 +8,6 @@ export interface GetEventsOptions {
     singleEvents?: boolean;
     orderBy?: string;
     maxResults?: number;
-    eventId?: string;
 }
 
 export async function getEvents(options: GetEventsOptions = {}): Promise<Event[]> {
@@ -25,7 +24,6 @@ export async function getEvents(options: GetEventsOptions = {}): Promise<Event[]
         singleEvents,
         orderBy,
         maxResults = 50,
-        eventId,
     } = options;
 
     const parameters = {
@@ -36,7 +34,6 @@ export async function getEvents(options: GetEventsOptions = {}): Promise<Event[]
         singleEvents: singleEvents ? "True" : "False",
         orderBy: orderBy ? orderBy : "",
         maxResults: maxResults.toString(),
-        eventId: eventId ? eventId : "",
     };
 
     let queryString = new URLSearchParams(
