@@ -23,6 +23,7 @@ const eventCard: React.FC<EventCardProps> = ({ event, linkEvent }) => {
 
     return (
         <div
+            data-testid={`event-card-${id}`}
             key={id}
             className="block rounded-lg bg-white mb-2 p-6 shadow dark:shadow-white/10 dark:bg-neutral-700">
             <a href={eventURL}>
