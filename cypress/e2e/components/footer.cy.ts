@@ -32,7 +32,7 @@ describe('Footer', () => {
             });
 
             it(`should contain a link to the github`, () => {
-                cy.get(footerSelector).contains(`View Project On GitHub`).should('have.attr', 'href', projectGithubLink);
+                cy.get(footerSelector).contains(`View Project on GitHub`).should('have.attr', 'href', projectGithubLink);
             });
 
             it(`should contain a link to the project contributors`, () => {

@@ -13,7 +13,7 @@ export default function Footer() {
         <div className="flex flex-col items-center sm:flex-row sm:justify-center">
           <a className="mr-4 mb-2 sm:mb-0" href="mailto:queercalendarsheffield@gmail.com">Email Us</a>
           <a className="mr-4 mb-2 sm:mb-0" href="https://forms.gle/KE4iZaxnhtfw4RCF7">Add An Event</a>
-          <a className="mr-4 mb-2 sm:mb-0" href="https://github.com/CanopusFalling/Queer-Calendar-Sheffield">View Project On GitHub</a>
+          <a className="mr-4 mb-2 sm:mb-0" href="https://github.com/CanopusFalling/Queer-Calendar-Sheffield">View Project on GitHub</a>
           <a className="mr-4 mb-2 sm:mb-0" href="/contributors">Project Contributors</a>
           {/* Add more links as needed */}
         </div>

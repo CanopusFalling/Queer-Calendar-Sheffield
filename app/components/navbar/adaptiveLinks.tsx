@@ -21,7 +21,6 @@ function AdaptiveLinks({ isNavOpen }: AdaptiveLinksProps) {
             data-testid="adaptive-links"
             className={`${isNavOpen ? 'flex' : 'hidden'
                 } mt-2 lg:flex flex-grow basis-[100%] items-center lg:mt-0 lg:basis-auto`}
-            id="adaptiveLinks"
             data-te-collapse-item
         >
             <div
