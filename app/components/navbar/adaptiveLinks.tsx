@@ -18,9 +18,9 @@ interface AdaptiveLinksProps {
 function AdaptiveLinks({ isNavOpen }: AdaptiveLinksProps) {
     return (
         <div
+            data-testid="adaptive-links"
             className={`${isNavOpen ? 'flex' : 'hidden'
                 } mt-2 lg:flex flex-grow basis-[100%] items-center lg:mt-0 lg:basis-auto`}
-            id="navbarSupportedContent3"
             data-te-collapse-item
         >
             <div
