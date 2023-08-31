@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       // Only allow the site to be scraped on the production deploy.
       allow: isProduction ? '/' : '',
-      disallow: isProduction ? '' : '/',
+      disallow: isProduction ? '/cdn-cgi/l/email-protection' : '/',
     },
     sitemap: 'https://queercalendarsheffield.co.uk/sitemap.xml',
   }
