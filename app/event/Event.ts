@@ -106,6 +106,6 @@ export class Event {
     }
 
     getPath(){
-        return `/event/${this.iCalUID}`;
+        return `/event/${this.id}`;
     }
 }
