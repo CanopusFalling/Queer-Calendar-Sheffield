@@ -106,6 +106,8 @@ export class Event {
     }
 
     getPath(){
-        return `/event/${this.id}`;
+        let name = this.summary.replaceAll(" ", "_");
+        name = encodeURIComponent(name);
+        return `/event/${this.id}/${name}`;
     }
 }
