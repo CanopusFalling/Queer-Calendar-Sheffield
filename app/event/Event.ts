@@ -4,6 +4,7 @@ import sanitizeHtml from 'sanitize-html';
 
 export interface EventData {
     id: string;
+    iCalUID: string;
     summary: string;
     description?: string;
     location: string;
@@ -11,10 +12,12 @@ export interface EventData {
     endTime: Date;
     allDay: boolean;
     lastModified: Date;
+    path: string;
 }
 
 export class Event {
     id: string;
+    iCalUID: string;
     summary: string;
     description?: string;
     location: string;
@@ -26,6 +29,7 @@ export class Event {
     constructor(googleEventObject: googleEventObject);
     constructor(
         id: string,
+        iCalUID: string,
         summary: string,
         description: string,
         location: string,
@@ -36,8 +40,9 @@ export class Event {
     );
     constructor(...args: any[]) {
         if ("id" in args[0]) {
-            const { id, summary, description, location, start, end, updated } = args[0] as googleEventObject;
+            const { id, iCalUID, summary, description, location, start, end, updated } = args[0] as googleEventObject;
             this.id = id;
+            this.iCalUID = iCalUID
             this.summary = summary;
             this.description = description;
             this.location = location;
@@ -45,13 +50,14 @@ export class Event {
             this.lastModified = new Date(updated);
         } else {
             this.id = args[0];
-            this.summary = args[1];
-            this.description = args[2];
-            this.location = args[3];
-            this.startTime = args[4];
-            this.endTime = args[5];
-            this.allDay = args[6];
-            this.lastModified = args[7];
+            this.iCalUID = args[1]
+            this.summary = args[2];
+            this.description = args[3];
+            this.location = args[4];
+            this.startTime = args[5];
+            this.endTime = args[6];
+            this.allDay = args[7];
+            this.lastModified = args[8];
         }
     };
 
@@ -76,6 +82,7 @@ export class Event {
     toPlainObject(): EventData {
         return {
             id: this.id,
+            iCalUID: this.iCalUID,
             summary: this.summary,
             description: this.description,
             location: this.location,
@@ -83,6 +90,7 @@ export class Event {
             endTime: this.endTime,
             allDay: this.allDay,
             lastModified: this.lastModified,
+            path: this.getPath()
         };
     }
 
@@ -97,7 +105,12 @@ export class Event {
         return sanitizeHtml(this.description || "", sanitizeOptions);
     }
 
+    getURIEncodedName(){
+        let name = this.summary.replaceAll(" ", "_");
+        return encodeURIComponent(name);
+    }
+
     getPath(){
-        return `/event?eventId=${this.id}`;
+        return `/event/${this.id}/${this.getURIEncodedName()}`;
     }
 }
