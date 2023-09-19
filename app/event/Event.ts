@@ -105,9 +105,12 @@ export class Event {
         return sanitizeHtml(this.description || "", sanitizeOptions);
     }
 
-    getPath(){
+    getURIEncodedName(){
         let name = this.summary.replaceAll(" ", "_");
-        name = encodeURIComponent(name);
-        return `/event/${this.id}/${name}`;
+        return encodeURIComponent(name);
+    }
+
+    getPath(){
+        return `/event/${this.id}/${this.getURIEncodedName()}`;
     }
 }
