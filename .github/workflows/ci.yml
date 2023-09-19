@@ -29,10 +29,10 @@ jobs:
         with:
           prettier_options: --write .
 
-      - name: Build project
-        run: npm run build:dev
-        env:
-          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+      # - name: Build project
+      #   run: npm run build:dev
+      #   env:
+      #     GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
 
       - name: Start server
         run: npm run dev &
