@@ -1,16 +1,16 @@
-import { MetadataRoute } from 'next';
+import { MetadataRoute } from "next";
 
-import { getEvents } from './event/getEvents';
-import { GetEventsOptions } from './event/getEvents';
+import { getEvents } from "./event/getEvents";
+import { GetEventsOptions } from "./event/getEvents";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let sitemap: MetadataRoute.Sitemap = [
     {
-      url: 'https://queercalendarsheffield.co.uk/',
+      url: "https://queercalendarsheffield.co.uk/",
       lastModified: new Date(),
     },
     {
-      url: 'https://queercalendarsheffield.co.uk/contributors',
+      url: "https://queercalendarsheffield.co.uk/contributors",
       lastModified: new Date(),
     },
   ];
@@ -20,11 +20,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const eventParams: GetEventsOptions = {
     singleEvents: true,
     maxResults: 2500,
-    timeMax: maxDate
-  }
+    timeMax: maxDate,
+  };
   const events = await getEvents(eventParams);
 
-  events.forEach(event => {
+  events.forEach((event) => {
     sitemap.push({
       url: `https://queercalendarsheffield.co.uk${event.getPath()}`,
       lastModified: event.lastModified.toISOString(),

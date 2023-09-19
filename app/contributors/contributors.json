@@ -1,17 +1,17 @@
 [
-    {
-        "avatarUrl": "img/contributors/rowan_garwood_profile.webp",
-        "name": "Rowan Garwood",
-        "role": "Calendar Organiser & Maintainer",
-        "pronouns": "They/Them"
-    },
-    {
-        "avatarUrl": "img/contributors/sammy_profile.webp",
-        "name": "Sammy",
-        "pronouns": "They/Them",
-        "role": "Website Developer & Maintainer",
-        "email": "kent_sam@outlook.com",
-        "github": "CanopusFalling",
-        "website": "https://canopusfalling.co.uk"
-    }
+  {
+    "avatarUrl": "img/contributors/rowan_garwood_profile.webp",
+    "name": "Rowan Garwood",
+    "role": "Calendar Organiser & Maintainer",
+    "pronouns": "They/Them"
+  },
+  {
+    "avatarUrl": "img/contributors/sammy_profile.webp",
+    "name": "Sammy",
+    "pronouns": "They/Them",
+    "role": "Website Developer & Maintainer",
+    "email": "kent_sam@outlook.com",
+    "github": "CanopusFalling",
+    "website": "https://canopusfalling.co.uk"
+  }
 ]
