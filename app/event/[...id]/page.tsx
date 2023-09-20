@@ -14,14 +14,14 @@ export default async function Page({
 }) {
   const eventId = params.id[0];
 
-  let event;
+  let event = await getEvent({ eventId: eventId });
 
-  try {
-    event = await getEvent({ eventId: eventId });
-  } catch (error) {
-    console.log(error);
-    return <EventNotFound />;
-  }
+  // try {
+  //   event = await getEvent({ eventId: eventId });
+  // } catch (error) {
+  //   console.log(error);
+  //   return <EventNotFound />;
+  // }
 
   // Redirect the user if the title in the URL does not match.
   if (params.id[1] != event.getURIEncodedName()) {
