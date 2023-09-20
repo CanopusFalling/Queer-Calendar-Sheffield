@@ -13,6 +13,7 @@ export default async function Page({
   params: { id: [string, string] };
 }) {
   const eventId = params.id[0];
+  console.log("Paramaters: ", params)
   console.log(`Event ID: ${eventId}`)
 
   let event = await getEvent({ eventId: eventId });
