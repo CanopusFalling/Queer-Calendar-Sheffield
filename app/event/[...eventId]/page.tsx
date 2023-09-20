@@ -10,11 +10,11 @@ import EventCard from "../eventCard";
 export default async function Page({
   params,
 }: {
-  params: { id: [string, string] };
+  params: { eventId: [string, string?] };
 }) {
-  const eventId = params.id[0];
-  console.log("Paramaters: ", params)
-  console.log(`Event ID: ${eventId}`)
+  const eventId = params.eventId[0];
+  console.log("Paramaters: ", params);
+  console.log(`Event ID: ${eventId}`);
 
   let event = await getEvent({ eventId: eventId });
 
@@ -26,7 +26,7 @@ export default async function Page({
   // }
 
   // Redirect the user if the title in the URL does not match.
-  if (params.id[1] != event.getURIEncodedName()) {
+  if (params.eventId[1] != event.getURIEncodedName()) {
     redirect(event.getPath());
   }
 
