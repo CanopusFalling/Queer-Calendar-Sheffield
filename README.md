@@ -18,7 +18,7 @@ This is a project to take data collated and organised by Rowan Garwood about Que
 - Node Package Manager v9.8.1
 - NodeJS v18.15.0
 
-*Version numbers are based on what has been tested, newer versions will likely work.*
+_Version numbers are based on what has been tested, newer versions will likely work._
 
 [Install instructions for node and npm.](https://docs.npmjs.com/cli/v9/configuring-npm/install)
 

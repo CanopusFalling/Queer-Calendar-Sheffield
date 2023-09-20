@@ -1,21 +1,19 @@
-import React from 'react';
-import { redirect } from 'next/navigation'
+import React from "react";
+import { redirect } from "next/navigation";
 
-import { getEvent } from './getEvent'
-import EventCard from './eventCard';
+import { getEvent } from "./getEvent";
+import EventCard from "./eventCard";
 
-export const runtime = 'edge';
+export const runtime = "edge";
 
 export default async function EventPage(req: any, res: any) {
-    const { eventId } = req.searchParams;
+  const { eventId } = req.searchParams;
 
-    const event = (await getEvent({ eventId: eventId }));
+  if (!eventId) {
+    redirect("/");
+  }
 
-    if (!eventId) {
-        redirect('/');
-    }
+  const event = await getEvent({ eventId: eventId });
 
-    return (
-        <EventCard event={event} linkEvent={false}/>
-    );
+  redirect(event.getPath());
 }
