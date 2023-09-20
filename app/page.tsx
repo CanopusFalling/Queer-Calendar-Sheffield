@@ -1,8 +1,8 @@
-export const runtime = 'edge';
+export const runtime = "edge";
 
-import { getEvents } from './event/getEvents';
-import EventList from './event/eventList'
-import { GetEventsOptions } from './event/getEvents'
+import { getEvents } from "./event/getEvents";
+import EventList from "./event/eventList";
+import { GetEventsOptions } from "./event/getEvents";
 
 export default async function HomePage() {
   const currentDate = new Date();
@@ -12,12 +12,9 @@ export default async function HomePage() {
     singleEvents: true,
     timeMin: currentDate,
     timeMax: maxDate,
-    orderBy: "startTime"
-  }
+    orderBy: "startTime",
+  };
   const events = await getEvents(eventParams);
 
-  return (
-
-    <EventList events={events} />
-  )
+  return <EventList events={events} />;
 }

@@ -1,10 +1,10 @@
 [
-    {
-        "label": "Home",
-        "href": "/#"
-    },
-    {
-        "label": "Contributors",
-        "href": "/contributors"
-    }
+  {
+    "label": "Home",
+    "href": "/#"
+  },
+  {
+    "label": "Contributors",
+    "href": "/contributors"
+  }
 ]

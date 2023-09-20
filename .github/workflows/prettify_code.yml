@@ -1,0 +1,17 @@
+name: Prettify Code
+
+on:
+  push:
+
+jobs:
+  prettify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Prettify code
+        uses: creyD/prettier_action@v4.3
+        with:
+          prettier_options: --write .
