@@ -121,6 +121,6 @@ export class Event {
   }
 
   getPath() {
-    return `/event/${this.id}/${this.getURIEncodedName()}`;
+    return `/event/${this.id}`;
   }
 }

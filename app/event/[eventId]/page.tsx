@@ -10,22 +10,16 @@ import EventCard from "../eventCard";
 export default async function Page({
   params,
 }: {
-  params: { id: [string, string] };
+  params: { eventId: string };
 }) {
-  const eventId = params.id[0];
+  const eventId = params.eventId;
 
   let event;
-
   try {
     event = await getEvent({ eventId: eventId });
   } catch (error) {
     console.log(error);
     return <EventNotFound />;
-  }
-
-  // Redirect the user if the title in the URL does not match.
-  if (params.id[1] != event.getURIEncodedName()) {
-    redirect(event.getPath());
   }
 
   return <EventCard event={event} linkEvent={false} />;
