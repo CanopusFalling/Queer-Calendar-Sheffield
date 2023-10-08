@@ -8,6 +8,8 @@
     "build:dev": "next build --no-lint",
     "start": "next start",
     "lint": "next lint",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write .",
     "test:cypress": "start-server-and-test dev http://localhost:3000 \"cypress open\"",
     "test:cypress-headless": "start-server-and-test dev http://localhost:3000 \"cypress run\"",
     "ci:cypress:e-to-e": "cypress run --spec 'cypress/e2e/**/*'"
@@ -37,6 +39,7 @@
     "@types/sanitize-html": "^2.9.0",
     "@types/xml2js": "^0.4.11",
     "cypress": "^13.0.0",
+    "prettier": "3.0.3",
     "start-server-and-test": "^2.0.0",
     "xml2js": "^0.6.2"
   }

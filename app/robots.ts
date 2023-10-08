@@ -1,16 +1,16 @@
-import { MetadataRoute } from 'next'
+import { MetadataRoute } from "next";
 
 const cfBranch = process.env.CF_PAGES_BRANCH;
-const isProduction = cfBranch == 'main';
+const isProduction = cfBranch == "main";
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
-      userAgent: '*',
+      userAgent: "*",
       // Only allow the site to be scraped on the production deploy.
-      allow: isProduction ? '/' : '',
-      disallow: isProduction ? '' : '/',
+      allow: isProduction ? "/" : "",
+      disallow: isProduction ? "" : "/",
     },
-    sitemap: 'https://queercalendarsheffield.co.uk/sitemap.xml',
-  }
+    sitemap: "https://queercalendarsheffield.co.uk/sitemap.xml",
+  };
 }

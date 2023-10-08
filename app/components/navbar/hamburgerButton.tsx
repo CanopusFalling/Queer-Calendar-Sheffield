@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 interface HamburgerButtonProps {
