@@ -1,7 +1,6 @@
 import { MetadataRoute } from "next";
 
-const cfBranch = process.env.CF_PAGES_BRANCH;
-const isProduction = cfBranch == "main";
+const isProduction = process.env.CF_PRODUCTION == "1";
 
 export default function robots(): MetadataRoute.Robots {
   return {
