@@ -34,10 +34,15 @@ jobs:
         env:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
 
-      - name: Run component tests
-        run: npm run ci:cypress:component
+      - name: Run end-to-end tests
+        run: npm run ci:cypress:e-to-e
         env:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+
+      # - name: Run component tests
+      #   run: npm run ci:cypress:component
+      #   env:
+      #     GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
 
       # - name: Run Lighthouse tests
       #   run: npm run lighthouse
