@@ -1,7 +1,7 @@
 import React from "react";
 
 import DateTimeWithDST from "./dateHandling";
-import CalendarButton from "../components/CalendarButton";
+import AddEventToCalendarButton from "./components/AddEventToCalendarButton";
 import ShareButton from "./shareEventButton";
 
 import { Event } from "./Event";
@@ -58,7 +58,7 @@ const eventCard: React.FC<EventCardProps> = ({ event, linkEvent }) => {
         {linkEvent && (
           <OpenLinkInNewWindowButton url={eventURL} text="View Details" />
         )}
-        <CalendarButton event={event.toPlainObject()} />
+        <AddEventToCalendarButton event={event.toPlainObject()} />
         <ShareButton event={event.toPlainObject()} />
       </div>
     </div>
