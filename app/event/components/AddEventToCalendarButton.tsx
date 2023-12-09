@@ -26,7 +26,7 @@ const AddEventToCalendarButton: React.FC<AddEventToCalendarButtonProps> = ({
       timeZone={moment.tz.guess()}
       location={event.location}
       //Button Settings
-      options={["Google", "Apple", "iCal", "Microsoft365", "Yahoo"]}
+      options={["Google", "Apple", "iCal", "Outlook.com", "Yahoo"]}
       buttonStyle="default"
       trigger="click"
       hideCheckmark={true}
