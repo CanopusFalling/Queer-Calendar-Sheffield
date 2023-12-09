@@ -25,7 +25,8 @@ const AddEventToCalendarButton: React.FC<AddEventToCalendarButtonProps> = ({
     endTime: string;
     timeZone: string;
     location: string;
-    options: ("Google" | "Apple" | "iCal" | "Outlook.com" | "Yahoo")[]; // Updated type definition
+    iCalFileName: string;
+    options: ("Google" | "Apple" | "iCal" | "Outlook.com" | "Yahoo")[];
     trigger: "click" | "hover" | undefined;
     hideCheckmark: boolean;
     size: string;
@@ -39,6 +40,7 @@ const AddEventToCalendarButton: React.FC<AddEventToCalendarButtonProps> = ({
     endTime: moment(event.endTime).format("HH:mm"),
     timeZone: moment.tz.guess(),
     location: event.location,
+    iCalFileName: `Queer Calendar Sheffield - ${event.summary}`,
     options: ["Google", "Apple", "iCal", "Outlook.com", "Yahoo"],
     trigger: "click",
     hideCheckmark: true,
