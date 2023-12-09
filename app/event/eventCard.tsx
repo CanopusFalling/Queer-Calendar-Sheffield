@@ -1,7 +1,7 @@
 import React from "react";
 
 import DateTimeWithDST from "./dateHandling";
-import CalendarButton from "./CalendarButton";
+import CalendarButton from "../components/CalendarButton";
 import ShareButton from "./shareEventButton";
 
 import { Event } from "./Event";
