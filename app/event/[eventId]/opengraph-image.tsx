@@ -18,16 +18,58 @@ export default async function Image() {
       // ImageResponse JSX element
       <div
         style={{
-          fontSize: 128,
-          background: "white",
           width: "100%",
           height: "100%",
           display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          flexDirection: "column",
+          backgroundColor: "black",
+          color: "white",
+          padding: "20px",
+          boxSizing: "border-box",
         }}
       >
-        Queer Calendar Sheffield
+        {/* Event Title */}
+        <div
+          style={{
+            fontSize: 64,
+            fontWeight: "bold",
+            maxWidth: "80%",
+            marginBottom: "20px",
+            textOverflow: "ellipsis",
+            overflow: "hidden",
+            whiteSpace: "nowrap",
+          }}
+        >
+          Event Title
+        </div>
+
+        {/* Event Description */}
+        <div
+          style={{
+            fontSize: 32,
+            maxWidth: "80%",
+            marginBottom: "20px",
+            textOverflow: "ellipsis",
+            overflow: "hidden",
+            whiteSpace: "nowrap",
+          }}
+        >
+          Event Description that may be truncated when too long.
+        </div>
+
+        {/* QCS Bottom Bar */}
+        <div className="flex flex-row flex-right">
+          <div
+            className="flex"
+            style={{
+              fontSize: 32,
+              textAlign: "right",
+              marginTop: "auto",
+            }}
+          >
+            Queer Calendar Sheffield
+          </div>
+        </div>
       </div>
     ),
     // ImageResponse options
