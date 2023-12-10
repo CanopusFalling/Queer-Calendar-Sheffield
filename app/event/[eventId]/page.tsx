@@ -38,14 +38,13 @@ export async function generateMetadata(
 
   const openGraph = {
     title: event.summary,
-    description: event.description,
-    images: [],
+    description: event.getTextDescription(),
     url: event.getPath(),
   };
 
   return {
     title: `${event.summary} | Queer Calendar Sheffield`,
-    description: `${event.summary} | ${event.description}`,
+    description: `${event.summary} | ${event.getTextDescription()}`,
     openGraph: openGraph,
   };
 }
