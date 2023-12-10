@@ -33,14 +33,6 @@ export default async function Image() {
     // ImageResponse options
     {
       ...size,
-      fonts: [
-        {
-          name: "Inter",
-          data: await interSemiBold,
-          style: "normal",
-          weight: 400,
-        },
-      ],
     },
   );
 }
