@@ -41,12 +41,6 @@ export async function generateMetadata(
     description: event.description,
     images: [],
     url: event.getPath(),
-    //type: "event",
-    event: {
-      start_time: event.startTime.toISOString(),
-      end_time: event.endTime.toISOString(),
-      location: event.location,
-    },
   };
 
   console.log(openGraph);
