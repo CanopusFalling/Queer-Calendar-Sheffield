@@ -7,9 +7,6 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://queercalendarsheffield.co.uk"),
-  alternates: {
-    canonical: "/",
-  },
   title: "Queer Calendar Sheffield",
   description: "Find out what queer events are on in Sheffield!",
   openGraph: {
