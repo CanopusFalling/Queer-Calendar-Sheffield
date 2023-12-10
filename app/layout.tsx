@@ -12,7 +12,6 @@ export const metadata: Metadata = {
   },
   title: "Queer Calendar Sheffield",
   description: "Find out what queer events are on in Sheffield!",
-  viewport: "width=device-width, initial-scale=1",
   openGraph: {
     title: "Queer Calendar Sheffield",
     url: "/",
