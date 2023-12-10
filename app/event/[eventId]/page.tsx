@@ -1,26 +1,69 @@
 export const runtime = "edge";
 import React from "react";
 
-import { redirect } from "next/navigation";
+import type { Metadata, ResolvingMetadata } from "next";
 
 import { getEvent } from "../getEvent";
 import EventNotFound from "../event_not_found";
 import EventCard from "../eventCard";
 
-export default async function Page({
-  params,
-}: {
+type Props = {
   params: { eventId: string };
-}) {
-  const eventId = params.eventId;
+  searchParams: {};
+};
 
-  let event;
+async function fetchEvent(eventId: string) {
   try {
-    event = await getEvent({ eventId: eventId });
+    const event = await getEvent({ eventId });
+    return event;
   } catch (error) {
     console.log(error);
-    return <EventNotFound />;
+    throw error; // Re-throw the error to handle it in the calling function
+  }
+}
+
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  let event;
+
+  try {
+    event = await fetchEvent(params.eventId);
+  } catch (error) {
+    // Handle the error, e.g., log it or return a default metadata
+    console.error("Error fetching event for metadata:", error);
+    return {};
   }
 
-  return <EventCard event={event} linkEvent={false} />;
+  const openGraph = {
+    title: event.summary,
+    description: event.description,
+    images: [],
+    url: event.getPath(),
+    //type: "event",
+    event: {
+      start_time: event.startTime.toISOString(),
+      end_time: event.endTime.toISOString(),
+      location: event.location,
+    },
+  };
+
+  console.log(openGraph);
+
+  return {
+    title: `${event.summary} | Queer Calendar Sheffield`,
+    description: `${event.summary} | ${event.description}`,
+    openGraph: openGraph,
+  };
+}
+
+export default async function Page({ params, searchParams }: Props) {
+  try {
+    const event = await fetchEvent(params.eventId);
+    return <EventCard event={event} linkEvent={false} />;
+  } catch (error) {
+    console.error("Error fetching event for page:", error);
+    return <EventNotFound />;
+  }
 }
