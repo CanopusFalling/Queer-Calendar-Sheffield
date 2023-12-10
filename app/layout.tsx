@@ -6,7 +6,7 @@ import Footer from "./components/footer";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://queercalendarsheffield.ac.uk"),
+  metadataBase: new URL("https://queercalendarsheffield.co.uk"),
   alternates: {
     canonical: "/",
     languages: {
@@ -18,11 +18,11 @@ export const metadata: Metadata = {
   viewport: "width=device-width, initial-scale=1",
   openGraph: {
     title: "Queer Calendar Sheffield",
-    url: "https://queercalendarsheffield.co.uk/",
+    url: "/",
     type: "website",
     images: [
       {
-        url: "https://queercalendarsheffield.co.uk/open-graph-banner.webp",
+        url: "open-graph-banner.webp",
         width: 1200,
         height: 630,
         alt: 'A rainbow calendar icon with a heart shape in the centre of the icon and to the right of that the words "Queer Calendar Sheffield" in white, bold text each word on a new line all on a black background.',
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     description: "A place to find queer and LGBTQ+ events in Sheffield.",
     images: [
       {
-        url: "https://queercalendarsheffield.co.uk/open-graph-banner.webp",
+        url: "open-graph-banner.webp",
         width: 1200,
         height: 630,
         alt: 'A rainbow calendar icon with a heart shape in the centre of the icon and to the right of that the words "Queer Calendar Sheffield" in white, bold text each word on a new line all on a black background.',
