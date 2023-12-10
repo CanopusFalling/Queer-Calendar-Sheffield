@@ -1,7 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
-export const runtime = "edge";
-
 const googleApiKey = process.env.GOOGLE_API_KEY;
 
 export default async function handler(

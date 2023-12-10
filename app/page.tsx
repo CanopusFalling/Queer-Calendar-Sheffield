@@ -1,5 +1,3 @@
-export const runtime = "edge";
-
 import { getEvents } from "./event/getEvents";
 import EventList from "./event/eventList";
 import { GetEventsOptions } from "./event/getEvents";

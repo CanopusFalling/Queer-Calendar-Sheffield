@@ -1,3 +1,6 @@
+// Export edge on the base layout.
+export const runtime = "edge";
+
 import "./globals.css";
 
 import Header from "./components/header";
