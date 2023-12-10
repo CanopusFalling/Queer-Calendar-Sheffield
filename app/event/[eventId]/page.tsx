@@ -43,8 +43,6 @@ export async function generateMetadata(
     url: event.getPath(),
   };
 
-  console.log(openGraph);
-
   return {
     title: `${event.summary} | Queer Calendar Sheffield`,
     description: `${event.summary} | ${event.description}`,
