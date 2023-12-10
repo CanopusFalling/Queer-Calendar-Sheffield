@@ -43,7 +43,7 @@ export default function RootLayout({
           content="A place to find queer and LGBTQ+ events in Sheffield."
         />
         {/* Twitter specific tags */}
-        <meta property="twitter:card" content="app" />
+        <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:title" content="Queer Calendar Sheffield" />
         <meta
           property="twitter:description"
