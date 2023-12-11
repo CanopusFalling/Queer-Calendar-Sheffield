@@ -7,8 +7,6 @@ import ShareButton from "./shareEventButton";
 import { Event } from "./Event";
 import OpenLinkInNewWindowButton from "../components/buttons/openLinkInNewWindow";
 
-export const runtime = "edge";
-
 interface EventCardProps {
   event: Event;
   linkEvent: boolean;

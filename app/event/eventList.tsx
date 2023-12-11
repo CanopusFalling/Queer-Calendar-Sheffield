@@ -4,8 +4,6 @@ import EventCard from "./eventCard";
 
 import { Event } from "./Event";
 
-export const runtime = "edge";
-
 interface EventListProps {
   events: Event[];
 }

@@ -5,8 +5,6 @@ import { EventData } from "./Event";
 
 import { BsShareFill } from "react-icons/bs";
 
-export const runtime = "edge";
-
 interface GoogleCalendarButtonProps {
   event: EventData;
 }

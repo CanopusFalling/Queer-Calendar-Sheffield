@@ -5,8 +5,6 @@ import moment from "moment-timezone";
 
 import { EventData } from "./Event";
 
-export const runtime = "edge";
-
 interface GoogleCalendarButtonProps {
   event: EventData;
 }

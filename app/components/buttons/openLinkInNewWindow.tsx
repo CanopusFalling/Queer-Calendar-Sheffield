@@ -1,7 +1,5 @@
 "use client";
 
-export const runtime = "edge";
-
 import { BsBoxArrowUpRight } from "react-icons/bs";
 
 interface openLinkInNewWindowButtonProps {

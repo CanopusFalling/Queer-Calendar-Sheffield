@@ -115,6 +115,10 @@ export class Event {
     return sanitizeHtml(this.description || "", sanitizeOptions);
   }
 
+  getTextDescription() {
+    return sanitizeHtml(this.description || "");
+  }
+
   getURIEncodedName() {
     let name = this.summary.replaceAll(" ", "_");
     return encodeURIComponent(name);
