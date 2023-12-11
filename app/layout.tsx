@@ -48,13 +48,10 @@ export async function generateMetadata(): Promise<Metadata> {
   //Set a baseURL only if the environment is a production Env.
   if (process.env.CF_PRODUCTION == "1") {
     metadata.metadataBase = new URL("https://queercalendarsheffield.co.uk");
-    console.log("Production Layout");
   } else if (process.env.CF_PAGES_URL) {
     metadata.metadataBase = new URL(process.env.CF_PAGES_URL as string);
-    console.log("CF deploy development layout.");
   } else {
     metadata.metadataBase = new URL("https://queercalendarsheffield.co.uk");
-    console.log("Local dev layout");
   }
 
   return metadata;
