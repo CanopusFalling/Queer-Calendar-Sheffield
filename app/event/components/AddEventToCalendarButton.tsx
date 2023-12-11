@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useEffect } from "react";
 import moment from "moment";
 
 import { EventData } from "../Event";
@@ -15,7 +16,10 @@ import { BsCalendarPlusFill } from "react-icons/bs";
 const AddEventToCalendarButton: React.FC<AddEventToCalendarButtonProps> = ({
   event,
 }) => {
-  const eventLink = window.location.origin + event.path;
+  let eventLink;
+  useEffect(() => {
+    eventLink = window.location.origin + event.path;
+  });
   const config: {
     name: string;
     description: string;
