@@ -1,13 +1,11 @@
 import React from "react";
 
 import DateTimeWithDST from "./dateHandling";
-import GoogleCalendarButton from "./googleCalendarButton";
+import AddEventToCalendarButton from "./components/AddEventToCalendarButton";
 import ShareButton from "./shareEventButton";
 
 import { Event } from "./Event";
 import OpenLinkInNewWindowButton from "../components/buttons/openLinkInNewWindow";
-
-export const runtime = "edge";
 
 interface EventCardProps {
   event: Event;
@@ -58,7 +56,7 @@ const eventCard: React.FC<EventCardProps> = ({ event, linkEvent }) => {
         {linkEvent && (
           <OpenLinkInNewWindowButton url={eventURL} text="View Details" />
         )}
-        <GoogleCalendarButton event={event.toPlainObject()} />
+        <AddEventToCalendarButton event={event.toPlainObject()} />
         <ShareButton event={event.toPlainObject()} />
       </div>
     </div>
