@@ -8,7 +8,18 @@ import Footer from "./components/footer";
 
 import type { Metadata } from "next";
 
+let baseURL = "";
+
+if (process.env.CF_PRODUCTION == "1") {
+  baseURL = "https://queercalendarsheffield.co.uk";
+} else {
+  baseURL = process.env.CF_PAGES_URL as string;
+}
+
+console.log(`CF PAGES URL ${process.env.CF_PAGES_URL}`);
+
 export const metadata: Metadata = {
+  metadataBase: baseURL == "" ? undefined : new URL(baseURL),
   title: "Queer Calendar Sheffield",
   description: "Find out what queer events are on in Sheffield!",
   openGraph: {
