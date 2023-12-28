@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { Contributor } from "./contributor";
 import contributorsData from "./contributors.json";
 
@@ -32,31 +34,31 @@ const Contributors: React.FC = () => {
 
             <div className="icon-container flex justify-center items-center">
               {contributor.email && (
-                <a
+                <Link
                   className="mail-badge m-2"
                   href={`mailto:${contributor.email}`}
                   aria-label={`Email ${contributor.name}`}
                 >
                   <AiOutlineMail className="w-6 h-6" />
-                </a>
+                </Link>
               )}
               {contributor.github && (
-                <a
+                <Link
                   className="github-badge m-2"
                   href={`https://github.com/${contributor.github}`}
                   aria-label={`Visit ${contributor.name}'s Github`}
                 >
                   <DiGithubBadge className="w-7 h-7" />
-                </a>
+                </Link>
               )}
               {contributor.website && (
-                <a
+                <Link
                   className="website-badge m-2"
                   href={contributor.website}
                   aria-label={`Visit ${contributor.name}'s Website`}
                 >
                   <GoGlobe className="w-6 h-6" />
-                </a>
+                </Link>
               )}
             </div>
           </div>

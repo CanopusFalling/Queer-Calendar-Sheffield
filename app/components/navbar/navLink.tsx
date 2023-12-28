@@ -2,6 +2,8 @@
 
 import React from "react";
 
+import Link from "next/link";
+
 export interface NavLinkProps {
   label: string;
   href: string;
@@ -16,7 +18,7 @@ function NavLink({ label, href }: NavLinkProps) {
     removeAnchors(window.location.pathname) === removeAnchors(href);
 
   return (
-    <a
+    <Link
       className={`py-2 lg:py-0 pl-2 lg:mb-0 lg:pl-2 lg:pr-1 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:hover:text-neutral-400 dark:focus:text-neutral-400 ${
         isActive
           ? "text-black/90 dark:text-neutral-400"
@@ -26,7 +28,7 @@ function NavLink({ label, href }: NavLinkProps) {
       data-te-nav-link-ref
     >
       {label}
-    </a>
+    </Link>
   );
 }
 
