@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { EventData } from "./Event";
+import { EventData } from "../Event";
 
 import { BsShareFill } from "react-icons/bs";
 
