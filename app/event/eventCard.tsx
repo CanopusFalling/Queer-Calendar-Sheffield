@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import DateTimeWithDST from "./dateHandling";
 import AddEventToCalendarButton from "./components/AddEventToCalendarButton";
-import ShareButton from "./shareEventButton";
+import ShareButton from "./components/shareEventButton";
 
 import { Event } from "./Event";
 import OpenLinkInNewWindowButton from "../components/buttons/openLinkInNewWindow";
