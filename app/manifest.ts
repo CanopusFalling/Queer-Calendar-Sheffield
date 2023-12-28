@@ -25,6 +25,12 @@ export default function manifest(): MetadataRoute.Manifest {
         sizes: "256x256",
         type: "image/png",
       },
+      {
+        src: "/logo-512.webp",
+        sizes: "512x512",
+        type: "image/webp",
+        purpose: "any",
+      },
     ],
   };
 }
