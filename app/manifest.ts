@@ -59,5 +59,17 @@ export default function manifest(): MetadataRoute.Manifest {
         purpose: "any",
       },
     ],
+    shortcuts: [
+      {
+        name: "Events",
+        url: "/",
+        description: "Browse LGBTQ+ events in Sheffield",
+      },
+      {
+        name: "Contributors",
+        url: "/contributors",
+        description: "A list of our contributors",
+      },
+    ],
   };
 }
