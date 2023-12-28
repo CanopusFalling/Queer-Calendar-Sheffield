@@ -2,6 +2,7 @@
 
 import React from "react";
 
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 export interface NavLinkProps {
@@ -14,8 +15,7 @@ function NavLink({ label, href }: NavLinkProps) {
     return path.split("#")[0];
   }
 
-  const isActive =
-    removeAnchors(window.location.pathname) === removeAnchors(href);
+  const isActive = usePathname() === removeAnchors(href);
 
   return (
     <Link
