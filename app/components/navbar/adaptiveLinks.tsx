@@ -1,11 +1,8 @@
 "use client";
 
 import React from "react";
-import dynamic from "next/dynamic";
 
-const NavLink = dynamic(() => import("./navLink"), {
-  ssr: false, // This will ensure the component is only loaded on the client-side
-});
+import NavLink from "./navLink";
 
 import { NavLinkProps } from "./navLink";
 import jsonNavLinks from "./navigationLinks.json";
