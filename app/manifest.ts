@@ -53,10 +53,10 @@ export default function manifest(): MetadataRoute.Manifest {
         purpose: "maskable",
       },
       {
-        src: "/icon/maskable-512.webp",
+        src: "/icon/512.webp",
         sizes: "512x512",
         type: "image/webp",
-        purpose: "maskable",
+        purpose: "any",
       },
     ],
   };
