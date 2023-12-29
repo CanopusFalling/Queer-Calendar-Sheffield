@@ -6,7 +6,14 @@ import "./globals.css";
 import Header from "./components/header";
 import Footer from "./components/footer";
 
-import type { Metadata } from "next";
+import type { Viewport, Metadata } from "next";
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#FFF" },
+    { media: "(prefers-color-scheme: dark)", color: "#000" },
+  ],
+};
 
 export async function generateMetadata(): Promise<Metadata> {
   let metadata: Metadata = {
@@ -63,8 +70,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html>
-      <body className="block bg-white dark:shadow-white/10 dark:bg-neutral-700">
+    <html lang="en-GB">
+      <body className="block bg-neutral-200 dark:shadow-white/10 dark:bg-neutral-800">
         <Header />
         {children}
         <Footer />

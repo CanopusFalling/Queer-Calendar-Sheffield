@@ -62,7 +62,7 @@ const AddEventToCalendarButton: React.FC<AddEventToCalendarButtonProps> = ({
       className="flex rounded items-center justify-center border border-black dark:border-white text-black dark:text-white px-4 py-2 text-xs font-medium uppercase"
       onClick={handleClick}
     >
-      <BsCalendarPlusFill className="mr-2" />
+      <BsCalendarPlusFill className="mr-2" title="Add Event To Calendar" />
       Add To Calendar
     </button>
   );
