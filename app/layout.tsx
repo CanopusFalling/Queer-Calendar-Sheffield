@@ -70,7 +70,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html>
+    <html lang="en-GB">
       <body className="block bg-white dark:shadow-white/10 dark:bg-neutral-800">
         <Header />
         {children}
