@@ -38,6 +38,9 @@ export default function Footer() {
           <Link className="mr-4 mb-2 sm:mb-0" href="/contributors">
             Project Contributors
           </Link>
+          <Link className="mr-4 mb-2 sm:mb-0" href="/accessibility">
+            Accessibility Statement
+          </Link>
           {/* Add more links as needed */}
         </div>
       </div>
