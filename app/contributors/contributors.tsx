@@ -13,11 +13,15 @@ const Contributors: React.FC = () => {
     <div className="lg:gap-xl-12 grid gap-x-6 md:grid-cols-3 xl:grid-cols-4">
       {(contributorsData as Contributor[]).map(
         (contributor: Contributor, index: number) => (
-          <div key={index} id={`contributor-${index}`} className="mb-12">
+          <div
+            key={index}
+            id={`contributor-${index}`}
+            className="mb-12 p-4 bg-white rounded-xl"
+          >
             {contributor.avatarUrl ? (
               <img
                 src={contributor.avatarUrl}
-                className="mx-auto mb-4 rounded-full shadow-lg dark:shadow-black/20"
+                className="mx-auto mb-4 rounded-full shadow-xl dark:shadow-black/20"
                 alt={contributor.name}
                 width="100px"
                 height="100px"
