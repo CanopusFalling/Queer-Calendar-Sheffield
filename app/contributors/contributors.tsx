@@ -39,7 +39,10 @@ const Contributors: React.FC = () => {
                   href={`mailto:${contributor.email}`}
                   aria-label={`Email ${contributor.name}`}
                 >
-                  <AiOutlineMail className="w-6 h-6" />
+                  <AiOutlineMail
+                    className="w-6 h-6"
+                    title={`Email ${contributor.name}`}
+                  />
                 </Link>
               )}
               {contributor.github && (
@@ -48,7 +51,10 @@ const Contributors: React.FC = () => {
                   href={`https://github.com/${contributor.github}`}
                   aria-label={`Visit ${contributor.name}'s Github`}
                 >
-                  <DiGithubBadge className="w-7 h-7" />
+                  <DiGithubBadge
+                    className="w-7 h-7"
+                    title={`Visit ${contributor.name}'s Github`}
+                  />
                 </Link>
               )}
               {contributor.website && (
@@ -57,7 +63,10 @@ const Contributors: React.FC = () => {
                   href={contributor.website}
                   aria-label={`Visit ${contributor.name}'s Website`}
                 >
-                  <GoGlobe className="w-6 h-6" />
+                  <GoGlobe
+                    className="w-6 h-6"
+                    title={`Visit ${contributor.name}'s Website`}
+                  />
                 </Link>
               )}
             </div>

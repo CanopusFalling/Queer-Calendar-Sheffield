@@ -22,7 +22,7 @@ const OpenLinkInNewWindowButton: React.FC<openLinkInNewWindowButtonProps> = ({
       className="flex rounded items-center justify-center border border-black dark:border-white text-black dark:text-white px-4 py-2 text-xs font-medium uppercase"
       target="_blank"
     >
-      <BsBoxArrowUpRight className="mr-2" /> {text}
+      <BsBoxArrowUpRight className="mr-2" title={text} /> {text}
     </Link>
   );
 };

@@ -14,9 +14,7 @@ function HamburgerButton({ onClick }: HamburgerButtonProps) {
       onClick={onClick} // Add onClick handler
       aria-label="Toggle navigation"
     >
-      <span className="[&>svg]:w-7">
-        <GiHamburgerMenu />
-      </span>
+      <GiHamburgerMenu title="Toggle navigation" />
     </button>
   );
 }
