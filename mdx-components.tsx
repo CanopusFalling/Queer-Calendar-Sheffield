@@ -9,7 +9,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <h2 className="text-3xl font-bold mb-3">{children}</h2>
     ),
     a: ({ href, children }) => (
-      <a href={href} className="text-blue-500 hover:underline">
+      <a
+        href={href}
+        className="text-blue-800 dark:text-blue-400 hover:underline visited:text-purple-600 visited:dark:text-purple-400"
+      >
         {children}
       </a>
     ),
