@@ -71,7 +71,7 @@ export default function RootLayout({
 }) {
   return (
     <html>
-      <body className="block bg-white dark:shadow-white/10 dark:bg-neutral-700">
+      <body className="block bg-white dark:shadow-white/10 dark:bg-neutral-800">
         <Header />
         {children}
         <Footer />
