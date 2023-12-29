@@ -19,6 +19,11 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ul: ({ children }) => <ul className="list-disc pl-5 mb-4">{children}</ul>,
     li: ({ children }) => <li className="mb-1">{children}</li>,
     p: ({ children }) => <p className="mb-4">{children}</p>,
+    hr: ({ children }) => (
+      <hr className="mb-4 border-neutral-400 dark:border-neutral-600">
+        {children}
+      </hr>
+    ),
     ...components,
   };
 }

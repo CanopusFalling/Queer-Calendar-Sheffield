@@ -13,11 +13,15 @@ const Contributors: React.FC = () => {
     <div className="lg:gap-xl-12 grid gap-x-6 md:grid-cols-3 xl:grid-cols-4">
       {(contributorsData as Contributor[]).map(
         (contributor: Contributor, index: number) => (
-          <div key={index} id={`contributor-${index}`} className="mb-12">
+          <div
+            key={index}
+            id={`contributor-${index}`}
+            className="mb-12 p-4 bg-white dark:bg-neutral-700 rounded-xl"
+          >
             {contributor.avatarUrl ? (
               <img
                 src={contributor.avatarUrl}
-                className="mx-auto mb-4 rounded-full shadow-lg dark:shadow-black/20"
+                className="mx-auto mb-4 rounded-full shadow-xl dark:shadow-black/20"
                 alt={contributor.name}
                 width="100px"
                 height="100px"
@@ -39,7 +43,10 @@ const Contributors: React.FC = () => {
                   href={`mailto:${contributor.email}`}
                   aria-label={`Email ${contributor.name}`}
                 >
-                  <AiOutlineMail className="w-6 h-6" />
+                  <AiOutlineMail
+                    className="w-6 h-6"
+                    title={`Email ${contributor.name}`}
+                  />
                 </Link>
               )}
               {contributor.github && (
@@ -48,7 +55,10 @@ const Contributors: React.FC = () => {
                   href={`https://github.com/${contributor.github}`}
                   aria-label={`Visit ${contributor.name}'s Github`}
                 >
-                  <DiGithubBadge className="w-7 h-7" />
+                  <DiGithubBadge
+                    className="w-7 h-7"
+                    title={`Visit ${contributor.name}'s Github`}
+                  />
                 </Link>
               )}
               {contributor.website && (
@@ -57,7 +67,10 @@ const Contributors: React.FC = () => {
                   href={contributor.website}
                   aria-label={`Visit ${contributor.name}'s Website`}
                 >
-                  <GoGlobe className="w-6 h-6" />
+                  <GoGlobe
+                    className="w-6 h-6"
+                    title={`Visit ${contributor.name}'s Website`}
+                  />
                 </Link>
               )}
             </div>

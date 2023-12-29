@@ -35,7 +35,7 @@ const ShareEventButton: React.FC<GoogleCalendarButtonProps> = ({ event }) => {
       className="flex rounded items-center justify-center border border-black dark:border-white text-black dark:text-white px-4 py-2 text-xs font-medium uppercase"
       onClick={shareEvent}
     >
-      <BsShareFill className="mr-2" />
+      <BsShareFill className="mr-2" title="Share" />
       Share
     </button>
   );
