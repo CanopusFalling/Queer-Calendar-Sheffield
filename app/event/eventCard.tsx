@@ -12,15 +12,31 @@ import OpenLinkInNewWindowButton from "../components/buttons/openLinkInNewWindow
 interface EventCardProps {
   event: Event;
   linkEvent: boolean;
+  includeJsonLD?: boolean;
 }
 
-const eventCard: React.FC<EventCardProps> = ({ event, linkEvent }) => {
+const eventCard: React.FC<EventCardProps> = ({
+  event,
+  linkEvent,
+  includeJsonLD = true,
+}) => {
   const { id, summary, location, description, startTime, endTime, allDay } =
     event;
 
   const urlEncodedLocation = encodeURIComponent(location);
 
   const eventURL = event.getPath();
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    url: eventURL,
+    name: summary,
+    startDate: startTime.toDateString(),
+    endDate: endTime.toDateString(),
+    location: location,
+    description: description,
+  };
 
   return (
     <div
@@ -33,6 +49,12 @@ const eventCard: React.FC<EventCardProps> = ({ event, linkEvent }) => {
           {summary}
         </h5>
       </Link>
+      {includeJsonLD && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      )}
       <p className="mb-2 leading-tight text-neutral-800 dark:text-neutral-50">
         <b>Time: </b>
         <DateTimeWithDST

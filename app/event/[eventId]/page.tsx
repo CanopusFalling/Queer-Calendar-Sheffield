@@ -59,26 +59,7 @@ export async function generateMetadata(
 export default async function Page({ params, searchParams }: Props) {
   try {
     const event = await fetchEvent(params.eventId);
-
-    const jsonLd = {
-      "@context": "https://schema.org",
-      "@type": "Event",
-      name: event.summary,
-      startDate: event.startTime.toDateString(),
-      endDate: event.endTime.toDateString(),
-      location: event.location,
-      description: event.description,
-    };
-
-    return (
-      <>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-        <EventCard event={event} linkEvent={false} />
-      </>
-    );
+    return <EventCard event={event} linkEvent={false} />;
   } catch (error) {
     console.error("Error fetching event for page:", error);
     return <EventNotFound />;
