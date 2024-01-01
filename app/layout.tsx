@@ -8,6 +8,8 @@ import Footer from "./components/footer";
 
 import type { Viewport, Metadata } from "next";
 
+const isProduction = process.env.CF_PRODUCTION == "1";
+
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#FFF" },
@@ -50,6 +52,7 @@ export async function generateMetadata(): Promise<Metadata> {
     icons: {
       icon: "./favicon.ico",
     },
+    robots: isProduction ? "" : "noindex",
   };
 
   //Set a baseURL only if the environment is a production Env.

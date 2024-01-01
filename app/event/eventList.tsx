@@ -9,7 +9,6 @@ interface EventListProps {
 }
 
 export default async function EventList({ events }: EventListProps) {
-  //console.log(events)
   return (
     <>
       {events.map((event) => (
