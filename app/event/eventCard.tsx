@@ -11,10 +11,10 @@ import OpenLinkInNewWindowButton from "../components/buttons/openLinkInNewWindow
 
 interface EventCardProps {
   event: Event;
-  linkEvent: boolean;
+  linkEvent?: boolean;
 }
 
-const eventCard: React.FC<EventCardProps> = ({ event, linkEvent }) => {
+const eventCard: React.FC<EventCardProps> = ({ event, linkEvent = true }) => {
   const { id, summary, location, description, startTime, endTime, allDay } =
     event;
 
@@ -50,10 +50,12 @@ const eventCard: React.FC<EventCardProps> = ({ event, linkEvent }) => {
           </p>
         </Link>
       )}
-      <div
-        className="mb-4 text-base text-neutral-600 break-words dark:text-neutral-200"
-        dangerouslySetInnerHTML={{ __html: event.getMarkupDescription() }}
-      />
+      {description && (
+        <div
+          className="mb-4 text-base text-neutral-600 break-words dark:text-neutral-200"
+          dangerouslySetInnerHTML={{ __html: event.getMarkupDescription() }}
+        />
+      )}
       <div className="flex flex-wrap gap-4">
         {linkEvent && (
           <OpenLinkInNewWindowButton url={eventURL} text="View Details" />
