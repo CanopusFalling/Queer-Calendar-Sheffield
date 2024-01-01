@@ -11,8 +11,11 @@
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
     "test:cypress": "start-server-and-test dev http://localhost:3000 \"cypress open\"",
-    "test:cypress-headless": "start-server-and-test dev http://localhost:3000 \"cypress run\"",
-    "ci:cypress:e-to-e": "cypress run --spec 'cypress/e2e/**/*'"
+    "test:cypress-headless": "npm run test:cypress-headless:component && npm run test:cypress-headless:e-to-e",
+    "test:cypress-headless:e-to-e": "start-server-and-test dev http://localhost:3000 \"cypress run --e2e\"",
+    "test:cypress-headless:component": "start-server-and-test dev http://localhost:3000 \"cypress run --component\"",
+    "ci:cypress:e-to-e": "cypress run --e2e",
+    "ci:cypress:component": "cypress run --component"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.0.0",
