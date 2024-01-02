@@ -54,7 +54,7 @@ describe("<EventCard />", () => {
 
   it("displays full day event time correctly", () => {
     const fullDayEvent: Event = new Event(
-      "test-id",
+      "test-full-day",
       "test-iCalUID",
       "Full Day Event",
       "Event Description",
@@ -72,7 +72,7 @@ describe("<EventCard />", () => {
 
   it("does not display a location heading if no location is set", () => {
     const eventWithNoLocation: Event = new Event(
-      "test-id",
+      "test-no-location",
       "test-iCalUID",
       "Event with No Location",
       "Event Description",
@@ -88,9 +88,9 @@ describe("<EventCard />", () => {
 
   it("does not display a description div if no description is set", () => {
     const eventWithNoLocation: Event = new Event(
-      "test-id",
+      "test-no-description",
       "test-iCalUID",
-      "Event with No Location",
+      "Event with No Description",
       "",
       "Event Location",
       new Date("2023-01-01T10:00:00"),
