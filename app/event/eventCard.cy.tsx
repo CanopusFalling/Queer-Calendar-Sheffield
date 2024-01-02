@@ -101,4 +101,6 @@ describe("<EventCard />", () => {
     cy.mount(<EventCard event={eventWithNoLocation} linkEvent={true} />);
     cy.get(".mb-4").should("not.exist");
   });
+
+  it("renders JSON-LD correctly");
 });
