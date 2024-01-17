@@ -16,6 +16,9 @@ jobs:
         with:
           node-version: "18.17.0"
           cache: npm
+      
+      - name: Install dependencies
+        run: npm install
 
       - name: Prettify code
         uses: creyD/prettier_action@v4.3
