@@ -11,7 +11,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Prettify code
-        uses: creyD/prettier_action@v4.3
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
-          prettier_options: --write .
+          node-version: "18.17.0"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Prettify code
+        run: npm run format
