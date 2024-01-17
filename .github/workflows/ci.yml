@@ -20,20 +20,17 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # - name: Build project
-      #   run: npm run build:dev
-      #   env:
-      #     GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+      - name: Set Up TOML file
+        run: echo "[vars] \n GOOGLE_API_KEY=\"${{ secrets.GOOGLE_API_KEY }}\""
+
+      - name: Build project
+        run: npm run pages:build
 
       - name: Start server
-        run: npm run dev &
-        env:
-          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        run: npm run pages:serve &
 
       - name: Run end-to-end tests
         run: npm run ci:cypress:e-to-e
-        env:
-          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
 
       # - name: Run component tests
       #   run: npm run ci:cypress:component
