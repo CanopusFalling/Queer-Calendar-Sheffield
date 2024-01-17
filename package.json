@@ -3,16 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "build:dev": "next build --no-lint",
-    "start": "next start",
-    "lint": "next lint",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
-    "test:cypress": "start-server-and-test dev http://localhost:3000 \"cypress open\"",
-    "test:cypress-headless": "start-server-and-test dev http://localhost:3000 \"cypress run\"",
-    "ci:cypress:e-to-e": "cypress run --spec 'cypress/e2e/**/*'"
+    "test:cypress": "npm run pages:build && concurrently \"npm run pages:serve\" \"cypress open\"",
+    "test:cypress-headless": "npm run pages:build && concurrently \"npm run pages:serve\" \"cypress run\"",
+    "ci:cypress:e-to-e": "cypress run --spec 'cypress/e2e/**/*'",
+    "pages:build": "npx @cloudflare/next-on-pages",
+    "pages:serve": "wrangler pages dev .vercel/output/static --compatibility-date=2023-12-18 --compatibility-flag=nodejs_compat",
+    "pages:preview": "npm run pages:build && npm run pages:serve"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.0.0",
@@ -39,9 +37,11 @@
     "typescript": "^5.1.6"
   },
   "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.8.5",
     "@types/memory-cache": "^0.2.3",
     "@types/sanitize-html": "^2.9.0",
     "@types/xml2js": "^0.4.11",
+    "concurrently": "^8.2.2",
     "cypress": "^13.0.0",
     "eslint-config-next": "^14.0.4",
     "prettier": "3.0.3",
