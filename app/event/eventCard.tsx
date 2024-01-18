@@ -6,21 +6,39 @@ import DateTimeWithDST from "./dateHandling";
 import AddEventToCalendarButton from "./components/AddEventToCalendarButton";
 import ShareButton from "./components/shareEventButton";
 
+import JsonLD from "../components/jsonLD";
+
 import { Event } from "./Event";
 import OpenLinkInNewWindowButton from "../components/buttons/openLinkInNewWindow";
 
 interface EventCardProps {
   event: Event;
   linkEvent: boolean;
+  includeJsonLD?: boolean;
 }
 
-const eventCard: React.FC<EventCardProps> = ({ event, linkEvent }) => {
+const eventCard: React.FC<EventCardProps> = ({
+  event,
+  linkEvent,
+  includeJsonLD = true,
+}) => {
   const { id, summary, location, description, startTime, endTime, allDay } =
     event;
 
   const urlEncodedLocation = encodeURIComponent(location);
 
-  const eventURL = event.getPath();
+  const eventPath = event.getPath();
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    url: eventPath,
+    name: summary,
+    startDate: startTime.toDateString(),
+    endDate: endTime.toDateString(),
+    location: location,
+    description: description,
+  };
 
   return (
     <div
@@ -28,11 +46,12 @@ const eventCard: React.FC<EventCardProps> = ({ event, linkEvent }) => {
       key={id}
       className="block rounded-lg bg-white m-4 p-6 shadow dark:shadow-white/10 dark:bg-neutral-700"
     >
-      <Link href={eventURL}>
+      <Link href={eventPath}>
         <h5 className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
           {summary}
         </h5>
       </Link>
+      <JsonLD data={jsonLd} />
       <p className="mb-2 leading-tight text-neutral-800 dark:text-neutral-50">
         <b>Time: </b>
         <DateTimeWithDST
@@ -56,7 +75,7 @@ const eventCard: React.FC<EventCardProps> = ({ event, linkEvent }) => {
       />
       <div className="flex flex-wrap gap-4">
         {linkEvent && (
-          <OpenLinkInNewWindowButton url={eventURL} text="View Details" />
+          <OpenLinkInNewWindowButton url={eventPath} text="View Details" />
         )}
         <AddEventToCalendarButton event={event.toPlainObject()} />
         <ShareButton event={event.toPlainObject()} />

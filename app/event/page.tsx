@@ -1,15 +1,14 @@
 import { redirect } from "next/navigation";
 
-import { getEvent } from "./getEvent";
-
 export default async function EventPage(req: any, res: any) {
-  const { eventId } = req.searchParams;
+  // Check if can be redirected to a specific event on the `event/[id]` path.
+  const specificEvent =
+    Object.keys(req.searchParams).length === 1 &&
+    req.searchParams.eventId !== undefined;
 
-  if (!eventId) {
-    redirect("/");
+  if (specificEvent) {
+    redirect(`event/${req.searchParams.eventId}`);
+  } else {
+    redirect(`/`);
   }
-
-  const event = await getEvent({ eventId: eventId });
-
-  redirect(event.getPath());
 }
