@@ -9,7 +9,6 @@ interface EventListProps {
 }
 
 const EventList: React.FC<EventListProps> = ({ events }: EventListProps) => {
-  console.log(events);
   return (
     <>
       {events.map((event) => (
