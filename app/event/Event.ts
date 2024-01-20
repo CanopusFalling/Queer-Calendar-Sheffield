@@ -39,7 +39,7 @@ export class Event {
     lastModified: Date,
   );
   constructor(...args: any[]) {
-    if ("id" in args[0]) {
+    if (typeof args[0] === "object" && "id" in args[0]) {
       const {
         id,
         iCalUID,
