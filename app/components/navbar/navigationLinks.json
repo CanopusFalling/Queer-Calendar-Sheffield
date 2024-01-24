@@ -10,5 +10,9 @@
   {
     "label": "Accessibility",
     "href": "/accessibility"
+  },
+  {
+    "label": "Add An Event",
+    "href": "/add-an-event"
   }
 ]
