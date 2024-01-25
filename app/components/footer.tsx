@@ -17,16 +17,10 @@ export default function Footer() {
 
       <div className="bg-white p-4 text-center dark:bg-neutral-600">
         <div className="flex flex-col items-center sm:flex-row sm:justify-center">
-          <Link
-            className="mr-4 mb-2 sm:mb-0"
-            href="mailto:queercalendarsheffield@gmail.com"
-          >
-            Email Us
+          <Link className="mr-4 mb-2 sm:mb-0" href="/contact">
+            Contact Us
           </Link>
-          <Link
-            className="mr-4 mb-2 sm:mb-0"
-            href="https://forms.gle/KE4iZaxnhtfw4RCF7"
-          >
+          <Link className="mr-4 mb-2 sm:mb-0" href="/contact">
             Add An Event
           </Link>
           <Link
