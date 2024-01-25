@@ -9,7 +9,7 @@ This is a project to take data collated and organised by Rowan Garwood about Que
 - Fill in [this form](https://forms.gle/KE4iZaxnhtfw4RCF7) if you want to add an event to the calendar!
 - Submit issues if you want to see a feature or find a bug [here](https://github.com/CanopusFalling/Queer-Calendar-Sheffield/issues)!
 - [Fork this repo](https://github.com/CanopusFalling/Queer-Calendar-Sheffield/fork) and submit a [pull request](https://github.com/CanopusFalling/Queer-Calendar-Sheffield/compare) if you want to contribute to the website.
-- If you would like to get involved with updating the calendar to add events or working on the website email us: [queercalendarsheffield@gmail.com](mailto:queercalendarsheffield@gmail.com)
+- If you would like to get involved with updating the calendar to add events or working on the website email us: [contact@queercalendarsheffield.co.uk](contact@queercalendarsheffield.co.uk)
 
 ## Development Setup
 
