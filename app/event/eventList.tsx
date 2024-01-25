@@ -8,7 +8,7 @@ interface EventListProps {
   events: Event[];
 }
 
-export default async function EventList({ events }: EventListProps) {
+const EventList: React.FC<EventListProps> = ({ events }: EventListProps) => {
   return (
     <>
       {events.map((event) => (
@@ -16,4 +16,6 @@ export default async function EventList({ events }: EventListProps) {
       ))}
     </>
   );
-}
+};
+
+export default EventList;

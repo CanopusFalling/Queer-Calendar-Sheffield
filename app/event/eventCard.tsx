@@ -13,13 +13,13 @@ import OpenLinkInNewWindowButton from "../components/buttons/openLinkInNewWindow
 
 interface EventCardProps {
   event: Event;
-  linkEvent: boolean;
+  linkEvent?: boolean;
   includeJsonLD?: boolean;
 }
 
 const eventCard: React.FC<EventCardProps> = ({
   event,
-  linkEvent,
+  linkEvent = true,
   includeJsonLD = true,
 }) => {
   const { id, summary, location, description, startTime, endTime, allDay } =
@@ -51,7 +51,7 @@ const eventCard: React.FC<EventCardProps> = ({
           {summary}
         </h5>
       </Link>
-      <JsonLD data={jsonLd} />
+      {includeJsonLD && <JsonLD data={jsonLd} />}
       <p className="mb-2 leading-tight text-neutral-800 dark:text-neutral-50">
         <b>Time: </b>
         <DateTimeWithDST
@@ -69,10 +69,12 @@ const eventCard: React.FC<EventCardProps> = ({
           </p>
         </Link>
       )}
-      <div
-        className="mb-4 text-base text-neutral-600 break-words dark:text-neutral-200"
-        dangerouslySetInnerHTML={{ __html: event.getMarkupDescription() }}
-      />
+      {description && (
+        <div
+          className="mb-4 text-base text-neutral-600 break-words dark:text-neutral-200"
+          dangerouslySetInnerHTML={{ __html: event.getMarkupDescription() }}
+        />
+      )}
       <div className="flex flex-wrap gap-4">
         {linkEvent && (
           <OpenLinkInNewWindowButton url={eventPath} text="View Details" />

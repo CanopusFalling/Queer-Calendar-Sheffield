@@ -33,15 +33,10 @@ const DateTimeWithDST: React.FC<DateTimeWithDSTProps> = ({
 
     if (isFullDayEvent) {
       formattedStart = startDate.tz(timezone).format("Do MMMM YYYY");
-      formattedEnd = endDate.tz(timezone).format("Do MMMM YYYY");
-    }
-
-    if (!isSameDay && !isFullDayEvent) {
-      formattedEnd = endDate.tz(timezone).format("Do MMMM YYYY HH:mm");
-    }
-
-    if (isSameDay && isFullDayEvent) {
       setFormattedDateTime(formattedStart);
+    } else if (!isSameDay) {
+      formattedEnd = endDate.tz(timezone).format("Do MMMM YYYY HH:mm");
+      setFormattedDateTime(`${formattedStart} - ${formattedEnd}`);
     } else {
       setFormattedDateTime(`${formattedStart} - ${formattedEnd}`);
     }
