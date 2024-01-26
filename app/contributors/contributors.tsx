@@ -16,7 +16,7 @@ const Contributors: React.FC = () => {
           <div
             key={index}
             id={`contributor-${index}`}
-            className="mb-12 p-4 bg-white dark:bg-neutral-700 rounded-xl"
+            className=" p-4 bg-white dark:bg-neutral-700 rounded-xl"
           >
             {contributor.avatarUrl ? (
               <img
