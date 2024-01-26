@@ -5,6 +5,7 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./mdx-components.tsx",
+    "./node_modules/tw-elements-react/dist/js/**/*.js",
   ],
   theme: {
     extend: {
@@ -13,5 +14,6 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  darkMode: "media",
+  plugins: [require("tw-elements-react/dist/plugin.cjs")],
 };
