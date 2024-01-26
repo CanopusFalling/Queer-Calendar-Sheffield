@@ -1,0 +1,46 @@
+<main className="max-w-screen-md mx-auto my-4 p-8 rounded-xl bg-white dark:bg-inherit">
+
+import Form from "../components/forms/form";
+import HandleEventSubmission from "./handleEventSubmission";
+
+# Add An Event
+
+Complete the form below to add an event to the calendar. Your event will
+be reviewed by our volenteers and you will recieve an email when it is
+live.
+
+<Form
+  inputFields={[
+    {
+      name: "eventName",
+      label: "Event Name",
+      type: "text",
+      required: true,
+      placeholder: "Enter the event name",
+    },
+    {
+      name: "eventDate",
+      label: "Event Date",
+      type: "text",
+      required: true,
+      placeholder: "Enter the event date",
+    },
+    {
+      name: "eventDescription",
+      label: "Event Description",
+      type: "textarea",
+      required: true,
+      placeholder: "Enter a brief description of the event",
+    },
+    {
+      name: "contactEmail",
+      label: "Contact Email",
+      type: "email",
+      required: true,
+      placeholder: "Enter your contact email",
+    },
+  ]}
+  submitAction={HandleEventSubmission}
+/>
+
+</main>
