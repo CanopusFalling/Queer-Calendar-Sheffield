@@ -3,6 +3,7 @@
 import React from "react";
 import { InputProps } from "tw-elements-react/dist/types/forms/Input/types";
 import { TEInput, TERipple } from "tw-elements-react";
+import DateTimePicker from "./datetimePicker";
 
 interface FormProps {
   inputFields: React.FC<InputProps>[];
@@ -15,9 +16,13 @@ const Form: React.FC<FormProps> = ({ inputFields, submitAction }) => {
       action={submitAction}
       className="flex flex-col gap-2 rounded-lg bg-white p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700"
     >
-      {inputFields.map((field, key) => (
-        <TEInput {...field} key={key} />
-      ))}
+      {inputFields.map((field, key) =>
+        (field as InputProps).type === "datetime-local" ? (
+          <DateTimePicker {...field} key={key} />
+        ) : (
+          <TEInput {...field} key={key} />
+        ),
+      )}
 
       <TERipple rippleColor="light">
         <button
