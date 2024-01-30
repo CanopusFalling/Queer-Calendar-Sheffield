@@ -9,6 +9,7 @@ import FormConfirmation from "@/emails/FormConfirmation";
 import { render as reactEmailRender } from "@react-email/render";
 
 export default async function HandleEventSubmission(formData: FormData) {
+  console.log(formData);
   console.log(formDataToHTML(formData));
 
   if (zepto_token && zepto_url && event_submission_email) {
@@ -21,7 +22,7 @@ export default async function HandleEventSubmission(formData: FormData) {
 }
 
 function formDataToHTML(formData: FormData): string {
-  return reactEmailRender(FormConfirmation());
+  return reactEmailRender(FormConfirmation(formData, "Add An Event"));
 }
 
 async function MailEventInfo(formData: FormData) {
