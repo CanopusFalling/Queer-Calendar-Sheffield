@@ -5,6 +5,9 @@ const zepto_token = process.env.ZEPTO_MAIL_TOKEN;
 
 const event_submission_email = process.env.EVENT_FORM_EMAIL;
 
+import FormConfirmation from "@/emails/FormConfirmation";
+import { render as reactEmailRender } from "@react-email/render";
+
 export default async function HandleEventSubmission(formData: FormData) {
   console.log(formDataToHTML(formData));
 
@@ -18,13 +21,7 @@ export default async function HandleEventSubmission(formData: FormData) {
 }
 
 function formDataToHTML(formData: FormData): string {
-  let htmlString = "<div><b>Form Data:</b></div><br>";
-
-  for (const [name, value] of formData.entries()) {
-    htmlString += `<div><b>${name}:</b> ${value}</div>`;
-  }
-
-  return htmlString;
+  return reactEmailRender(FormConfirmation());
 }
 
 async function MailEventInfo(formData: FormData) {
