@@ -6,7 +6,6 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./mdx-components.tsx",
     "./node_modules/tw-elements-react/dist/js/**/*.js",
-    "./emails/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
