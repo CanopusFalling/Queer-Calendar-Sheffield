@@ -1,5 +1,6 @@
 "use server";
 
+import Image from "next/image";
 import React from "react";
 
 interface ConfirmationEmailProps {
@@ -10,7 +11,7 @@ const ConfirmationEmail: React.FC<ConfirmationEmailProps> = ({ formData }) => {
   return (
     <div className="bg-black text-white p-8">
       <div className="mb-8">
-        <img
+        <Image
           src="https://queercalendarsheffield.co.uk/open-graph-banner.webp"
           alt="Banner Logo"
           className="mx-auto"
@@ -22,8 +23,8 @@ const ConfirmationEmail: React.FC<ConfirmationEmailProps> = ({ formData }) => {
           Event Submission Confirmation
         </h1>
         <p>
-          Thank you for submitting the event! We'll be in touch when your event
-          is up!
+          Thank you for submitting the event! We will be in touch when your
+          event is up!
         </p>
         <p>You can view the details of the event you submitted below:</p>
         <ul className="list-disc ml-5 mt-4">
