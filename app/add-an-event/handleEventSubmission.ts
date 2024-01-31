@@ -11,7 +11,7 @@ const zepto_token = process.env.ZEPTO_MAIL_TOKEN;
 const event_submission_email = process.env.EVENT_FORM_EMAIL;
 
 export default async function HandleEventSubmission(formData: FormData) {
-  console.log(formDataToHTML(formData));
+  console.log(await formDataToHTML(formData));
 
   if (zepto_token && zepto_url && event_submission_email) {
     await MailEventInfo(formData);
@@ -22,14 +22,34 @@ export default async function HandleEventSubmission(formData: FormData) {
   }
 }
 
-function formDataToHTML(formData: FormData): string {
-  return ReactDOMServer.renderToString(
+export async function renderToString(
+  element: React.ReactElement<any, string | React.JSXElementConstructor<any>>,
+): Promise<string> {
+  const { renderToReadableStream } = await import("react-dom/server");
+
+  const stream = await renderToReadableStream(element);
+  const textStream = stream.pipeThrough(new TextDecoderStream());
+  const reader = textStream.getReader();
+
+  let result = "";
+  while (true) {
+    const { value, done } = await reader.read();
+    if (done) break;
+    result += value;
+  }
+  return result;
+}
+
+async function formDataToHTML(formData: FormData): Promise<string> {
+  return await renderToString(
     React.createElement(ConfirmationEmail, { formData }),
   );
 }
 
 async function MailEventInfo(formData: FormData) {
-  const apiUrl = `https://${zepto_url}/v1.1/email`; // Adjust the URL according to your API
+  const apiUrl = `https://${zepto_url}/v1.1/email`;
+
+  const emailBody = await formDataToHTML(formData);
 
   const requestBody = {
     from: {
@@ -39,13 +59,13 @@ async function MailEventInfo(formData: FormData) {
     to: [
       {
         email_address: {
-          address: "contact@queercalendarsheffield.co.uk",
+          address: event_submission_email,
           name: "Queer Calendar Sheffield",
         },
       },
     ],
     subject: "Event Form Submitted",
-    htmlbody: formDataToHTML(formData),
+    htmlbody: emailBody,
   };
 
   const headers: Record<string, string> = {
