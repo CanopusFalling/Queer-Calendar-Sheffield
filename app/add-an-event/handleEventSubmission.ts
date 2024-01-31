@@ -1,5 +1,10 @@
 "use server";
 
+import React from "react";
+import ConfirmationEmail from "./confirmationEmail";
+
+const ReactDOMServer = require("react-dom/server"); //Hacky workaround.
+
 const zepto_url = process.env.ZEPTO_MAIL_URL;
 const zepto_token = process.env.ZEPTO_MAIL_TOKEN;
 
@@ -18,13 +23,9 @@ export default async function HandleEventSubmission(formData: FormData) {
 }
 
 function formDataToHTML(formData: FormData): string {
-  let htmlString = "<div><b>Form Data:</b></div><br>";
-
-  for (const [name, value] of formData.entries()) {
-    htmlString += `<div><b>${name}:</b> ${value}</div>`;
-  }
-
-  return htmlString;
+  return ReactDOMServer.renderToString(
+    React.createElement(ConfirmationEmail, { formData }),
+  );
 }
 
 async function MailEventInfo(formData: FormData) {
