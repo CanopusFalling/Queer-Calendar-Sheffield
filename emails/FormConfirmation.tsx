@@ -26,7 +26,8 @@ export default function FormConfirmation(formData: FormData, formName: string) {
           <ul className="list-disc pl-6 mb-4">
             {[...formData.entries()].map(([name, value]) => (
               <li key={name} className="mb-2">
-                <strong className="text-brand">{name}:</strong> {value}
+                <strong className="text-brand">{name}:</strong>{" "}
+                {value.toString()}
               </li>
             ))}
           </ul>
