@@ -1,6 +1,5 @@
 "use server";
 
-import Image from "next/image";
 import React from "react";
 
 interface ConfirmationEmailProps {
@@ -11,7 +10,7 @@ const ConfirmationEmail: React.FC<ConfirmationEmailProps> = ({ formData }) => {
   return (
     <div className="bg-black text-white p-8">
       <div className="mb-8">
-        <Image
+        <img
           src="https://queercalendarsheffield.co.uk/open-graph-banner.webp"
           alt="Banner Logo"
           className="mx-auto"
