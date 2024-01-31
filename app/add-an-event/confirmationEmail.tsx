@@ -27,11 +27,16 @@ const ConfirmationEmail: React.FC<ConfirmationEmailProps> = ({ formData }) => {
         </p>
         <p>You can view the details of the event you submitted below:</p>
         <ul className="list-disc ml-5 mt-4">
-          {[...formData.entries()].map(([name, value]) => (
-            <li key={name} className="mb-2">
-              <strong className="text-brand">{name}:</strong> {value.toString()}
-            </li>
-          ))}
+          {[...formData.entries()].map(([name, value]) =>
+            value ? (
+              <li key={name} className="mb-2">
+                <strong className="text-brand">{name}:</strong>{" "}
+                {value.toString()}
+              </li>
+            ) : (
+              <></>
+            ),
+          )}
         </ul>
       </div>
 
