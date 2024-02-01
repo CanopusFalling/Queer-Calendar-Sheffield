@@ -2,8 +2,7 @@
 
 import React from "react";
 import ConfirmationEmail from "./confirmationEmail";
-
-const ReactDOMServer = require("react-dom/server"); //Hacky workaround.
+import renderToString from "react-render-to-string";
 
 const zepto_url = process.env.ZEPTO_MAIL_URL;
 const zepto_token = process.env.ZEPTO_MAIL_TOKEN;
@@ -22,28 +21,8 @@ export default async function HandleEventSubmission(formData: FormData) {
   }
 }
 
-export async function renderToString(
-  element: React.ReactElement<any, string | React.JSXElementConstructor<any>>,
-): Promise<string> {
-  const { renderToReadableStream } = await import("react-dom/server");
-
-  const stream = await renderToReadableStream(element);
-  const textStream = stream.pipeThrough(new TextDecoderStream());
-  const reader = textStream.getReader();
-
-  let result = "";
-  while (true) {
-    const { value, done } = await reader.read();
-    if (done) break;
-    result += value;
-  }
-  return result;
-}
-
 async function formDataToHTML(formData: FormData): Promise<string> {
-  return await renderToString(
-    React.createElement(ConfirmationEmail, { formData }),
-  );
+  return renderToString(React.createElement(ConfirmationEmail, { formData }));
 }
 
 async function MailEventInfo(formData: FormData) {
