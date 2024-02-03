@@ -2,7 +2,8 @@
 
 import React from "react";
 import ConfirmationEmail from "./confirmationEmail";
-import renderToString from "react-render-to-string";
+import { renderAsync } from "@react-email/render";
+import { MyTemplate } from "@/emails/index";
 
 const zepto_url = process.env.ZEPTO_MAIL_URL;
 const zepto_token = process.env.ZEPTO_MAIL_TOKEN;
@@ -22,7 +23,7 @@ export default async function HandleEventSubmission(formData: FormData) {
 }
 
 async function formDataToHTML(formData: FormData): Promise<string> {
-  return renderToString(React.createElement(ConfirmationEmail, { formData }));
+  return renderAsync(<MyTemplate />, { pretty: true });
 }
 
 async function MailEventInfo(formData: FormData) {

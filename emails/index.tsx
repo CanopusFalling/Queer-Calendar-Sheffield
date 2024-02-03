@@ -1,15 +1,17 @@
-import { Button, Html } from "@react-email/components";
 import * as React from "react";
+import { Button } from "@react-email/button";
+import { Hr } from "@react-email/hr";
+import { Html } from "@react-email/html";
+import { Text } from "@react-email/text";
 
-export default function Email() {
+export function MyTemplate() {
   return (
-    <Html>
-      <Button
-        href="https://example.com"
-        style={{ background: "#000", color: "#fff", padding: "12px 20px" }}
-      >
-        Click me
-      </Button>
+    <Html lang="en">
+      <Text>Some title</Text>
+      <Hr />
+      <Button href="https://example.com">Click me</Button>
     </Html>
   );
 }
+
+export default MyTemplate;
