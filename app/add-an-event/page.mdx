@@ -24,6 +24,60 @@ live.
     },
     {
       props: {
+        name: "Event Description",
+        label: "Event Description",
+        type: "textarea",
+        required: true,
+        placeholder: "Give Your Event Some Flavour",
+      },
+      description:
+        "1-3 paragraphs to really sell an event to someone, the title has hooked them, now tell people why your event is the best! Talk about the event organiser in the 3rd person (It feels super strange if you're the organiser writing it but I promise it's worth it). For instance write '[Organiser] invites you to...' instead of 'we invite you to...'",
+    },
+    {
+      props: {
+        name: "Event Accessibility",
+        label: "Event Accessibility",
+        type: "textarea",
+        required: false,
+        placeholder:
+          "Make Your Event Accessible By Telling People What Accessibility Measures Are In Place",
+      },
+      description:
+        "We Reccommend listing accessibility measures in bullet point format and providing an email contact for accessibility queries.",
+    },
+    {
+      props: {
+        name: "Organiser Name",
+        label: "Organiser Name",
+        type: "text",
+        required: false,
+        placeholder: "Organisation or Individual",
+      },
+      description: "",
+    },
+    {
+      props: {
+        name: "Organiser Contact",
+        label: "Organiser Contact",
+        type: "text",
+        required: true,
+        placeholder: "organiser@example.com",
+      },
+      description:
+        "At the moment we require that all events have an organiser's contact attatched to them. It can be anonymous, it can be an email or a social media, but it has to be a valid contact that will be published on the calendar.",
+    },
+    {
+      props: {
+        name: "Organiser Social Media",
+        label: "Organiser Social Media",
+        type: "textarea",
+        required: false,
+        placeholder: "Tell people where to find you!",
+      },
+      description: "",
+    },
+    {
+      props: {
         name: "Start Time",
         label: "Start Time",
         type: "datetime-local",
@@ -36,26 +90,37 @@ live.
         name: "End Time",
         label: "End Time",
         type: "datetime-local",
-        required: true,
+        required: false,
         placeholder: "-",
       },
     },
     {
       props: {
-        name: "eventDescription",
-        label: "Event Description",
-        type: "textarea",
+        name: "I Have Permission To Post This Event",
+        label: "I Have Permission To Post This Event",
+        type: "checkbox",
         required: true,
-        placeholder: "Enter a brief description of the event",
       },
+      description:
+        "By ticking this box you aknowledge that one of the following applies; you are the event organiser, you have permission from the event organiser or you are submittig details for an event that are already publicly availible.",
     },
     {
       props: {
-        name: "contactEmail",
+        name: "Contact Email",
         label: "Contact Email",
         type: "email",
         required: true,
         placeholder: "Enter your contact email",
+      },
+      description:
+        "This Email will NOT be published. This is the email we will contact you on, you will get both an initial confirmation email once you submit this form and a follow up when your event is live.",
+    },
+    {
+      props: {
+        name: "I Confirm This Is My Email And Agree To Be Contacted",
+        label: "I Confirm This Is My Email And Agree To Be Contacted",
+        type: "checkbox",
+        required: true,
       },
     },
   ]}
