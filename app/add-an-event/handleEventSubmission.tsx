@@ -3,7 +3,7 @@
 import React from "react";
 import ConfirmationEmail from "./confirmationEmail";
 import { renderAsync } from "@react-email/render";
-import { MyTemplate } from "@/emails/index";
+import { FormConfirmation } from "@/emails/FormConfirmation";
 
 const zepto_url = process.env.ZEPTO_MAIL_URL;
 const zepto_token = process.env.ZEPTO_MAIL_TOKEN;
@@ -23,7 +23,7 @@ export default async function HandleEventSubmission(formData: FormData) {
 }
 
 async function formDataToHTML(formData: FormData): Promise<string> {
-  return renderAsync(<MyTemplate />, { pretty: true });
+  return renderAsync(<FormConfirmation />, { pretty: true });
 }
 
 async function MailEventInfo(formData: FormData) {
