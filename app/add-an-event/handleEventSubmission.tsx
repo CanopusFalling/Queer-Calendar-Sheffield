@@ -33,6 +33,7 @@ async function formDataToHTML(formData: FormData): Promise<string> {
   return renderAsync(
     <FormConfirmation
       title="Event Confirmation"
+      preview="We have recieved your event and will let you know when it's live!"
       description="Thank you for submitting your event!"
       formData={formDataObject}
     />,
