@@ -1,7 +1,6 @@
 "use server";
 
 import React from "react";
-import ConfirmationEmail from "./confirmationEmail";
 import { renderAsync } from "@react-email/render";
 import { FormConfirmation } from "@/emails/FormConfirmation";
 
@@ -23,7 +22,24 @@ export default async function HandleEventSubmission(formData: FormData) {
 }
 
 async function formDataToHTML(formData: FormData): Promise<string> {
-  return renderAsync(<FormConfirmation />, { pretty: true });
+  const formDataObject: Record<string, any> = {};
+
+  formData.forEach((value, name) => {
+    formDataObject[name] = value;
+  });
+
+  console.log(formDataObject);
+
+  return renderAsync(
+    <FormConfirmation
+      title="Event Confirmation"
+      description="Thank you for submitting your event!"
+      formData={formDataObject}
+    />,
+    {
+      pretty: true,
+    },
+  );
 }
 
 async function MailEventInfo(formData: FormData) {
