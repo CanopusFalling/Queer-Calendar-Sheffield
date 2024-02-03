@@ -60,20 +60,22 @@ export function FormConfirmation({
             <Hr />
             <section>
               <Heading as="h2" className="text-xl m-0">
-                Event Details Submitted
+                Information Submitted
               </Heading>
-              <ul className="list-disc ml-5 mt-4">
+              <div className="my-4">
                 {Object.entries(formData).map(([key, value]) =>
                   value ? (
-                    <li key={key} className="mb-2">
-                      <strong className="text-brand">{key}:</strong>{" "}
-                      {value.toString()}
-                    </li>
+                    <div className="mb-4">
+                      <label className="block font-bold mb-1 ml-2">{key}</label>
+                      <div className="bg-neutral-800 border-solid border border-neutral-600 p-2 rounded-md">
+                        <span className="">{value}</span>
+                      </div>
+                    </div>
                   ) : (
                     <></>
                   ),
                 )}
-              </ul>
+              </div>
             </section>
             <Footer />
           </Container>
@@ -87,7 +89,7 @@ FormConfirmation.PreviewProps = {
   title: "Thank You For Submitting Your Event!",
   preview: "We have recieved your event and will let you know when it's live!",
   description:
-    "Success! Thank you for taking the time to tell us about your event. Our team of volenteers will work on getting your event live for you as fast as possible! This may take up to two weeks at the moment, we are usually faster and try to prioritise events happening soon but can't always get them up in time. In the meantime if you have any updates to this event or extra details, just reply to this email and we'll pick it up when we can. \n You will get a confirmation email when your event is live.",
+    "Thank you for taking the time to tell us about your event. Our team of volenteers will work on getting your event live for you as fast as possible! This may take up to two weeks at the moment, we are usually faster and try to prioritise events happening soon but can't always get them up in time. In the meantime if you have any updates to this event or extra details, just reply to this email and we'll pick it up when we can. You will get a confirmation email when your event is live.",
   formData: {
     Title: "Bouldering @ Climbing Hangar",
     Description: "Come Join us climbing the wall at The Climbing Hangar",
