@@ -2,11 +2,11 @@
 
 import React from "react";
 import { InputProps } from "tw-elements-react/dist/types/forms/Input/types";
-import { TEInput, TERipple } from "tw-elements-react";
+import { TEInput, TERipple, TETextarea } from "tw-elements-react";
 import DateTimePicker from "./datetimePicker";
 
 interface FormProps {
-  inputFields: React.FC<InputProps>[];
+  inputFields: { props: React.FC<InputProps>; description?: string }[];
   submitAction: (formData: FormData) => void;
 }
 
@@ -16,13 +16,21 @@ const Form: React.FC<FormProps> = ({ inputFields, submitAction }) => {
       action={submitAction}
       className="flex flex-col gap-2 rounded-lg bg-white p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700"
     >
-      {inputFields.map((field, key) =>
-        (field as InputProps).type === "datetime-local" ? (
-          <DateTimePicker {...field} key={key} />
-        ) : (
-          <TEInput {...field} key={key} />
-        ),
-      )}
+      {inputFields.map((field, key) => (
+        <div key={key}>
+          {(field.props as InputProps).type === "datetime-local" ? (
+            <DateTimePicker {...(field.props as InputProps)} />
+          ) : (field.props as InputProps).type === "textarea" ? (
+            <TETextarea {...(field.props as any)} />
+          ) : (
+            <TEInput {...(field.props as InputProps)} />
+          )}
+
+          {field.description && (
+            <div className="italic text-sm px-2">{field.description}</div>
+          )}
+        </div>
+      ))}
 
       <TERipple rippleColor="light">
         <button

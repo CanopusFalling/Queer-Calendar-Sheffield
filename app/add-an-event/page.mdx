@@ -12,32 +12,51 @@ live.
 <Form
   inputFields={[
     {
-      name: "eventName",
-      label: "Event Name",
-      type: "text",
-      required: true,
-      placeholder: "Enter the event name",
+      props: {
+        name: "Event Title",
+        label: "Event Title",
+        type: "text",
+        required: true,
+        placeholder: "Title Your Event",
+      },
+      description:
+        "Titles should be unique to your event and be as descriptive as possible ideally in under 130 characters. Do not include other information like date or location in this section.",
     },
     {
-      name: "eventDate",
-      label: "Event Date",
-      type: "datetime-local",
-      required: true,
-      placeholder: "-",
+      props: {
+        name: "Start Time",
+        label: "Start Time",
+        type: "datetime-local",
+        required: true,
+        placeholder: "-",
+      },
     },
     {
-      name: "eventDescription",
-      label: "Event Description",
-      type: "textarea",
-      required: true,
-      placeholder: "Enter a brief description of the event",
+      props: {
+        name: "End Time",
+        label: "End Time",
+        type: "datetime-local",
+        required: true,
+        placeholder: "-",
+      },
     },
     {
-      name: "contactEmail",
-      label: "Contact Email",
-      type: "email",
-      required: true,
-      placeholder: "Enter your contact email",
+      props: {
+        name: "eventDescription",
+        label: "Event Description",
+        type: "textarea",
+        required: true,
+        placeholder: "Enter a brief description of the event",
+      },
+    },
+    {
+      props: {
+        name: "contactEmail",
+        label: "Contact Email",
+        type: "email",
+        required: true,
+        placeholder: "Enter your contact email",
+      },
     },
   ]}
   submitAction={HandleEventSubmission}

@@ -30,17 +30,18 @@ async function formDataToHTML(formData: FormData): Promise<string> {
 
   console.log(formDataObject);
 
-  return renderAsync(
-    <FormConfirmation
-      title="Event Confirmation"
-      preview="We have recieved your event and will let you know when it's live!"
-      description="Thank you for submitting your event!"
-      formData={formDataObject}
-    />,
-    {
-      pretty: true,
-    },
-  );
+  const formProps = {
+    title: "Thank You For Submitting Your Event!",
+    preview:
+      "We have recieved your event and will let you know when it's live!",
+    description:
+      "Thank you for taking the time to tell us about your event. Our team of volenteers will work on getting your event live for you as fast as possible! This may take up to two weeks at the moment, we are usually faster and try to prioritise events happening soon but can't always get them up in time. In the meantime if you have any updates to this event or extra details, just reply to this email and we'll pick it up when we can. You will get a confirmation email when your event is live.",
+    formData: formDataObject,
+  };
+
+  return renderAsync(<FormConfirmation {...formProps} />, {
+    pretty: true,
+  });
 }
 
 async function MailEventInfo(formData: FormData) {
