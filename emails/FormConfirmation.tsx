@@ -13,7 +13,7 @@ import {
   Preview,
 } from "@react-email/components";
 
-import { BsInstagram, BsFacebook, BsEnvelopeFill } from "react-icons/bs";
+import Footer from "./components/footer";
 
 interface FormConfirmationProps {
   title: string;
@@ -75,37 +75,7 @@ export function FormConfirmation({
                 )}
               </ul>
             </section>
-
-            <Hr />
-            <section className="flex flex-row justify-center gap-4 mt-4">
-              <Link
-                href="mailto:contact@queercalendarsheffield.co.uk"
-                className="w-8 h-8"
-              >
-                <BsEnvelopeFill
-                  title="Queer Calendar Sheffield on Instagram"
-                  className="w-8 h-8"
-                />
-              </Link>
-              <Link
-                href="https://www.instagram.com/queercalendarsheffield"
-                className="w-8 h-8"
-              >
-                <BsInstagram
-                  title="Queer Calendar Sheffield on Instagram"
-                  className="w-8 h-8"
-                />
-              </Link>
-              <Link
-                href="https://www.facebook.com/profile.php?id=61555239571680"
-                className="w-8 h-8"
-              >
-                <BsFacebook
-                  title="Queer Calendar Sheffield on Facebook"
-                  className="w-8 h-8"
-                />
-              </Link>
-            </section>
+            <Footer />
           </Container>
         </Body>
       </Tailwind>
@@ -116,7 +86,8 @@ export function FormConfirmation({
 FormConfirmation.PreviewProps = {
   title: "Thank You For Submitting Your Event!",
   preview: "We have recieved your event and will let you know when it's live!",
-  description: "Thank you for submitting your event!",
+  description:
+    "Success! Thank you for taking the time to tell us about your event. Our team of volenteers will work on getting your event live for you as fast as possible! This may take up to two weeks at the moment, we are usually faster and try to prioritise events happening soon but can't always get them up in time. In the meantime if you have any updates to this event or extra details, just reply to this email and we'll pick it up when we can. \n You will get a confirmation email when your event is live.",
   formData: {
     Title: "Bouldering @ Climbing Hangar",
     Description: "Come Join us climbing the wall at The Climbing Hangar",
