@@ -1,27 +1,18 @@
 "use server";
 
 import React from "react";
-import { renderAsync } from "@react-email/render";
 import { FormConfirmation } from "@/emails/FormConfirmation";
 
-const zepto_url = process.env.ZEPTO_MAIL_URL;
-const zepto_token = process.env.ZEPTO_MAIL_TOKEN;
+import { Resend } from "resend";
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-const event_submission_email = process.env.EVENT_FORM_EMAIL;
+const event_submission_email = process.env.EVENT_FORM_EMAIL as string;
 
 export default async function HandleEventSubmission(formData: FormData) {
-  console.log(await formDataToHTML(formData));
-
-  if (zepto_token && zepto_url && event_submission_email) {
-    const success = await MailEventInfo(formData);
-  } else {
-    console.log(
-      "No Transactional Mail Provider, or provided email, email not sent.",
-    );
-  }
+  console.log(MailEventInfo(formData));
 }
 
-async function formDataToHTML(formData: FormData): Promise<string> {
+async function MailEventInfo(formData: FormData): Promise<boolean> {
   const formDataObject: Record<string, any> = {};
 
   formData.forEach((value, name) => {
@@ -37,61 +28,70 @@ async function formDataToHTML(formData: FormData): Promise<string> {
     formData: formDataObject,
   };
 
-  return renderAsync(<FormConfirmation {...formProps} />, {
-    pretty: true,
-  });
-}
-
-async function MailEventInfo(formData: FormData): Promise<boolean> {
-  const apiUrl = `https://${zepto_url}/v1.1/email`;
-
-  const emailBody = await formDataToHTML(formData);
-
-  const requestBody = {
-    from: {
-      address: "events@queercalendarsheffield.co.uk",
-      name: "Queer Calendar Sheffield - Events",
-    },
+  const state = await resend.emails.send({
+    from: "event@notifications.queercalendarsheffield.co.uk",
     to: [
-      {
-        email_address: {
-          address: event_submission_email,
-          name: "Queer Calendar Sheffield",
-        },
-      },
-      {
-        email_address: {
-          address: formData.get("Contact Email")?.toString(),
-        },
-      },
+      event_submission_email,
+      formData.get("Contact Email")?.toString() as string,
     ],
-    reply_to: {
-      address: event_submission_email,
-      name: "Queer Calendar Sheffield",
-    },
-    track_clicks: "False",
-    track_opens: "False",
-    subject: "Event Form Submitted",
-    htmlbody: emailBody,
-  };
-
-  const headers: Record<string, string> = {
-    Accept: "application/json",
-    "Content-Type": "application/json",
-    Authorization: zepto_token as string,
-  };
-
-  const response = await fetch(apiUrl, {
-    method: "POST",
-    headers: headers,
-    body: JSON.stringify(requestBody),
+    subject: "Thank You For Your Event!",
+    react: <FormConfirmation {...formProps} />,
   });
 
-  if (response.ok) {
-    const responseData = await response.json();
-    return true;
-  } else {
-    console.error("Failed to send email:", response.statusText);
-    return false;
-  }
+  console.log(state);
+  return state.error !== null;
 }
+
+// async function MailEventInfo(formData: FormData): Promise<boolean> {
+//   const apiUrl = `https://${zepto_url}/v1.1/email`;
+
+//   const emailBody = await formDataToHTML(formData);
+
+//   const requestBody = {
+//     from: {
+//       address: "events@queercalendarsheffield.co.uk",
+//       name: "Queer Calendar Sheffield - Events",
+//     },
+//     to: [
+//       {
+//         email_address: {
+//           address: event_submission_email,
+//           name: "Queer Calendar Sheffield",
+//         },
+//       },
+//       {
+//         email_address: {
+//           address: formData.get("Contact Email")?.toString(),
+//         },
+//       },
+//     ],
+//     reply_to: {
+//       address: event_submission_email,
+//       name: "Queer Calendar Sheffield",
+//     },
+//     track_clicks: "False",
+//     track_opens: "False",
+//     subject: "Event Form Submitted",
+//     htmlbody: emailBody,
+//   };
+
+//   const headers: Record<string, string> = {
+//     Accept: "application/json",
+//     "Content-Type": "application/json",
+//     Authorization: zepto_token as string,
+//   };
+
+//   const response = await fetch(apiUrl, {
+//     method: "POST",
+//     headers: headers,
+//     body: JSON.stringify(requestBody),
+//   });
+
+//   if (response.ok) {
+//     const responseData = await response.json();
+//     return true;
+//   } else {
+//     console.error("Failed to send email:", response.statusText);
+//     return false;
+//   }
+// }
