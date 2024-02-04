@@ -13,7 +13,7 @@ export default async function HandleEventSubmission(formData: FormData) {
   console.log(await formDataToHTML(formData));
 
   if (zepto_token && zepto_url && event_submission_email) {
-    await MailEventInfo(formData);
+    const success = await MailEventInfo(formData);
   } else {
     console.log(
       "No Transactional Mail Provider, or provided email, email not sent.",
@@ -27,8 +27,6 @@ async function formDataToHTML(formData: FormData): Promise<string> {
   formData.forEach((value, name) => {
     formDataObject[name] = value;
   });
-
-  console.log(formDataObject);
 
   const formProps = {
     title: "Thank You For Submitting Your Event!",
@@ -44,15 +42,15 @@ async function formDataToHTML(formData: FormData): Promise<string> {
   });
 }
 
-async function MailEventInfo(formData: FormData) {
+async function MailEventInfo(formData: FormData): Promise<boolean> {
   const apiUrl = `https://${zepto_url}/v1.1/email`;
 
   const emailBody = await formDataToHTML(formData);
 
   const requestBody = {
     from: {
-      address: "noreply@queercalendarsheffield.co.uk",
-      name: "noreply",
+      address: "events@queercalendarsheffield.co.uk",
+      name: "Queer Calendar Sheffield - Events",
     },
     to: [
       {
@@ -61,7 +59,18 @@ async function MailEventInfo(formData: FormData) {
           name: "Queer Calendar Sheffield",
         },
       },
+      {
+        email_address: {
+          address: formData.get("Contact Email")?.toString(),
+        },
+      },
     ],
+    reply_to: {
+      address: event_submission_email,
+      name: "Queer Calendar Sheffield",
+    },
+    track_clicks: "False",
+    track_opens: "False",
     subject: "Event Form Submitted",
     htmlbody: emailBody,
   };
@@ -80,8 +89,9 @@ async function MailEventInfo(formData: FormData) {
 
   if (response.ok) {
     const responseData = await response.json();
-    console.log("Email sent successfully:", responseData);
+    return true;
   } else {
     console.error("Failed to send email:", response.statusText);
+    return false;
   }
 }
