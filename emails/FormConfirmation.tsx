@@ -1,6 +1,6 @@
 import * as React from "react";
 import {
-  Tailwind,
+  // Tailwind,
   Html,
   Head,
   Container,
@@ -30,7 +30,7 @@ export function FormConfirmation({
 }: FormConfirmationProps) {
   return (
     <Html lang="en-GB" dir="ltr">
-      <Tailwind
+      {/* <Tailwind
         config={{
           theme: {
             extend: {
@@ -40,47 +40,47 @@ export function FormConfirmation({
             },
           },
         }}
-      >
-        <Body className="bg-neutral-800 font-sans">
-          <Head>
-            <title>{title}</title>
-          </Head>
-          <Preview>{preview}</Preview>
-          <Container className="max-w-screen-md bg-black rounded-xl p-10 text-white">
-            <Img
-              src="https://queercalendarsheffield.co.uk/icon/128.webp"
-              alt="Queer Calendar Sheffield Logo"
-              className="h-20 mx-auto mb-6"
-            />
-            <Heading as="h1" className="text-xxl m-0 mb-4 text-center">
-              {title}
+      > */}
+      <Body className="bg-neutral-800 font-sans">
+        <Head>
+          <title>{title}</title>
+        </Head>
+        <Preview>{preview}</Preview>
+        <Container className="max-w-screen-md bg-black rounded-xl p-10 text-white">
+          <Img
+            src="https://queercalendarsheffield.co.uk/icon/128.webp"
+            alt="Queer Calendar Sheffield Logo"
+            className="h-20 mx-auto mb-6"
+          />
+          <Heading as="h1" className="text-xxl m-0 mb-4 text-center">
+            {title}
+          </Heading>
+          <Hr />
+          <Text>{description}</Text>
+          <Hr />
+          <section>
+            <Heading as="h2" className="text-xl m-0">
+              Information Submitted
             </Heading>
-            <Hr />
-            <Text>{description}</Text>
-            <Hr />
-            <section>
-              <Heading as="h2" className="text-xl m-0">
-                Information Submitted
-              </Heading>
-              <div className="my-4">
-                {Object.entries(formData).map(([key, value]) =>
-                  value ? (
-                    <div className="mb-4">
-                      <label className="block font-bold mb-1 ml-2">{key}</label>
-                      <div className="bg-neutral-800 border-solid border border-neutral-600 p-2 rounded-md">
-                        <span className="">{value}</span>
-                      </div>
+            <div className="my-4">
+              {Object.entries(formData).map(([key, value]) =>
+                value ? (
+                  <div className="mb-4">
+                    <label className="block font-bold mb-1 ml-2">{key}</label>
+                    <div className="bg-neutral-800 border-solid border border-neutral-600 p-2 rounded-md">
+                      <span className="">{value}</span>
                     </div>
-                  ) : (
-                    <></>
-                  ),
-                )}
-              </div>
-            </section>
-            <Footer />
-          </Container>
-        </Body>
-      </Tailwind>
+                  </div>
+                ) : (
+                  <></>
+                ),
+              )}
+            </div>
+          </section>
+          <Footer />
+        </Container>
+      </Body>
+      {/* </Tailwind> */}
     </Html>
   );
 }
