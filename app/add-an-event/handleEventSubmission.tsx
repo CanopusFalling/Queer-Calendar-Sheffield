@@ -4,15 +4,27 @@ import React from "react";
 import { FormConfirmation } from "@/emails/FormConfirmation";
 
 import { Resend } from "resend";
-const resend = new Resend(process.env.RESEND_API_KEY);
 
-const event_submission_email = process.env.EVENT_FORM_EMAIL as string;
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
+
+const EVENT_FORM_EMAIL = process.env.EVENT_FORM_EMAIL;
 
 export default async function HandleEventSubmission(formData: FormData) {
-  console.log(MailEventInfo(formData));
+  console.log(await MailEventInfo(formData));
 }
 
 async function MailEventInfo(formData: FormData): Promise<boolean> {
+  if (RESEND_API_KEY == undefined) {
+    console.log("Missing Resend API Key");
+    return false;
+  }
+
+  if (EVENT_FORM_EMAIL == undefined) {
+    console.log("Missing Event Form Email");
+    return false;
+  }
+
+  const resend = new Resend(RESEND_API_KEY);
   const formDataObject: Record<string, any> = {};
 
   formData.forEach((value, name) => {
@@ -28,18 +40,22 @@ async function MailEventInfo(formData: FormData): Promise<boolean> {
     formData: formDataObject,
   };
 
+  let sendTo: string[] = [
+    formData.get("Contact Email")?.toString() as string,
+    EVENT_FORM_EMAIL,
+  ];
+
+  console.log(sendTo);
+
   const state = await resend.emails.send({
     from: "event@notifications.queercalendarsheffield.co.uk",
-    to: [
-      event_submission_email,
-      formData.get("Contact Email")?.toString() as string,
-    ],
+    to: sendTo,
     subject: "Thank You For Your Event!",
     react: <FormConfirmation {...formProps} />,
   });
 
   console.log(state);
-  return state.error !== null;
+  return state.error == null;
 }
 
 // async function MailEventInfo(formData: FormData): Promise<boolean> {
