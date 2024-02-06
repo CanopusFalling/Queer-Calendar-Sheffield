@@ -4,6 +4,7 @@ import React from "react";
 import { FormConfirmation } from "@/emails/FormConfirmation";
 
 import { Resend } from "resend";
+import { redirect } from "next/navigation";
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 
@@ -16,6 +17,7 @@ export default async function HandleEventSubmission(
   const eventSubmitted = await MailEventInfo(formData);
 
   if (eventSubmitted) {
+    redirect("/add-an-event?success=true");
     return {
       message:
         "Event Successfully Submitted! You Should Recieve A Confirmation Email Soon, Remember To Check Your Spam.",
@@ -60,6 +62,8 @@ async function MailEventInfo(formData: FormData): Promise<boolean> {
     formData.get("Contact Email")?.toString() as string,
     EVENT_FORM_EMAIL,
   ];
+
+  return true;
 
   const state = await resend.emails.send({
     from: "event@notifications.queercalendarsheffield.co.uk",

@@ -8,9 +8,9 @@ import Checkbox from "./checkbox";
 // @ts-expect-error
 import { useFormState } from "react-dom";
 
-interface FormProps {
-  inputFields: { props: React.FC<InputProps>; description?: string }[];
-  submitAction: (formData: FormData) => void;
+export interface FormProps {
+  inputFields: { props: { [key: string]: any }; description?: string }[];
+  submitAction: (currentState: React.FormEvent, formData: FormData) => void;
 }
 
 const initialState = {
