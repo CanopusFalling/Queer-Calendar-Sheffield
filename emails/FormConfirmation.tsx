@@ -29,28 +29,19 @@ export function FormConfirmation({
 }: FormConfirmationProps) {
   return (
     <Html lang="en-GB" dir="ltr">
-      <style>
-        {`body, table, td, a {
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        }
-
-        body {
-          font-family: 'Open Sans', sans-serif;
-        }`}
-      </style>
-      <Body className="bg-neutral-800 font-sans">
+      <style>{TEMP_TAILWIND_STYLES}</style>
+      <Body className="bg-neutral-800 font-sans text-white">
         <Head>
           <title>{title}</title>
         </Head>
         <Preview>{preview}</Preview>
-        <Container className="max-w-screen-md bg-black rounded-xl p-10 text-white">
+        <Container className="max-w-screen-md bg-black rounded-xl p-10">
           <Img
             src="https://queercalendarsheffield.co.uk/icon/128.webp"
             alt="Queer Calendar Sheffield Logo"
             className="h-20 mx-auto mb-6"
           />
-          <Heading as="h1" className="text-xxl m-0 mb-4 text-center">
+          <Heading as="h1" className="text-3xl m-0 mb-4 text-center">
             {title}
           </Heading>
           <Hr />
@@ -81,6 +72,116 @@ export function FormConfirmation({
     </Html>
   );
 }
+
+const TEMP_TAILWIND_STYLES = `
+.bg-neutral-800 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(38 38 38 / var(--tw-bg-opacity));
+}
+
+.font-sans {
+  font-family: Roboto, sans-serif;
+}
+
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.max-w-screen-md {
+  max-width: 768px;
+}
+
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}
+
+.rounded-xl {
+  border-radius: 0.75rem/* 12px */;
+}
+
+.p-10 {
+  padding: 2.5rem/* 40px */;
+}
+
+.h-20 {
+  height: 5rem/* 80px */;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mb-6 {
+  margin-bottom: 1.5rem/* 24px */;
+}
+
+.text-2xl {
+  font-size: 1.5rem/* 24px */;
+  line-height: 2rem/* 32px */;
+}
+
+.text-3xl {
+  font-size: 1.875rem/* 30px */;
+  line-height: 2.25rem/* 36px */;
+}
+
+.m-0 {
+  margin: 0px;
+}
+
+.mb-4 {
+  margin-bottom: 1rem/* 16px */;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-xl {
+  font-size: 1.25rem/* 20px */;
+  line-height: 1.75rem/* 28px */;
+}
+
+.my-4 {
+  margin-top: 1rem/* 16px */;
+  margin-bottom: 1rem/* 16px */;
+}
+
+.block {
+  display: block;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.mb-1 {
+  margin-bottom: 0.25rem/* 4px */;
+}
+
+.border-solid {
+  border-style: solid;
+}
+
+.border {
+  border-width: 1px;
+}
+
+.border-neutral-600 {
+  --tw-border-opacity: 1;
+  border-color: rgb(82 82 82 / var(--tw-border-opacity));
+}
+
+.p-2 {
+  padding: 0.5rem/* 8px */;
+}
+
+.rounded-md {
+  border-radius: 0.375rem/* 6px */;
+}`;
 
 FormConfirmation.PreviewProps = {
   title: "Thank You For Submitting Your Event!",

@@ -23,12 +23,13 @@ import {
 export default function Footer() {
   return (
     <footer>
+      <style>{TEMP_TAILWIND_STYLES}</style>
       <Hr />
       <div>
         <Text className="text-center">
           Queer Calendar Sheffield is a volenteer run project, if you'd like to
           get involved reach out at{" "}
-          <Link href="mailto:contact@queercalendarsheffield.co.uk">
+          <Link href="mailto:contact@queercalendarsheffield.co.uk?subject=I%27d%20Like%20To%20Get%20Involved%21">
             contact@queercalendarsheffield.co.uk
           </Link>
         </Text>
@@ -87,3 +88,40 @@ export default function Footer() {
     </footer>
   );
 }
+
+const TEMP_TAILWIND_STYLES = `
+.text-center {
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.gap-4 {
+  gap: 1rem/* 16px */;
+}
+
+.mt-4 {
+  margin-top: 1rem/* 16px */;
+}
+
+.w-8 {
+  width: 2rem/* 32px */;
+}
+
+.h-8 {
+  height: 2rem/* 32px */;
+}
+
+.italic {
+  font-style: italic;
+}`;
