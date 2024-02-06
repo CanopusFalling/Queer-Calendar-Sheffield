@@ -1,5 +1,3 @@
-"use client";
-
 import Form from "../components/forms/form";
 import HandleEventSubmission from "./handleEventSubmission";
 
@@ -120,7 +118,6 @@ export default function Page(params: {
   params: Record<string, any>;
   searchParams: Record<string, any>;
 }) {
-  console.log(params.searchParams);
   return (
     <main className="max-w-screen-md mx-auto my-4 p-8 rounded-xl bg-white dark:bg-inherit">
       <h1 className="text-4xl font-bold mb-4"> Add An Event </h1>
