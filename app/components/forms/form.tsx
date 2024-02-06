@@ -5,16 +5,25 @@ import { InputProps } from "tw-elements-react/dist/types/forms/Input/types";
 import { TEInput, TERipple, TETextarea } from "tw-elements-react";
 import DateTimePicker from "./datetimePicker";
 import Checkbox from "./checkbox";
+// @ts-expect-error
+import { useFormState } from "react-dom";
 
 interface FormProps {
   inputFields: { props: React.FC<InputProps>; description?: string }[];
   submitAction: (formData: FormData) => void;
 }
 
+const initialState = {
+  message: "",
+  success: null,
+};
+
 const Form: React.FC<FormProps> = ({ inputFields, submitAction }) => {
+  const [state, formAction] = useFormState(submitAction, initialState);
+
   return (
     <form
-      action={submitAction}
+      action={formAction}
       className="flex flex-col gap-2 rounded-lg bg-white p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-900"
     >
       {inputFields.map((field, key) => (
@@ -49,6 +58,19 @@ const Form: React.FC<FormProps> = ({ inputFields, submitAction }) => {
           Submit
         </button>
       </TERipple>
+
+      {state.success !== null && (
+        <div
+          className={"rounded-lg p-4 text-base ".concat(
+            state.success
+              ? "text-success-100 bg-success-800"
+              : "text-danger-100 bg-danger-800",
+          )}
+          role="alert"
+        >
+          {state?.message}
+        </div>
+      )}
     </form>
   );
 };

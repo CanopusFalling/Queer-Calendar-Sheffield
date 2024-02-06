@@ -9,8 +9,24 @@ const RESEND_API_KEY = process.env.RESEND_API_KEY;
 
 const EVENT_FORM_EMAIL = process.env.EVENT_FORM_EMAIL;
 
-export default async function HandleEventSubmission(formData: FormData) {
-  console.log(await MailEventInfo(formData));
+export default async function HandleEventSubmission(
+  currentState: React.FormEvent,
+  formData: FormData,
+) {
+  const eventSubmitted = await MailEventInfo(formData);
+
+  if (eventSubmitted) {
+    return {
+      message:
+        "Event Successfully Submitted! You Should Recieve A Confirmation Email Soon, Remember To Check Your Spam.",
+      success: true,
+    };
+  } else {
+    return {
+      message: `Failed To Submit Event! You Can Send Us Your Event At ${EVENT_FORM_EMAIL} Instead.`,
+      success: false,
+    };
+  }
 }
 
 async function MailEventInfo(formData: FormData): Promise<boolean> {
@@ -45,13 +61,12 @@ async function MailEventInfo(formData: FormData): Promise<boolean> {
     EVENT_FORM_EMAIL,
   ];
 
-  console.log(sendTo);
-
   const state = await resend.emails.send({
     from: "event@notifications.queercalendarsheffield.co.uk",
     to: sendTo,
     subject: "Thank You For Your Event!",
     react: <FormConfirmation {...formProps} />,
+    reply_to: EVENT_FORM_EMAIL,
   });
 
   console.log(state);
