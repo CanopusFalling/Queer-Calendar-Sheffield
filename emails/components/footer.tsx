@@ -1,7 +1,6 @@
 import React from "react";
 
 import {
-  Tailwind,
   Html,
   Head,
   Container,
@@ -23,7 +22,7 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="">
+    <footer>
       <Hr />
       <div>
         <Text className="text-center">
