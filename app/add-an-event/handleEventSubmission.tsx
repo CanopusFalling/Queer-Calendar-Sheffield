@@ -63,8 +63,6 @@ async function MailEventInfo(formData: FormData): Promise<boolean> {
     EVENT_FORM_EMAIL,
   ];
 
-  return true;
-
   const state = await resend.emails.send({
     from: "event@notifications.queercalendarsheffield.co.uk",
     to: sendTo,
