@@ -4,6 +4,7 @@ import HandleEventSubmission from "./handleEventSubmission";
 const formStructure = [
   {
     props: {
+      name: "Event Title",
       label: "Event Title",
       type: "text",
       required: true,
@@ -14,6 +15,7 @@ const formStructure = [
   },
   {
     props: {
+      name: "Event Description",
       label: "Event Description",
       type: "textarea",
       required: true,
@@ -24,6 +26,7 @@ const formStructure = [
   },
   {
     props: {
+      name: "Event Accessibility",
       label: "Event Accessibility",
       type: "textarea",
       required: false,
@@ -34,6 +37,7 @@ const formStructure = [
   },
   {
     props: {
+      name: "Organiser Name",
       label: "Organiser Name",
       type: "text",
       required: false,
@@ -43,6 +47,7 @@ const formStructure = [
   },
   {
     props: {
+      name: "Organiser Contact",
       label: "Organiser Contact",
       type: "text",
       required: true,
@@ -53,6 +58,7 @@ const formStructure = [
   },
   {
     props: {
+      name: "Organiser Social Media",
       label: "Organiser Social Media",
       type: "textarea",
       required: false,
@@ -62,6 +68,7 @@ const formStructure = [
   },
   {
     props: {
+      name: "Start Time",
       label: "Start Time",
       type: "datetime-local",
       required: true,
@@ -70,6 +77,7 @@ const formStructure = [
   },
   {
     props: {
+      name: "End Time",
       label: "End Time",
       type: "datetime-local",
       required: false,
@@ -78,6 +86,7 @@ const formStructure = [
   },
   {
     props: {
+      name: "I Have Permission To Post This Event",
       label: "I Have Permission To Post This Event",
       type: "checkbox",
       required: true,
@@ -87,6 +96,7 @@ const formStructure = [
   },
   {
     props: {
+      name: "Contact Name",
       label: "Contact Name",
       type: "text",
       required: false,
@@ -97,6 +107,7 @@ const formStructure = [
   },
   {
     props: {
+      name: "Contact Email",
       label: "Contact Email",
       type: "email",
       required: true,
@@ -107,6 +118,7 @@ const formStructure = [
   },
   {
     props: {
+      name: "I Confirm This Is My Email And Agree To Be Contacted",
       label: "I Confirm This Is My Email And Agree To Be Contacted",
       type: "checkbox",
       required: true,
