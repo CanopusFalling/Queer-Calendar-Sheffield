@@ -49,6 +49,7 @@ export async function getEvents(
   const res = await fetch(queryString);
 
   if (!res.ok) {
+    console.error("Error loading Google Calendar data", (await res.json()));
     throw new Error("Failed to fetch data");
   }
 
