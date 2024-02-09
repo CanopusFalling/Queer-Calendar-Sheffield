@@ -89,6 +89,20 @@ export default function manifest(): MetadataRoute.Manifest {
         purpose: "any",
       },
     ],
+    screenshots: [
+      {
+        src: "/img/screenshots/narrow.webp",
+        "type": "image/webp",
+        sizes: "675x952",
+        "form_factor": "narrow"
+      },
+      {
+        src: "/img/screenshots/wide.webp",
+        "type": "image/webp",
+        sizes: "800x451",
+        "form_factor": "wide"
+      }
+    ],
     shortcuts: [
       {
         name: "Events",
