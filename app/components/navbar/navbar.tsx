@@ -17,8 +17,8 @@ function Navbar() {
   }
 
   return (
-    <nav className="relative flex w-full flex-nowrap items-center justify-between bg-white py-2 hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-700 lg:flex-wrap lg:justify-start lg:py-4">
-      <div className="flex w-full flex-wrap items-center justify-between px-3">
+    <nav className="relative flex w-full flex-nowrap items-center justify-between bg-white hover:text-neutral-700 focus:text-neutral-700 dark:bg-black lg:flex-wrap lg:justify-start">
+      <div className="flex w-full flex-wrap items-center justify-between">
         <SiteLogo />
         <HamburgerButton onClick={handleToggleNav} />
         <AdaptiveLinks isNavOpen={isNavOpen} />
