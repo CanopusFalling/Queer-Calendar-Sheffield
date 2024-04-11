@@ -21,7 +21,7 @@ function AdaptiveLinks({ isNavOpen }: AdaptiveLinksProps) {
       } flex-col basis-[100%] p-2 lg:flex lg:flex-row lg:basis-auto lg:py-0 lg:pb-0.5`}
       data-te-collapse-item
     >
-      {isNavOpen && <hr />}
+      {isNavOpen && <hr className=" border-black dark:border-white" />}
       {navLinks.map((link, index) => (
         <NavLink key={index} label={link.label} href={link.href} />
       ))}
