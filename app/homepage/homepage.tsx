@@ -8,9 +8,10 @@ export default function Homepage() {
     <main className="flex flex-col">
       <Banner />
       <section className="my-4 mb-8 m-auto max-w-xl px-4">
-        <h2 className="mb-3 w-fit text-2xl font-bold bg-gradient-to-r text-transparent bg-clip-text from-green-300 via-blue-400 to-purple-500">
+        <h2 className="w-fit text-2xl font-bold bg-gradient-to-r text-transparent bg-clip-text from-green-300 via-blue-400 to-purple-500 brightness-50 dark:brightness-100">
           About
         </h2>
+        <hr className="mb-3 border-2 brightness-50 dark:brightness-100" />
         <p className="mb-2">
           Queer Calendar Sheffield is a volunteer-run project dedicated to
           connecting individuals with LGBTQ+ community events. Its primary
@@ -55,7 +56,7 @@ const GradientButton = ({
       href={href}
       className="flex bg-gradient-to-r from-green-300 via-blue-400 to-purple-500 mb-2 rounded-2xl"
     >
-      <div className="text-lg bg-white/[0.7] dark:bg-black/[0.7] hover:dark:bg-black/[0.5] transition-all text-center font-extrabold w-full py-2 px-4">
+      <div className="text-lg bg-white/[0.7] hover:bg-white/[0.3] dark:bg-black/[0.7] hover:dark:bg-black/[0.5] transition-all text-center font-extrabold w-full py-2 px-4">
         {children}
       </div>{" "}
     </Link>

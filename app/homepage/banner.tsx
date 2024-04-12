@@ -9,10 +9,10 @@ export default function Banner() {
         </div>
         <h1 className="text-4xl">Queer Calendar Sheffield</h1>
         <Link
-          className="flex w-fit mx-auto bg-black rounded-lg p-2 px-4 m-4 animate-pulse"
+          className="flex w-fit mx-auto bg-white dark:bg-black rounded-lg p-2 px-4 m-4 border-cyan-800 border-2 dark:border-0"
           href="/event"
         >
-          <span className="mx-auto w-fit text-2xl bg-gradient-to-br from-green-300 via-blue-400 to-purple-500 text-transparent bg-clip-text brightness-75 dark:brightness-100">
+          <span className="mx-auto w-fit text-2xl bg-gradient-to-br from-green-300 via-blue-400 to-purple-500 text-transparent bg-clip-text brightness-50 dark:brightness-100">
             View Events Now
           </span>
         </Link>
