@@ -21,7 +21,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     li: ({ children }) => <li className="mb-1">{children}</li>,
     p: ({ children }) => <p className="mb-4">{children}</p>,
     hr: ({ children }) => (
-      <hr className="mb-4 border-neutral-400 dark:border-neutral-600">
+      <hr className="mb-4 border-0 w-full h-px bg-gradient-to-r from-green-300 via-blue-400 to-purple-500 brightness-75 dark:brightness-100">
         {children}
       </hr>
     ),

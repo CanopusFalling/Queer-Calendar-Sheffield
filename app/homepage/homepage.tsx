@@ -8,10 +8,8 @@ export default function Homepage() {
     <main className="flex flex-col">
       <Banner />
       <section className="my-4 mb-8 m-auto max-w-xl px-4">
-        <h2 className="w-fit text-2xl font-bold bg-gradient-to-r text-transparent bg-clip-text from-green-300 via-blue-400 to-purple-500 brightness-50 dark:brightness-100">
-          About
-        </h2>
-        <hr className="mb-3 border-2 brightness-50 dark:brightness-100" />
+        <h2 className="mb-2 text-3xl font-bold bg-gradient-to-r">About QCS</h2>
+        <hr className="mb-3 border-0 w-full h-px bg-gradient-to-r from-green-300 via-blue-400 to-purple-500 brightness-75 dark:brightness-100" />
         <p className="mb-2">
           Queer Calendar Sheffield is a volunteer-run project dedicated to
           connecting individuals with LGBTQ+ community events. Its primary
@@ -22,7 +20,7 @@ export default function Homepage() {
           For this reason we place a high importance on the{" "}
           <Link
             href="/accessibility"
-            className=" font-bold text- text-blue-800 dark:text-blue-400 underline visited:text-purple-600 visited:dark:text-purple-400"
+            className="font-bold text- text-blue-800 dark:text-blue-400 underline visited:text-purple-600 visited:dark:text-purple-400"
           >
             accessibility
           </Link>{" "}
