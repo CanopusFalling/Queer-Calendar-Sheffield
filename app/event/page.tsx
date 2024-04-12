@@ -1,5 +1,9 @@
 import { redirect } from "next/navigation";
 
+import { getEvents } from "./getEvents";
+import EventList from "./eventList";
+import { GetEventsOptions } from "./getEvents";
+
 export default async function EventPage(req: any, res: any) {
   // Check if can be redirected to a specific event on the `event/[id]` path.
   const specificEvent =
@@ -9,6 +13,17 @@ export default async function EventPage(req: any, res: any) {
   if (specificEvent) {
     redirect(`event/${req.searchParams.eventId}`);
   } else {
-    redirect(`/`);
+    const currentDate = new Date();
+    const maxDate = new Date();
+    maxDate.setMonth(currentDate.getMonth() + 1);
+    const eventParams: GetEventsOptions = {
+      singleEvents: true,
+      timeMin: currentDate,
+      timeMax: maxDate,
+      orderBy: "startTime",
+    };
+    const events = await getEvents(eventParams);
+
+    return <EventList events={events} />;
   }
 }
