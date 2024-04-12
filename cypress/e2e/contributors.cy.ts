@@ -11,21 +11,10 @@ describe(`contributors`, () => {
     cy.get("main").contains("Project Contributors");
   });
 
-  it(`should show Rowan Garwood`, () => {
-    const details = [
-      "Rowan Garwood",
-      "They/Them",
-      "Calendar Organiser & Maintainer",
-    ];
-    details.forEach((detail) => {
-      cy.get("#contributor-0").contains(detail);
-    });
-  });
-
   it(`should show Sammy`, () => {
     const details = ["Sammy", "They/Them", "Website Developer & Maintainer"];
     details.forEach((detail) => {
-      cy.get("#contributor-1").contains(detail);
+      cy.get("#contributor-0").contains(detail);
     });
   });
 
