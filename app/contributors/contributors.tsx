@@ -10,13 +10,13 @@ import { GoGlobe } from "react-icons/go";
 
 const Contributors: React.FC = () => {
   return (
-    <div className="lg:gap-xl-12 grid gap-x-6 md:grid-cols-3 xl:grid-cols-4">
+    <div className="lg:gap-xl-12 grid gap-x-6 md:grid-cols-3">
       {(contributorsData as Contributor[]).map(
         (contributor: Contributor, index: number) => (
           <div
             key={index}
             id={`contributor-${index}`}
-            className=" p-4 bg-white dark:bg-neutral-700 rounded-xl"
+            className=" p-4 rounded-xl bg-gradient-to-tr from-green-300/[0.2] via-blue-400/[0.2] to-purple-500/[0.2]"
           >
             {contributor.avatarUrl ? (
               <img
