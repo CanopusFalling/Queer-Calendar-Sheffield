@@ -30,6 +30,10 @@ jobs:
         env:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
 
+      - uses: GuillaumeFalourd/wait-sleep-action@v1
+        with:
+          time: '30' # for 30 seconds
+
       - name: Run end-to-end tests
         run: npm run ci:cypress:e-to-e
         env:
