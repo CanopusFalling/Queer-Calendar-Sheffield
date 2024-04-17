@@ -25,14 +25,12 @@ jobs:
       #   env:
       #     GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
 
-      - name: Start server
-        run: npm run dev &
+      - name: Start server and wait for it to spin up
+        run: |
+          npm run dev &
+          npx wait-on http://localhost:3000 --timeout 60000
         env:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-
-      - uses: GuillaumeFalourd/wait-sleep-action@v1
-        with:
-          time: '30' # for 30 seconds
 
       - name: Run end-to-end tests
         run: npm run ci:cypress:e-to-e
