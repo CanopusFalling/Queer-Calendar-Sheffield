@@ -13,7 +13,7 @@
     "test:cypress": "start-server-and-test dev http://localhost:3000 \"cypress open\"",
     "test:cypress-headless": "npm run test:cypress-headless:component && npm run test:cypress-headless:e-to-e",
     "test:cypress-headless:e-to-e": "start-server-and-test dev http://localhost:3000 \"cypress run --e2e\"",
-    "test:cypress-headless:component": "start-server-and-test dev http://localhost:3000 \"cypress run --component\"",
+    "test:cypress-headless:component": "cypress run --component",
     "ci:cypress:e-to-e": "cypress run --e2e",
     "ci:cypress:component": "cypress run --component"
   },
@@ -32,7 +32,7 @@
     "memory-cache": "^0.2.0",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.43",
-    "next": "^14.0.4",
+    "next": "14.1.3",
     "postcss": "^8.4.31",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
