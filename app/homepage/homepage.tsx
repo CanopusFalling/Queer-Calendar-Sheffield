@@ -8,6 +8,17 @@ export default function Homepage() {
   return (
     <main className="flex flex-col">
       <Banner />
+      <section className="m-4 self-center max-w-xl w-full px-4 bg-red-500/20 border-red-500/80 border-4 rounded-3xl text-center p-4">
+        <h2 className="text-xl font-extrabold">Temporary Update</h2>
+        <p>
+          The information on this calendar is heavily out of date, please don't
+          rely on it at the moment. I'm working on getting new systems in place
+          to get the info up to date again but I've gotta prioritise surviving
+          this capitalist hellscape for a little bit while my housing is
+          insecure. Hope to be able to bring good news before pride month hits,
+          please don't hold your breath on that one though.
+        </p>
+      </section>
       <section className="my-4 mb-8 m-auto max-w-xl px-4">
         <h2 className="mb-2 text-3xl font-bold bg-gradient-to-r">About QCS</h2>
         <hr className="mb-3 border-0 w-full h-px bg-gradient-to-r from-green-300 via-blue-400 to-purple-500 brightness-75 dark:brightness-100" />
