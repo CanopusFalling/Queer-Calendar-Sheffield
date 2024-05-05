@@ -10,7 +10,7 @@ import { GoGlobe } from "react-icons/go";
 
 const Contributors: React.FC = () => {
   return (
-    <div className="lg:gap-xl-12 grid gap-x-6 md:grid-cols-3">
+    <div className="lg:gap-xl-12 grid gap-x-6 md:grid-cols-3 my-4 text-center">
       {(contributorsData as Contributor[]).map(
         (contributor: Contributor, index: number) => (
           <div
