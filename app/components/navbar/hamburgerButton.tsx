@@ -1,6 +1,5 @@
 import React from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { IconContext } from "react-icons";
 
 interface HamburgerButtonProps {
   onClick: () => void;
