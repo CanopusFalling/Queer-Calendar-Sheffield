@@ -2,6 +2,7 @@ import OverflowScroll from "@/app/components/overflow-scroll/overflowScroll";
 import Banner from "./banner";
 import Link from "next/link";
 import { BsGithub } from "react-icons/bs";
+import EventStats from "../event/event-stats";
 
 export default function Homepage() {
   return (
@@ -38,6 +39,7 @@ export default function Homepage() {
           View Project GitHub
         </GradientButton>
       </section>
+      <EventStats />
     </main>
   );
 }
