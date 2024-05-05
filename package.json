@@ -46,6 +46,7 @@
     "typescript": "^5.1.6"
   },
   "devDependencies": {
+    "@cloudflare/wrangler": "^1.21.0",
     "@types/memory-cache": "^0.2.3",
     "@types/sanitize-html": "^2.9.0",
     "@types/xml2js": "^0.4.11",
