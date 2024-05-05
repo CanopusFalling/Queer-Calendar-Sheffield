@@ -1,21 +1,15 @@
+import Link from "next/link";
 import React from "react";
 
 function SiteLogo() {
   return (
-    <div data-testid="site-logo" className="ml-2">
-      <a
-        className="flex w-full flex-nowrap text-xl text-neutral-800 dark:text-neutral-200"
-        href="/"
-      >
-        <img
-          data-testid="logo-image"
-          src="/favicon.ico"
-          alt="Logo"
-          className="h-7 w-7 mr-1"
-        />
-        Queer Calendar Sheffield
-      </a>
-    </div>
+    <Link
+      className="flex p-3 pt-2 text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-300 via-blue-400 to-purple-500 brightness-50 dark:brightness-110"
+      href="/"
+      aria-label="Homepage"
+    >
+      QCS
+    </Link>
   );
 }
 

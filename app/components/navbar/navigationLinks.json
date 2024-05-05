@@ -4,6 +4,10 @@
     "href": "/#"
   },
   {
+    "label": "Events",
+    "href": "/event"
+  },
+  {
     "label": "Contributors",
     "href": "/contributors"
   },

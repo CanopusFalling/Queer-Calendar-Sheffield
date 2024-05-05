@@ -74,7 +74,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en-GB">
-      <body className="flex flex-col min-h-screen bg-neutral-200 dark:shadow-white/10 dark:bg-neutral-800">
+      <body className="flex flex-col min-h-screen bg-white dark:bg-black dark:shadow-white/10">
         <Header />
         <div className="flex-grow">{children}</div>
         <Footer />

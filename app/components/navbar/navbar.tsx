@@ -17,12 +17,10 @@ function Navbar() {
   }
 
   return (
-    <nav className="relative flex w-full flex-nowrap items-center justify-between bg-white py-2 hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-700 lg:flex-wrap lg:justify-start lg:py-4">
-      <div className="flex w-full flex-wrap items-center justify-between px-3">
-        <SiteLogo />
-        <HamburgerButton onClick={handleToggleNav} />
-        <AdaptiveLinks isNavOpen={isNavOpen} />
-      </div>
+    <nav className="bg-white dark:bg-black flex w-full flex-wrap items-center justify-between lg:justify-normal">
+      <SiteLogo />
+      <HamburgerButton onClick={handleToggleNav} />
+      <AdaptiveLinks isNavOpen={isNavOpen} />
     </nav>
   );
 }
