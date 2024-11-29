@@ -7,8 +7,7 @@ import EventNotFound from "../event_not_found";
 import EventCard from "../eventCard";
 
 type Props = {
-  params: { eventId: string };
-  searchParams: {};
+  params: Promise<{ eventId: string }>;
 };
 
 async function fetchEvent(eventId: string) {
@@ -22,13 +21,13 @@ async function fetchEvent(eventId: string) {
 }
 
 export async function generateMetadata(
-  { params, searchParams }: Props,
+  { params }: Props,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   let event;
 
   try {
-    event = await fetchEvent(params.eventId);
+    event = await fetchEvent((await params).eventId);
   } catch (error) {
     // Handle the error, e.g., log it or return a default metadata
     console.error("Error fetching event for metadata:", error);
@@ -56,9 +55,9 @@ export async function generateMetadata(
   };
 }
 
-export default async function Page({ params, searchParams }: Props) {
+export default async function Page({ params }: Props) {
   try {
-    const event = await fetchEvent(params.eventId);
+    const event = await fetchEvent((await params).eventId);
     return <EventCard event={event} linkEvent={false} />;
   } catch (error) {
     console.error("Error fetching event for page:", error);

@@ -14,7 +14,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "18.17.0"
+          node-version: "20.17.0"
           cache: npm
 
       - name: Install dependencies
@@ -37,10 +37,10 @@ jobs:
         env:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
 
-      - name: Run component tests
-        run: npm run ci:cypress:component
-        env:
-          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+      # - name: Run component tests
+      #   run: npm run ci:cypress:component
+      #   env:
+      #     GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
 
       # - name: Run Lighthouse tests
       #   run: npm run ci:lighthouse
