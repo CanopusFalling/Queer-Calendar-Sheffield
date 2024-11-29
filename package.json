@@ -6,6 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "build:dev": "next build --no-lint",
+    "pages:build": "next-on-pages",
+    "pages:serve": "npm run pages:build && npm run pages:serve-nobuild",
+    "pages:serve-nobuild": "wrangler pages dev .vercel/output/static --compatibility-flag=nodejs_compat",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --check .",
@@ -42,6 +45,7 @@
     "typescript": "^5.1.6"
   },
   "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.13.6",
     "@types/memory-cache": "^0.2.3",
     "@types/sanitize-html": "^2.9.0",
     "@types/xml2js": "^0.4.11",
@@ -49,6 +53,7 @@
     "eslint-config-next": "^14.0.4",
     "prettier": "3.0.3",
     "start-server-and-test": "^2.0.0",
+    "wrangler": "^3.91.0",
     "xml2js": "^0.6.2"
   }
 }
