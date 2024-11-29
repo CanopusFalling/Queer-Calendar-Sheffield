@@ -94,14 +94,12 @@ export default function manifest(): MetadataRoute.Manifest {
         src: "/img/screenshots/narrow.webp",
         type: "image/webp",
         sizes: "675x952",
-        //@ts-expect-error
         form_factor: "narrow",
       },
       {
         src: "/img/screenshots/wide.webp",
         type: "image/webp",
         sizes: "800x451",
-        //@ts-expect-error
         form_factor: "wide",
       },
     ],
